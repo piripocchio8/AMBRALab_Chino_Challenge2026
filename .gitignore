@@ -9,3 +9,6 @@ Target_1/*/submission_*.csv
 
 __pycache__/
 *.pyc
+
+# Scratch probes left by tooling; the maintainer removes them.
+.tmp_probe.txt

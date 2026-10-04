@@ -69,7 +69,12 @@ imidazolium.
 
 ### 1.2 The geometry the two acceptors have to present
 
-Measured over the 181 strict backbone-plus-backbone cases:
+Measured over the 181 histidines that have at least one backbone-only donor pair. That count is
+three higher than the 178 above, and the two are consistent rather than in conflict: both describe
+the same 243 histidines, and they differ only in which donor pair is counted. The 178 classifies
+each histidine by the first qualifying pair found, whereas the 181 asks whether a backbone-only pair
+exists at all — three histidines whose first qualifying pair includes an amide also possess a
+backbone-only pair, and the geometry below is measured over the backbone pairs.
 
 | | n | median | P10 to P90 | range |
 |---|---|---|---|---|
