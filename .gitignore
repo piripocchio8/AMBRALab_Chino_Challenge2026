@@ -1,0 +1,11 @@
+# The submission CSVs are build products of scripts/make_submission_csv.py.
+# They are deliberately untracked until the final designs have been selected, so
+# that a CSV generated from the placeholder example input can never be mistaken
+# for the real submission.
+#
+# To commit the final, real submission CSV once the designs are chosen:
+#     git add -f Target_1/micro/submission_micro.csv
+Target_1/*/submission_*.csv
+
+__pycache__/
+*.pyc
