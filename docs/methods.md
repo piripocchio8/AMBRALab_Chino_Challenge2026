@@ -403,11 +403,21 @@ Two findings from that cross-check are worth stating, because both are traps:
   still. A site restraint makes the right answer reachable; it does not make a wrong answer
   impossible, so every prediction is scored for *where* the binder landed, never on confidence alone.
 
-- **The two oracles agree on binding and disagree on the mechanism.** With the site stated, Boltz-2
-  predicts the peptide bound at the target histidine, compact and with high confidence, but does not
-  reproduce the binder-to-imidazolium hydrogen bond that Chai-1 reports. The honest reading is that
-  the association is supported by two independent predictors while the specific hydrogen-bond
-  geometry that would make it pH-dependent is supported by one.
+- **The two predictors are not given the same information, and that governs how the comparison
+  reads.** The Chai-1 refold carries *residue-level* restraints naming which binder positions sit at
+  the site (each intended acceptor position to the target histidine at 4-6 Å). The second oracle is
+  given only the chain-level pocket, so it is told the neighbourhood and left to find the pose. Under
+  those terms Boltz-2 predicts the peptide bound at the target histidine, compact and with high
+  confidence, but does not reproduce the binder-to-imidazolium hydrogen bond Chai-1 reports.
+
+  That is **not** evidence of disagreement about the mechanism, and is not reported as such: an
+  oracle that was never told which residue should reach the ring cannot be said to have failed to
+  confirm it. The weaker and correct statement is that the *association* is supported by two
+  independent predictors, while the hydrogen-bond geometry has so far been demonstrated only under
+  restraints that name the participating residues. The pocket-only run is kept as the primary
+  cross-check precisely because it is the one that leaves the pose to the predictor; a matched run
+  carrying the same residue-level contacts is reported alongside it, as a measurement of what those
+  restraints are worth rather than as a second vote.
 
 Protenix was evaluated as a third predictor and not adopted; the optimized builds we assessed require
 a GPU compute capability the available hardware does not provide.
