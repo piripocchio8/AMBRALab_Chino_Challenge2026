@@ -278,6 +278,53 @@ make. For reference, every candidate examined so far passes with no flags raised
 currently being traded away for makeability. Where a non-canonical design is assessed this way it is
 assessed on its expressible swap, since the non-canonical residue is not something a ribosome makes.
 
+### 3.3 Interaction-preserving repacking of the selected designs
+
+The designs that survive selection are refined once more, by rebuilding the parts of the sequence
+that are not carrying the binding and leaving the parts that are.
+
+For each candidate, the interactions worth preserving are identified from its own predicted
+structure, by geometry rather than by inspection:
+
+- every residue within 5 Å of the target histidine, whatever it is doing, because the whole design
+  turns on that residue;
+- hydrogen bonds across the interface, taken as a nitrogen/oxygen donor-acceptor pair between 2.5
+  and 3.4 Å;
+- salt bridges, a carboxylate oxygen within 4.0 Å of a cationic nitrogen;
+- aromatic stacking, ring centroids within 5.5 Å either face to face below 30° or edge to face above
+  60°;
+- the two cysteines of the disulfide, which define the cyclic molecule rather than the interface.
+
+**Plain hydrophobic contact is deliberately not preserved.** A leucine packed against a valine is
+worth about as much as any other aliphatic residue of similar size, so holding its identity
+constrains the rebuild without protecting anything specific. The point of the exercise is to free
+the generic positions and hold the ones whose chemistry *is* the interaction.
+
+Those positions are then held fixed while a context-aware all-atom inverse-folding model rebuilds
+the rest, conditioned on the target chain as fixed context. The target sequence cannot change and is
+verified unchanged in the output. Cysteine is excluded from the rebuilt positions so that no third
+cysteine can scramble the disulfide.
+
+Two hold policies are run for every candidate and judged against each other rather than chosen in
+advance: one holds the specific interactions *and* the histidine shell, the other holds only the
+specific interactions, freeing residues that merely sit near the site without doing anything
+chemical. Which is right is an empirical question, and the refold answers it.
+
+Inverse-folding output is filtered before anything is folded. The model has a measured tendency to
+return low-complexity, alanine-rich sequences when few positions are free, so each candidate is
+required to carry at least 2.0 bits of Shannon entropy over its rebuilt positions with no single
+residue type taking more than 40 % of them. On the 12-residue designs, where only four or five
+positions are free, this discards 14 to 20 of every 88 sequences generated; on the 39-residue
+designs it discards almost none.
+
+Surviving sequences are refolded under their parent's own restraint file, unchanged, so that parent
+and variant are compared like for like and any difference is a property of the sequence rather than
+of how it was held. Because the oracle is not deterministic, each parent is refolded three times to
+establish its own run-to-run spread, and a variant is accepted only if it clears that spread. The
+acceptance order is fixed and is not a weighted sum: engagement of the target imidazolium first,
+reproducibility across the five predicted models second, fold quality third, and confidence scores
+last. A variant that loses the hydrogen bond is rejected however good its confidence looks.
+
 ---
 
 ## 4. Validation protocol and acceptance criteria
