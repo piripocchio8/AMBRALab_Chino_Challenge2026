@@ -690,3 +690,47 @@ Structure prediction uses Chai-1 at its released weights with five diffusion sam
 retraining, run on a local two-GPU workstation and an institutional HPC cluster. Scoring code for the
 hydrogen-bond criteria of section 4.2, the interface metrics of section 6 and the submission CSV
 format is the authors' own.
+
+---
+
+## 9. Selection of the submitted eight
+
+The eight micro designs were chosen on measurements made against the **human** target, pooled over
+two oracles, after three findings changed what the earlier ranking was worth.
+
+**The search optimised against the wrong ortholog.** The design campaign ran against the *mouse*
+sequence (UniProt Q01279 334–494); the competition target is human (P00533 334–494). The two are
+90.7 % identical and the epitope is conserved residue for residue — Asn355, Lys357 and **His358**
+are identical — but the orthologs differ at 15 other positions and the designs did not transfer.
+Of the first sixteen refolded on human, **one kept a double engagement** where the best of them
+reached six models in fifteen on mouse. The whole pool was therefore refolded against human, and
+every number reported here comes from those folds. The nearest substitution to the site is three
+residues away (mouse Tyr → human Asn at local 28), which removes packing surface immediately beside
+the histidine.
+
+Note also that the human construct carries **five** histidines to the mouse construct's four: local
+50 is His in human and Arg in mouse. The search never saw that competing site.
+
+**Both hydrogen-bond directions are now measured, and they mean opposite things.** The campaign
+scored only the designed direction, in which a protonated ring nitrogen **donates** to an acceptor.
+The reverse — a binder donor giving into a deprotonated ring nitrogen, which the ring **accepts** —
+was never counted. Across 1200 models it occurs in about one model in eleven, with the binder
+supplying the donor in 9 %. This is not a bonus: a bond in that direction requires the ring to be
+*deprotonated*, so a design relying on it binds more tightly at pH 7.4 than at pH 6.5 — the switch
+running backwards. Designs are therefore reported with both counts, and the inverse direction is
+penalised in the ranking rather than ignored.
+
+**The two oracle settings disagree about individual designs.** Folding with a multiple-sequence
+alignment for the target and with none changes which designs score: of thirty-six designs run both
+ways, several move from three double engagements to zero and others in the opposite direction. The
+overall rate is essentially unchanged — 0.9 % against 1.5 % of models — so the alignment does not
+rescue the second hydrogen bond, but it does make any single-oracle ranking unstable. The submitted
+eight were selected on **agreement**: each scores under both settings, ranked by the rate of
+binder-supplied hydrogen bonds across all thirty models, penalised by the inverse direction, with a
+usable fold required and at most two designs drawn from any one lineage, so that a single bad
+scaffold cannot carry the whole submission.
+
+The honest summary of what is claimed: on the human target these designs reproducibly place a
+binder main-chain carbonyl in hydrogen-bonding geometry on the target imidazolium. **The double
+engagement that would make the interaction sharply pH-dependent is observed in roughly 1 % of
+predicted models, and is not an established property of any submitted design.**
