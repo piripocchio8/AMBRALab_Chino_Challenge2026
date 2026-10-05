@@ -1,0 +1,6 @@
+
+Chn1 Chn2  PAE Dist  Type   ipSAE    ipSAE_d0chn ipSAE_d0dom  ipTM_af  ipTM_d0chn     pDockQ     pDockQ2    LIS       n0res  n0chn  n0dom   d0res   d0chn   d0dom  nres1   nres2   dist1   dist2  Model
+A    B     15   15   asym  0.797848    0.902994    0.902451    0.900    0.902994      0.4726     0.7309     0.6916     118    288    286    4.01    6.24    6.22    168     118      87      74   /lustre/scratch/gsgueglia/challenge2026/polar/out/shard05/boltz_results_shard05/predictions/R4_07__v1__m/R4_07__v1__m_model_0
+B    A     15   15   asym  0.841268    0.895781    0.895781    0.903    0.895781      0.4726     0.7279     0.6898     170    288    288    4.86    6.24    6.24    118     170      74      87   /lustre/scratch/gsgueglia/challenge2026/polar/out/shard05/boltz_results_shard05/predictions/R4_07__v1__m/R4_07__v1__m_model_0
+A    B     15   15   max   0.841268    0.902994    0.902451    0.903    0.902994      0.4726     0.7309     0.6907     170    288    286    4.86    6.24    6.22    170     118      87      74   /lustre/scratch/gsgueglia/challenge2026/polar/out/shard05/boltz_results_shard05/predictions/R4_07__v1__m/R4_07__v1__m_model_0
+
