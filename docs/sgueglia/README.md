@@ -16,7 +16,15 @@ documentation, reproduced so the submission is self-contained:
 UniProt 25–645, so mature *m* = UniProt *m* + 24. Its pH switch is **His409 mature / His433
 UniProt**, with Asp436 mature / Asp460 UniProt as the fixed anchor.
 
-**Relationship to the micro binders.** The micro designs in `Target_1/micro/` attack the *same*
-target histidine by a different chemistry: two main-chain carbonyls donating to the protonated
-imidazolium, rather than a salt bridge to an engineered carboxylate. The two mechanisms are
-independent, which is why both are submitted.
+**Relationship to the micro binders: a different histidine, not the same one.** An earlier version
+of this file said the two series attack the same residue. They do not.
+
+| series | target histidine | UniProt P00533 | mature EGFR |
+|---|---|---|---|
+| mini and large (this series) | pH switch, with an engineered carboxylate | **His433** | His409 |
+| micro (`Target_1/micro/`) | pH switch, with two main-chain carbonyls | **His358** | His334 |
+
+The two sites are 75 residues apart in sequence. So the submission covers two distinct epitopes on
+EGFR domain III as well as two distinct chemistries, and a failure of one tells you nothing about
+the other. That is a broader bet than a single site, not a redundant one, but it should not be
+described as independent confirmation of one mechanism.
