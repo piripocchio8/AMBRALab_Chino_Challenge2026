@@ -300,8 +300,8 @@ worth about as much as any other aliphatic residue of similar size, so holding i
 constrains the rebuild without protecting anything specific. The point of the exercise is to free
 the generic positions and hold the ones whose chemistry *is* the interaction.
 
-Those positions are then held fixed while a context-aware all-atom inverse-folding model rebuilds
-the rest, conditioned on the target chain as fixed context. The target sequence cannot change and is
+Those positions are then held fixed while **CARBonAra**, a context-aware all-atom inverse-folding
+model, rebuilds the rest, conditioned on the target chain as fixed context. The target sequence cannot change and is
 verified unchanged in the output. Cysteine is excluded from the rebuilt positions so that no third
 cysteine can scramble the disulfide.
 
@@ -310,7 +310,7 @@ advance: one holds the specific interactions *and* the histidine shell, the othe
 specific interactions, freeing residues that merely sit near the site without doing anything
 chemical. Which is right is an empirical question, and the refold answers it.
 
-Inverse-folding output is filtered before anything is folded. The model has a measured tendency to
+Inverse-folding output is filtered before anything is folded. CARBonAra has a measured tendency to
 return low-complexity, alanine-rich sequences when few positions are free, so each candidate is
 required to carry at least 2.0 bits of Shannon entropy over its rebuilt positions with no single
 residue type taking more than 40 % of them. On the 12-residue designs, where only four or five
@@ -383,7 +383,36 @@ independently. A restraint-emitting step is pinned by a test and the job aborts 
 if an expected restraint row is missing from the emitted restraint file, because a validation fold
 that silently loses a restraint is a mistake this campaign has already made twice.
 
-### 4.2 Hydrogen-bond acceptance criteria
+### 4.2 An independent second oracle
+
+Confidence from a single predictor is one model's opinion. Final candidates are therefore also folded
+with **Boltz-2**, which is independent of Chai-1 in training data and architecture, using a
+multiple-sequence alignment for the target chain computed once and reused (the target is identical in
+every prediction) and no alignment for the de-novo binder, which has no homologues. Boltz-2 reports
+per-chain pTM directly, so binder-only confidence is read rather than reconstructed.
+
+Two findings from that cross-check are worth stating, because both are traps:
+
+- **The second oracle must be given the site.** Folded with no restraints, Boltz-2 placed one
+  candidate 24.7 Å from the target histidine, against a different histidine entirely, and reported
+  interface ipTM 0.883 and binder pTM 0.904 for it. The prediction was confident and internally
+  consistent; it was simply about an interaction nobody asked for. Supplied with the same two
+  statements the Chai-1 refold carries — the binder's disulfide and a pocket on the target histidine
+  — the same sequence moved to 5.96 Å of the intended residue, formed its own disulfide at 1.61 Å,
+  became compact (radius of gyration 1.02 against the expectation for its length) and scored higher
+  still. A site restraint makes the right answer reachable; it does not make a wrong answer
+  impossible, so every prediction is scored for *where* the binder landed, never on confidence alone.
+
+- **The two oracles agree on binding and disagree on the mechanism.** With the site stated, Boltz-2
+  predicts the peptide bound at the target histidine, compact and with high confidence, but does not
+  reproduce the binder-to-imidazolium hydrogen bond that Chai-1 reports. The honest reading is that
+  the association is supported by two independent predictors while the specific hydrogen-bond
+  geometry that would make it pH-dependent is supported by one.
+
+Protenix was evaluated as a third predictor and not adopted; the optimized builds we assessed require
+a GPU compute capability the available hardware does not provide.
+
+### 4.3 Hydrogen-bond acceptance criteria
 
 A contact between a ring nitrogen of the target histidine and a candidate acceptor oxygen counts as a
 hydrogen bond only if **all four** of the following hold:
@@ -557,6 +586,18 @@ residues retained.
 ---
 
 ## 7. Limitations
+
+
+**The target carries a free cysteine, and these binders are closed by a disulfide.** The target's
+Cys4 and Cys29 form a disulfide in every predicted structure (1.90 Å), but **Cys137 is unpaired** and
+33 Å from any partner. A disulfide-cyclised peptide incubated with a protein presenting a free
+surface thiol can undergo thiol-disulfide exchange, which would open the cycle and could tether the
+peptide covalently at the wrong place. This is not predicted in any of our complexes — across 200
+predicted models no binder sulfur comes within 4 Å of a target sulfur, since the designed epitope is
+roughly 30 Å from Cys137 — but it was observed once, in an unrestrained fold by the second oracle,
+which cross-linked a binder cysteine to Cys137 at 2.00 Å and scored that adduct highly. It is a real
+consideration at the bench rather than a modelling artifact: it argues for a redox-controlled
+assay, a blocked Cys137, or a non-disulfide cyclisation if these designs are taken forward.
 
 Stated plainly, because several of them are load-bearing.
 
