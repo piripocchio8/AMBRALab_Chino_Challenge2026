@@ -61,7 +61,7 @@ independent: a failure of either says nothing about the other.
 | | micro | mini and large |
 |---|---|---|
 | target histidine | **His358** UniProt (mature His334) | **His433** UniProt (mature His409) |
-| mechanism | two **main-chain carbonyls** donate to the protonated imidazolium | **salt bridge** from the imidazolium to an engineered carboxylate, plus a reciprocal His–Asp anchor |
+| mechanism | **main-chain carbonyls accept** from the protonated imidazolium's two N–H donors | **salt bridge** from the imidazolium to an engineered carboxylate, plus a reciprocal His–Asp anchor |
 | scaffold | disulfide-cyclised peptide, 12–39 residues | motif-scaffolded de novo protein, 60–134 residues |
 | methods | [`docs/methods_micro.md`](docs/methods_micro.md) | [`docs/methods_mini_large/`](docs/methods_mini_large/) |
 

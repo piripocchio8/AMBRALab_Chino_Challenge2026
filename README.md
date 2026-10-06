@@ -32,8 +32,8 @@ Two independent design series contribute to Target 1, on two different histidine
 different chemistries. They are documented separately, in `Target_1/docs/`, because they share no
 machinery and fail independently:
 
-- **micro** — short disulfide-cyclised peptides that donate two main-chain carbonyls to the
-  protonated imidazolium of **His358** (UniProt; mature His334).
+- **micro** — short disulfide-cyclised peptides whose main-chain carbonyls **accept** hydrogen bonds
+  from the two N–H donors of the protonated imidazolium of **His358** (UniProt; mature His334).
 - **mini and large** — scaffolded de novo proteins that form a salt bridge from the protonated
   imidazolium of **His433** (UniProt; mature His409) to an engineered carboxylate, with a reciprocal
   histidine-aspartate anchor.

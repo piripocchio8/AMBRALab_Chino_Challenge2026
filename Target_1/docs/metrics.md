@@ -16,7 +16,7 @@ different tools, and a blank means *not measured*, never *measured as zero*.
 |---|---|
 | `name` | the submitted identifier |
 | `sequence` | the binder sequence, as submitted |
-| `molecule_class` | `protein` for every row |
+| `molecule_class` | `single_chain` for every row — the upload form accepts `single_chain`, `nanobody`, `scfv`, `fab_kappa`, `fab_lambda` |
 | `submission_rank` | 1 is the entry we would most like tested |
 | `binder_length` | residues |
 | `series` | `micro`, `mini` or `large` |
