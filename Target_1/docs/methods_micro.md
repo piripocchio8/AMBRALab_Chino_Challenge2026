@@ -928,3 +928,163 @@ disagreed with without redoing the work.
 Read the refold counts first: a rate is only as good as its denominator. Rows where a value
 is missing were not measured, which is not the same as measuring zero.
 <!-- /GENERATED:RANKING -->
+
+---
+
+## 11. Reproducing these numbers
+
+Everything below is the production path, not a simplified version of it. What is *not* here is the
+engine that generated the candidate sequences, for the reason given at the top of this document;
+nothing in this section depends on it, because every number reported is computed from a delivered
+structure.
+
+### 11.1 The restraints
+
+Each design folder carries the exact file the oracle was given, as `restraints.csv`. Example
+(`micro/AMBRA_T1_micro_01/restraints.csv`), with columns
+`chainA,res_idxA,chainB,res_idxB,connection_type,confidence,min_distance_angstrom,max_distance_angstrom,comment,restraint_id`:
+
+```
+B,C1@SG,B,C39@SG,covalent,1.0,0.0,2.05,disulfide_1_39,disulfide_1_39
+B,C1,B,C39,contact,1.0,0.0,8.0,intra-contact,ic_1_39
+B,X16,A,H25,contact,0.9,4.0,6.0,acceptor position,contact_his25_16
+B,X22,A,H25,contact,0.9,4.0,6.0,acceptor position,contact_his25_22
+B,,A,N22,pocket,0.8,0.0,8.0,epitope-pocket,pocket_epitope_0
+B,,A,K24,pocket,0.8,0.0,8.0,epitope-pocket,pocket_epitope_1
+```
+
+Chain **A** is the target, chain **B** the binder, and local numbering is used throughout
+(local *n* = UniProt *n* + 333). The declared contacts state **which binder residue sits at the
+site**; they do not state the hydrogen bond, so whether an acceptor lands in hydrogen-bonding
+geometry is the oracle's answer rather than an instruction. Commas inside the `comment` field are
+rejected by the parser.
+
+### 11.2 The folds
+
+**Chai-1**, one fold per model set, 200 diffusion timesteps, five samples:
+
+```
+python scripts/local/predict_complex.py \
+    --binder "<sequence from sequence.fasta>" \
+    --target "<target sequence, human or mouse>" --binder_last \
+    --seed <seed> --restraints <restraints.csv> \
+    --out_dir <out> --timesteps 200
+```
+
+Human target = UniProt P00533 residues 334–494 (the competition construct). Mouse target =
+UniProt Q01279 residues 334–494. Each design carries 45 human and 30–35 mouse models, pooled over
+independent runs; single-sequence and alignment-backed runs are both included and are pooled, which
+is stated because the two settings disagree about individual designs (§9).
+
+**Boltz-2** (2.2.1), as an independent check, given the same two statements:
+
+```yaml
+version: 1
+sequences:
+  - protein: {id: A, sequence: <target>, msa: <target>.a3m}
+  - protein: {id: B, sequence: <binder>, msa: empty}
+constraints:
+  - bond:   {atom1: [B, 1, SG], atom2: [B, <n>, SG]}
+  - pocket: {binder: B, contacts: [[A, 25], [A, 22], [A, 24]], max_distance: 8.0}
+```
+```
+boltz predict <name>.yaml --out_dir <out> --cache <weights> --accelerator gpu --devices 1 \
+    --output_format mmcif --diffusion_samples 5 --seed <seed> --override
+```
+The binder alignment is `empty` on purpose: a designed peptide has no homologues. The target
+alignment is supplied — Boltz is alignment-driven, and running it on a bare sequence tests it at a
+disadvantage it would not have in use.
+
+**Protenix**, as a third oracle, on `protenix_base_constraint_v0.5.0`:
+
+```json
+{"name": "<design>__<species>",
+ "sequences": [{"proteinChain": {"sequence": "<target>", "count": 1,
+                                 "unpairedMsaPath": "...", "pairedMsaPath": "..."}},
+               {"proteinChain": {"sequence": "<binder>", "count": 1, ...}}],
+ "covalent_bonds": [{"entity1": 2, "copy1": 1, "position1": 1,   "atom1": "SG",
+                     "entity2": 2, "copy2": 1, "position2": <n>, "atom2": "SG"}],
+ "constraint": {"pocket": {"binder_chain": {"entity": 2, "copy": 1},
+                           "contact_residues": [{"entity": 1, "copy": 1, "position": 22},
+                                                {"entity": 1, "copy": 1, "position": 24},
+                                                {"entity": 1, "copy": 1, "position": 25}],
+                           "max_distance": 8}}}
+```
+```
+protenix pred --input <in>.json --out_dir <out> --model_name protenix_base_constraint_v0.5.0 \
+    --seeds 101,202 --sample 5 --need_atom_confidence true --use_msa true
+```
+> **The constraint checkpoint is required.** `constraint` is a **silent no-op** on
+> `protenix_base_default_v1.0.0`, `protenix_base_20250630_v1.0.0` and `protenix-v2` — those models
+> have no constraint embedder, accept the key and ignore it. Using them would quietly make this a
+> different experiment from the other two oracles. (The `protenix-v2` checkpoint is in any case not
+> publicly downloadable: the object returns `403 AccessDenied`, while v1.0.0 at the same prefix is
+> public.) The subcommand is `pred`, not `predict`.
+
+### 11.3 The measurements
+
+A hydrogen bond to the imidazolium is accepted only if it is 2.5–3.4 Å, within 45° of the in-plane
+N–H vector, at least 2.9 Å from every ring carbon and within 1.2 Å of the ring plane — the
+ring-carbon clause is what separates a hydrogen bond from a collision on the edge of the ring.
+`scripts/local/score_imidazolium_full.py` applies it; `derive_imidazolium_ring.py` builds the ring
+frame.
+
+Interface confidence is ipSAE computed **per token** (the residue-aggregated form collapses its d0
+on atom-tokenised residues) and the **binder–target entry** of the per-chain-pair ipTM matrix, never
+the global ipTM, which on a 161-residue target is dominated by the target's own confidence. Pose
+consistency superposes each model on the **target** and measures the binder's deviation from the
+design's own best pose; fold consistency superposes binder on binder. Both are reported per species
+and the worse one is scored.
+
+### 11.4 What a reader can check without running anything
+
+Every design folder holds the five models it was judged on, the selected model, its sequence, its
+restraints and a `metrics.json` with every number quoted for it. `metrics_full.csv` carries the same
+numbers for all twenty designs with the per-species model counts beside each rate, so a rate can
+always be read against its denominator.
+
+
+---
+
+## 12. Three oracles, and where they disagree
+
+Every design in the band was refolded by **Chai-1** (which built them), **Boltz-2 2.2.1** and
+**Protenix** (`protenix_base_constraint_v0.5.0`), each given the same two statements — the design's
+own disulfide and a pocket naming the epitope — against both orthologs. Boltz: 2 seeds x 5 samples
+per species. Protenix: 2 seeds x 5 samples per species. Commands in §11.2.
+
+| design | Chai engage H/M | Boltz engage H/M | Protenix engage H/M | Boltz fold spread H | Protenix fold spread H | Boltz iPTM H | Protenix iPTM H |
+|---|---|---|---|---|---|---|---|
+| `AMBRA_T1_micro_01` | 0.222/0.314 | 0.2/0.2 | 0.0/0.0 | 0.24 Å | 1.72 Å | 0.331 | 0.382 |
+| `AMBRA_T1_micro_02` | 0.0/0.4 | 0.3/0.1 | 0.0/0.0 | 0.23 Å | 0.28 Å | 0.321 | 0.882 |
+| `AMBRA_T1_micro_03` | 0.356/0.229 | 0.2/0.0 | 0.0/0.1 | 0.24 Å | 0.21 Å | 0.248 | 0.877 |
+| `AMBRA_T1_micro_04` | 0.356/0.371 | 0.4/0.2 | 0.1/0.2 | 2.68 Å | 3.66 Å | 0.244 | 0.446 |
+| `AMBRA_T1_micro_05` | 0.578/0.171 | 0.3/0.3 | 0.3/0.0 | 3.35 Å | 0.84 Å | 0.173 | 0.304 |
+| `AMBRA_T1_micro_06` | 0.6/0.233 | 0.4/0.3 | 0.1/0.1 | 2.44 Å | 3.18 Å | 0.209 | 0.466 |
+| `AMBRA_T1_micro_07` | 0.0/0.2 | 0.4/0.1 | 0.1/0.1 | 2.06 Å | 0.49 Å | 0.194 | 0.428 |
+| `AMBRA_T1_micro_08` | 0.444/0.086 | 0.1/0.0 | 0.0/0.0 | 2.28 Å | 0.6 Å | 0.259 | 0.462 |
+
+**They agree about the molecule and disagree about the bond.** That split is the honest headline.
+
+*Agreement.* The three `micro_01`-lineage designs (`micro_01`, `micro_02`, `micro_03` as submitted)
+come back as one conformation from every oracle: Boltz fold spread **0.23–0.24 Å** across independent
+seeds, Protenix **0.21–1.72 Å**, Chai **0.31–0.34 Å**. Three models that share no code converge on
+the same structure for these peptides. Protenix is also markedly confident about the complexes —
+iPTM **0.88** and **0.88** for `micro_02` and `micro_03`, against Boltz's 0.23–0.32 for the same two.
+Interface confidence is not comparable across predictors, but the ordering within each is.
+
+*Disagreement.* The rate at which an acceptor reaches His358 in hydrogen-bonding geometry falls as
+you move away from the oracle that designed them: Chai 0.00–0.60 on human, Boltz 0.10–0.40,
+Protenix 0.00–0.30 with **four of eight at zero**. Boltz sees engagement in **all eight** designs in
+at least one species; Protenix sees a binder-supplied bond in only three.
+
+This is what it is. These designs were optimised against Chai, so Chai's view of them is the least
+independent evidence available and the one most likely to be optimistic — selection pressure against
+a single oracle produces sequences that satisfy that oracle. The fold is corroborated three ways; the
+specific hydrogen bond is corroborated by one independent model (Boltz, weakly) and largely not by
+the other. A reader should weight the mechanism claim accordingly, and we would rather say so than
+report only the oracle that agrees with us.
+
+The carboxylate contact in particular — the strongest version of the mechanism, §10.4 — is seen by
+Chai in up to 58 % of models and essentially never by the other two. It is a single-oracle
+observation and is reported as one.

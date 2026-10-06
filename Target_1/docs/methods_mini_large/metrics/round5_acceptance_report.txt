@@ -1,0 +1,8 @@
+accepted 11/98 (unconstrained, replicated over seeds ['20261005', '7919'])
+realism	84
+bridges_all_seeds	47
+bridge_tight_one_seed	44
+ipsae	43
+docked_all_seeds	25
+plddt	12
+fold_kept	8
