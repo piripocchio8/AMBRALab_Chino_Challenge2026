@@ -13,6 +13,34 @@ docs/           the methods for each series
 submission.csv  all 20 rows, ranked, with the metrics they were selected on
 ```
 
+## Why these are worth bench time
+
+**Two independent shots for the price of one entry.** The two series target different histidines by
+different chemistries, from different pipelines. Neither can take the other down with it.
+
+**The micro band is cheap and fast to falsify.** Eight disulfide-cyclised peptides of 12–39 residues
+are solid-phase synthesis, not expression — no cloning, no insoluble prep — and the pH question is
+answered by running one binding assay in two buffers. Whatever the answer, it arrives quickly.
+
+**The mechanism predicts a direction, not just an affinity.** These designs accept hydrogen bonds
+from the protonated imidazolium, an interaction that exists only while the ring carries its proton.
+That commits us to a sign: tighter at acidic pH, weaker at pH 7.4. A flat or inverted result refutes
+the design hypothesis, which is more informative than an unexplained binder.
+
+**The selection evidence is reproducibility, not a best model.** Every design was refolded many
+times from scratch and ranked on the *rate* at which the interaction reappears, on how tightly the
+refolds agree on a single pose, on the interface confidence against **both** orthologs, and on
+whether it is the same structure in both. The top micro design docks within a median **1.34 Å** of
+its own best pose in **40 of 45** independent human refolds and keeps a comparable interface on
+mouse. Designs that looked excellent on one model, or on one species, were dropped on exactly this
+test — including the single most reproducibly docked peptide we have, which turned out to be
+extended in every one of its mouse models and is therefore not submitted.
+
+**The micro designs were never tuned on the sequence they are scored against.** That campaign ran
+against the **mouse** ortholog; the human challenge sequence was used only afterwards to evaluate
+what already existed, with no re-optimisation. Their behaviour on human EGFR is transfer rather than
+a fit to the evaluation target, and the same molecules are directly testable in mouse models.
+
 ## Two series, two histidines, two mechanisms
 
 The submission deliberately covers **two different sites** rather than one site twice. They are

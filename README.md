@@ -37,6 +37,19 @@ machinery and fail independently:
   imidazolium of **His433** (UniProt; mature His409) to an engineered carboxylate, with a reciprocal
   histidine-aspartate anchor.
 
+## How designs are ranked here
+
+A single predicted complex is one draw from a stochastic process, so nothing in this repository is
+ranked on a best model. Each design is refolded many times from scratch and judged on what happens
+*repeatedly*: how often the intended interaction reappears, how tightly the refolds agree on one
+pose, whether the binder is one structure rather than two, and whether that holds against both the
+human and the mouse ortholog. Rates are reported with the number of models behind them, because a
+rate over five models is not a rate.
+
+Where a property can be put on an independent footing, it is: protonation effects are computed with
+propka, interface energies with AutoDock Vina, and structures are cross-checked against a second
+co-folding model. Those tools know nothing about how the designs were made, which is the point.
+
 ## What these numbers are
 
 Every metric in this repository is a property of a **structure prediction**, not of a measurement.

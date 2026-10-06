@@ -693,10 +693,17 @@ format is the authors' own.
 
 ---
 
-## 9. Selection of the submitted eight
+## 9. Selection on engagement rate alone (superseded by section 10)
 
-The eight micro designs were chosen on measurements made against the **human** target, pooled over
-two oracles, after three findings changed what the earlier ranking was worth.
+> **This section records an earlier ranking and the three findings that shaped it. The submitted
+> band is no longer chosen this way** — ranking on engagement rate alone admitted designs that make
+> the hydrogen bond from an inconsistent pose, designs with interfaces too small for the oracle to
+> believe, and one design that is extended against the mouse ortholog. Section 10 describes the
+> measurements that replaced it and what they changed. The findings below still hold and are the
+> reason several of those measurements exist.
+
+The eight micro designs were first chosen on measurements made against the **human** target, pooled
+over two oracles, after three findings changed what the earlier ranking was worth.
 
 **The search optimised against the wrong ortholog.** The design campaign ran against the *mouse*
 sequence (UniProt Q01279 334–494); the competition target is human (P00533 334–494). The two are
@@ -765,7 +772,8 @@ Three things are worth stating because they are not what the campaign set out to
 **The best design engages in two models out of three and never doubly.** It donates a binder
 main-chain carbonyl to the imidazolium in **40 of 60 models**, with not one model showing the
 inverse direction, and shows the double engagement in none. It is the most reproducible single
-hydrogen bond measured anywhere in this work, and it is a one-bond interaction.
+hydrogen bond measured anywhere in this work, and it is a one-bond interaction. *It is also the
+design section 10.2 removes from the submission: it is extended in every one of its mouse models.*
 
 **It came from refinement, not from search.** It is an inverse-folding repack of a backbone the
 search had found but could not encode in a sequence - the backbone folded compactly only while an
@@ -777,3 +785,120 @@ produced nothing that survives into the top three.
 reported where it occurs and claimed for nothing. What this submission asserts is a reproducibly
 placed single hydrogen bond from the binder to the target imidazolium, which is a weaker claim than
 the campaign set out to make and is the one the measurements support.
+
+## 10. The final ranking: reproducibility, both orthologs, and a pKa
+
+The ranking in section 9 was built on one quantity — how often the binder donates a hydrogen bond to
+the target imidazolium. That is necessary but not sufficient, and three further properties were
+measured before the submission was fixed. Each is a separate way for a design to be worthless while
+scoring well on the others.
+
+### 10.1 Does it dock in the same place every time?
+
+Every refold of a design was superposed on the **target** chain, and the binder's deviation from the
+design's own best pose measured. This is a different question from whether the peptide folds
+consistently: a peptide can hold one structure and still bind a different patch each time, and the
+complex metrics report that as a good interface either way.
+
+The spread is reported as the median pose RMSD to the best pose, the fraction of refolds within
+2 Å of it, and the RMSF — the spread of each binder residue about its mean position. The leading
+design docks within a median 1.03 Å in 45 of 45 independent human refolds, with an RMSF of 0.80 Å.
+Most designs do not: of the shortlist, pose RMSDs run from 1.03 Å to 21.8 Å, and several designs
+with respectable bond rates turn out to be making those bonds from inconsistent positions.
+
+### 10.2 Is it one structure, in both species?
+
+Binder-on-binder superposition gives the fold spread within each species, and the best agreement
+between a human-bound and a mouse-bound conformation gives the cross-species difference.
+
+This test removed the design that had led the previous ranking. It is compact in **all 45** of its
+human models (median Rg ratio 1.01) and extended in **all 5** of its mouse models (median 1.62) —
+two different structures, 9.9 Å apart, one per ortholog. Pooled across both species that reads as
+"14 % of models extended", which is how it survived an earlier filter. Per species it is a design
+with no folded conformation against one of the two orthologs, and for a submission judged on
+cross-reactivity that is disqualifying rather than cosmetic. Extension is therefore taken from the
+**worse** species, never pooled.
+
+Where a design was also folded alone, the RMSD between the free binder and its bound conformation is
+reported. A peptide that already holds the binding-competent fold is a better bet than one the
+target has to fold for it.
+
+### 10.3 Comparable denominators
+
+An engagement rate over 45 human models and 5 mouse ones is not a comparison, and the first version
+of this ranking made exactly that mistake. The mouse side was refolded up to roughly 20–25 models
+per design, under **each design's own restraint file** — recovered from the queue that originally ran
+it, so the restraints are identical between the two species and the two rates mean the same thing.
+Designs whose restraint file could not be identified were left out of the top-up rather than refolded
+under a reconstructed one, and every rate in `submission.csv` carries its own *n*.
+
+Cross-reactivity is then scored as the **lower** of the two rates. An average lets a design that
+works on one ortholog and fails on the other look mid-table, which is the opposite of what the
+property means.
+
+### 10.4 pH sensitivity as a number
+
+propka 3.5.1 was run twice on the same coordinates, once with the binder present and once with it
+deleted, and the shift in the predicted pKa of the target histidine attributed to the binder. Holding
+the conformation fixed means nothing but the binder's presence can account for the difference.
+
+The shift is read from the **five best-engaged models** of each species and reported as the median,
+with the spread beside it. One model would make the number a property of that draw rather than of
+the design: the oracle is stochastic, and the same sequence refolded twice gives different
+structures, so a pKa shift computed from a single pose is not reproducible even in principle.
+
+**The results are mostly negative, and this is the least comfortable finding in the submission.**
+Across the 27-design shortlist, **only 2 show a positive shift on the human target**. Burying a
+histidine in an interface lowers its pKa; accepting a hydrogen bond from it raises it. For almost
+every design burial wins, which means the interface *as modelled* would favour the **neutral** ring
+— the switch running backwards, selective at pH 7.4 rather than at tumour pH.
+
+Two qualifications, neither of which rescues the result:
+
+- The one design positive in **both** species (+0.04 human, +0.17 mouse) is the design that section
+  10.2 removes for being extended against mouse. No submitted design is positive in both.
+- Several shifts move by 4 to 7 pH units between models of the same design. A number that unstable
+  is not a measurement, so it is scored as unmeasured rather than as a large negative; otherwise the
+  ranking would order designs by how noisy their propka runs were. The spread is reported per design.
+
+What this means for the claim: the geometry is right — a binder main-chain carbonyl sits in
+hydrogen-bonding geometry on the imidazolium, reproducibly. The *electrostatic consequence* of that
+geometry, as propka computes it on these models, does not yet favour the protonated ring for most
+designs. Whether that reflects the designs, the fixed-conformation approximation, or propka's
+treatment of a shallow peptide interface is not something these predictions can settle. It is
+reported because a pH-switch submission that hid it would be worthless.
+
+AutoDock Vina 1.2.7 was used to score each predicted pose in place, without docking or minimisation
+(`--score_only`, which evaluates the given coordinates and is independent of the grid settings -
+checked by rescoring at two spacings and obtaining identical values). It is an opinion from a
+function unrelated to the model that produced the structure.
+
+It should be read as an interaction energy **including steric repulsion**, not as an affinity. Three
+of the shortlisted poses score *positive* (+1.6 to +25 kcal/mol), which is vina reporting atom
+overlap in the predicted complex rather than weak binding. That is informative: a pose the oracle is
+confident about can still contain contacts no force field will accept.
+
+### 10.5 How the four combine
+
+`overall_score` is a weighted sum of four sub-scores, each on 0–1 and each reported beside it:
+cross-reactivity 0.30, pH sensitivity and bond strength 0.25, binding consistency 0.25, fold consistency 0.20. The
+weights are a judgement; the components are measurements, and are published so the weighting can be
+disagreed with without redoing the work.
+
+### 10.6 The submitted band, on these measurements
+
+<!-- GENERATED:RANKING -->
+| # | design | overall | cross (H/M bond rate) | pH (ΔpKa, vina) | binding (pose, repro) | fold (extended H/M, H↔M Å) | refolds H/M |
+|---|---|---|---|---|---|---|---|
+| 1 | `AMBRA_T1_micro_01` | **0.442** | 0.48 (0.22/0.31) | 0.36 (-0.42, -7.4) | 0.07 (3.41 Å, 0.24) | 0.95 (0.00/0.00, 0.25) | 45/35 |
+| 2 | `AMBRA_T1_micro_02` | **0.401** | 0.46 (0.36/0.23) | 0.36 (-0.24, -6.7) | 0.00 (1.34 Å, 0.89) | 0.86 (0.00/0.00, 0.32) | 45/35 |
+| 3 | `AMBRA_T1_micro_03` | **0.341** | 0.27 (0.58/0.17) | 0.34 (-0.04, -3.9) | 0.00 (3.37 Å, 0.20) | 0.88 (0.00/0.00, 0.65) | 45/35 |
+| 4 | `AMBRA_T1_micro_04` | **0.172** | 0.07 (0.42/0.10) | 0.25 (-0.52, -4.8) | 0.01 (3.02 Å, 0.18) | 0.44 (0.00/0.00, 3.51) | 45/30 |
+| 5 | `AMBRA_T1_micro_05` | **0.485** | 0.36 (0.13/0.17) | 0.70 (0.84, -9.3) | 0.04 (7.23 Å, 0.18) | 0.96 (0.00/0.00, 0.20) | 45/35 |
+| 6 | `AMBRA_T1_micro_06` | **0.376** | 0.42 (0.27/0.46) | 0.27 (-1.76, -10.4) | 0.00 (21.76 Å, 0.13) | 0.91 (0.00/0.00, 0.30) | 45/35 |
+| 7 | `AMBRA_T1_micro_07` | **0.352** | 0.28 (0.18/0.14) | 0.40 (-1.49, -4.5) | 0.00 (21.12 Å, 0.27) | 0.84 (0.00/0.00, 0.53) | 45/35 |
+| 8 | `AMBRA_T1_micro_08` | **0.323** | 0.37 (0.40/0.20) | 0.20 (-1.46, -7.8) | 0.01 (8.89 Å, 0.20) | 0.80 (0.00/0.00, 0.74) | 15/15 |
+
+Read the refold counts first: a rate is only as good as its denominator. Rows where a value
+is missing were not measured, which is not the same as measuring zero.
+<!-- /GENERATED:RANKING -->
