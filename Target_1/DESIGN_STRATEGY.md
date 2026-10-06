@@ -46,8 +46,9 @@ could address this site at this size.
 > **A note on disclosure.** The design engine is the subject of a manuscript in preparation and is
 > described here in principle rather than in reproducible detail, **ahead of publication**. Nothing
 > needed to *evaluate* these designs is withheld: sequences, predicted structures, every per-model
-> measurement, the selection gates and their thresholds, the restraint files, the command lines, and
-> the designs we rejected with the reasons are all in the repository. What is held back is how
+> measurement, the selection gates and their thresholds, the restraint files and the command lines are all in
+> the repository, and every design excluded from the band is named with the gate it failed in
+> `docs/methods_micro.md` §10. What is held back is how
 > candidate sequences were *generated*, not how they were *judged*. We are glad to discuss the method
 > in confidence with the organisers.
 
@@ -140,9 +141,22 @@ exploit rather than a histidine already saturated before the binder arrives.
 
 ## 3. Why these peptides are worth bench time
 
-**Cheap and fast to falsify.** A 12–39 residue disulfide-cyclised peptide is solid-phase synthesis,
-not cloning and expression: no construct can fail to express, no prep can come back insoluble. The pH
-question is answered by one binding assay in two buffers.
+**Cheap and fast to falsify, and well inside the expression regime.** These are made the same way as
+every other entry — cell-free from synthesised DNA — and that favours them: in this competition's own
+800-design EGFR dataset, length is the strongest *negative* term for expression and the 60–134 aa band
+expressed 143/144. Short, disulfide-cyclised, low-alanine designs are the easy case for a PURE system
+carrying DsbC and a glutathione buffer. The pH question is then answered by one binding assay in two
+buffers.
+
+**The length risk, stated plainly, because it comes from our own analysis of their data.** On that
+same 800-design EGFR set the hit rate is 3.4 % at ≤30 aa and **0 % at 31–45 aa**, against 34.7 % at
+200+ aa — and six of these eight sit at 39 aa, two at 12 aa. We submit them anyway, for three
+reasons. That prior comes from campaigns optimising **affinity**; this one optimises **selectivity**,
+and a modest binder with a real pH window is what the challenge asks for. The site forces the size:
+the scaffolded route in this same submission could not reach His358 at all, so there is no 200-aa
+version of this experiment to compare against. And the bins are small — a 0 % bin of a few dozen
+designs is not a law — so the honest reading is that **this size regime is close to untested at this
+target**, which is part of why eight cheap peptides are worth a plate.
 
 **The mechanism predicts a direction, not just an affinity.** Neutral imidazole carries one N–H; the
 other ring nitrogen holds a lone pair. A geometry in which **both** ring nitrogens donate to acceptors

@@ -26,9 +26,9 @@ refined by **interaction-preserving inverse folding (CARBonAra)**: the hydrogen 
 and stacking coordinated to the histidine were held fixed while the rest of the binder was repacked.
 This reached what the standard RFdiffusion3→ProteinMPNN route did not — that pipeline produced
 nothing below 60 residues and could not target His358, a site whose double-carbonyl motif occurs in
-~0.455 % of PDB histidines, about six times rarer than the carboxylate-bridged alternative. At
-12–39 aa these are solid-phase synthesis: no expression risk, and the pH question answered by one
-binding assay in two buffers.
+~0.455 % of PDB histidines, about six times rarer than the carboxylate-bridged alternative. At 12–39 aa they are also well inside the expression
+regime — length is the strongest *negative* expression term in this competition's own 800-design EGFR
+dataset — and the pH question is answered by one binding assay in two buffers.
 
 **Mini and large — 12 scaffolded proteins, 94–129 aa, engaging His433 by a reciprocal two-point
 motif.** This is the concept the series exists to test. Most pH-switch designs hang the effect on a
@@ -93,6 +93,12 @@ Protenix). We report that rather than only the model that agrees with us. A pred
 published but deliberately **not scored**: propka credits each hydrogen bond at ~0.5 pKa units while
 burial of the histidine costs more than 1, so it returns a negative shift for a geometry that cannot
 exist without the cation.
+
+**The length risk, from your own data:** that same dataset gives a 3.4 % hit rate at ≤30 aa and **0 %
+at 31–45 aa**, and six of these eight are 39 aa. We submit them because that prior comes from
+campaigns optimising affinity while this one optimises selectivity; because the site forces the size
+(the scaffolded route could not reach His358 at all); and because those bins are small enough that
+the regime is closer to untested than to excluded.
 
 Five of the eight micro designs share one backbone — deliberate, and a stated concentration risk: it
 is the only lineage with equal interface confidence on both orthologs and the only one all three
