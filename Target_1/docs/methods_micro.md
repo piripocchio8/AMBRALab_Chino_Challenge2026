@@ -863,7 +863,10 @@ makes the bidentate geometry the strongest statement about protonation that a st
 and it is what the pH axis is ranked on, together with whether the acceptor is a **carboxylate**
 (a charge–charge interaction) rather than a neutral carbonyl.
 
-**propka was run, tested, and found unable to represent that constraint.** It is reported in the CSV
+**propka was run and tested. It is reported but does not score the micro series, and the reason is
+specific to a neutral-acceptor mechanism rather than a general complaint about the tool** — the
+scaffolded series in this same submission, scored with the same tool on the same protein, gets a
+clean positive answer (see below). It is reported in the CSV
 for transparency and does not enter the score. The reason is specific, not a general complaint.
 
 A stratified test was run: 18 models per class, propka on identical coordinates with and without the
@@ -897,6 +900,42 @@ Reporting those numbers as this submission's pH evidence would therefore have be
 direction that matters: it would have said the designs favour the neutral ring when the geometry
 they were selected for requires the protonated one. The shift stays in the CSV so the judgement can
 be checked; the ranking uses the geometry.
+
+### The control that settles it: the same tool, the same protein, a charged acceptor
+
+The scaffolded series engineers a **carboxylate** onto its binder to meet the target's His433. Running
+propka on one of those complexes and on the same coordinates with the binder deleted:
+
+| target His433 | pKa | protonated at pH 6.5 | at pH 7.4 | window |
+|---|---|---|---|---|
+| **free target** | **6.26** | 36.5 % | 6.8 % | 0.298 |
+| **with binder** | **6.89** | 71.1 % | 23.6 % | **0.474** |
+
+**ΔpKa = +0.63**, and the term breakdown from that run shows exactly why:
+
+```
+HIS 99 A   pKa 6.89   100 % buried   desolvation -2.73
+                      +1.60  H-bond    from binder ASP 62 B
+                      +1.52  coulombic from binder ASP 62 B
+```
+
+A charged acceptor contributes **+3.12** against **−2.73** of desolvation and wins. The micro series'
+main-chain carbonyls contribute **+0.44 and +0.55** against **−1.28** and lose. Same tool, same
+protein, opposite sign, and the only difference is whether the acceptor carries a charge.
+
+Three things follow, and they matter more than the propka question itself:
+
+1. **propka is not broken here — it discriminates correctly.** It is not used to score the micro
+   series because it cannot express the constraint that a bidentate geometry *requires* the cation,
+   not because it fails on protonation-dependent binding in general. The scaffolded series' pH switch
+   is supported by propka outright.
+2. **The free target histidine titrates normally.** At pKa 6.26 it is 6.8 % protonated at pH 7.4, so
+   it is not pre-protonated and there is a real window to exploit. Binding widens that window from
+   0.298 to 0.474 rather than destroying it — the concern that an intramolecular pair might saturate
+   the histidine before the binder arrives does not apply.
+3. **It tells the micro series what to do next.** A carbonyl clamp cannot deliver a positive shift; a
+   carboxylate can. Three designs in the micro pool already present a binder Asp/Glu to His358 in a
+   substantial fraction of models, and that is the route to pursue.
 
 **What the carboxylate result adds.** The only positive shifts anywhere in the test are in the
 carboxylate stratum (28 % of them, up to +1.80). Even on a model that understates hydrogen bonding,

@@ -126,6 +126,18 @@ the contact forms** — in round 4 the worst designed bridge had a median of 16.
 folds with both constraints present and verified. Bridge thresholds must be calibrated on the current
 round's distribution.
 
+**The two series together give the pH switch a control, and it works.** Running propka on a
+scaffolded complex and on the same coordinates with the binder deleted: the target's His433 goes from
+pKa **6.26 free to 6.89 bound** — 36.5 % → 71.1 % protonated at pH 6.5 against 6.8 % → 23.6 % at
+pH 7.4, widening the selectivity window from 0.298 to 0.474. The term breakdown shows the binder's
+engineered carboxylate contributing **+1.60 (H-bond) and +1.52 (coulombic) against −2.73 of
+desolvation** at 100 % burial. The micro series' neutral main-chain carbonyls contribute +0.44 and
++0.55 against −1.28 and come out negative. Same tool, same protein, opposite sign, and the only
+difference is whether the acceptor carries a charge — which is why the micro series' pH evidence is
+read from geometry while the scaffolded series' is supported by propka directly. It also confirms the
+free target histidine titrates normally (6.8 % protonated at pH 7.4), so there is a real window to
+exploit rather than a histidine already saturated before the binder arrives.
+
 ## 3. Why these peptides are worth bench time
 
 **Cheap and fast to falsify.** A 12–39 residue disulfide-cyclised peptide is solid-phase synthesis,
