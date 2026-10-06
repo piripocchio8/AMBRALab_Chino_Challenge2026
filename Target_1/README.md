@@ -30,9 +30,9 @@ the design hypothesis, which is more informative than an unexplained binder.
 **The selection evidence is reproducibility, not a best model.** Every design was refolded many
 times from scratch and ranked on the *rate* at which the interaction reappears, on how tightly the
 refolds agree on a single pose, on the interface confidence against **both** orthologs, and on
-whether it is the same structure in both. The top micro design docks within a median **1.34 Å** of
-its own best pose in **40 of 45** independent human refolds and keeps a comparable interface on
-mouse. Designs that looked excellent on one model, or on one species, were dropped on exactly this
+whether it is the same structure in both. Every micro design carries **45 human and 30–35 mouse
+models**; the top one scores ipSAE **0.368 on human and 0.390 on mouse** and differs by **0.25 Å**
+between its two bound conformations. Designs that looked excellent on one model, or on one species, were dropped on exactly this
 test — including the single most reproducibly docked peptide we have, which turned out to be
 extended in every one of its mouse models and is therefore not submitted.
 

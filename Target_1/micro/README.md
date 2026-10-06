@@ -23,16 +23,24 @@ design hypothesis is wrong and the experiment has said something. That is a more
 a strong binder with no mechanism attached.
 
 **The evidence behind them is reproducibility, not a single lucky model.** Each design was refolded
-many times from scratch, and what is reported is the *rate* at which the interaction reappears, not
-the best model found. The top-ranked design docks into the same pose in **40 of 45** independent
-refolds of the human complex, a median 1.34 Å from its own best pose, and holds a confident
-interface on **both** orthologs (ipSAE 0.42 human, 0.36 mouse). A single predicted complex with a
-high confidence score carries none of that information.
+from scratch until it carried **45 models against the human target and 30–35 against the mouse one**,
+under its own restraint file so the two numbers mean the same thing, and what is reported is the
+*rate* at which something happens rather than the best model found. Three results survive that
+treatment:
+
+- **The top design is equally confident on both orthologs** — ipSAE 0.368 on human and 0.390 on
+  mouse, over 45 and 35 models. It is not a human binder that tolerates mouse; the two are the same.
+- **It is the same molecule in both** — 0.25 Å between its human-bound and mouse-bound conformations,
+  and 0 % of models extended in either species.
+- **The peptide already holds that conformation unaided** — 0.37 Å between the binder folded alone
+  and the binder in its complex. The target does not have to fold it.
+
+A single predicted complex with a high confidence score carries none of this.
 
 **The ranking threw out our own best-looking design.** The most reproducibly docked peptide in the
-whole pool — same pose in 45 of 45 human refolds, 1.03 Å, the highest human ipSAE we measured at
+whole pool — same pose in 45 of 45 human refolds at 1.03 Å, and the highest human ipSAE we measured,
 0.577 — is **not submitted**. It is compact in every one of its 45 human models and extended in
-every one of its mouse models: two different structures, 9.9 Å apart, one per ortholog, and its
+every one of its 30 mouse models: two different structures, 9.3 Å apart, one per ortholog, and its
 mouse interface confidence collapses to 0.076. Pooled across species that reads as "14 % of models
 extended", which is how it survived an earlier filter. Measured per species it is not a cross-reactive
 binder, so it was dropped. The designs that remain are the ones that behave the same way twice.
