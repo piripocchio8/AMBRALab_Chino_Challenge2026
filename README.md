@@ -48,4 +48,4 @@ documents rather than left to inference.
 ## Licence and contact
 
 Designs and documentation are released for the purposes of the competition. Correspondence:
-the AMBRA group, Department of Chemical Sciences, University of Naples Federico II.
+the AMBRA group, Department of Chemical Sciences, University of Naples Federico II. marco.chino@unina.it ambralab@unina.it
