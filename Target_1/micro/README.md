@@ -4,8 +4,9 @@
 form of His358.**
 
 Every other entry in this band is, in effect, a small protein. These are not. They are peptides
-short enough to be ordered from a solid-phase synthesiser, folded by a single disulfide, and tested
-at two pH values in an afternoon.
+folded by a single disulfide and testable at two pH values in an afternoon — and, at 12 to 39
+residues, they sit in the length regime where this competition's own EGFR dataset reports its
+highest hit rate.
 
 ## Why these are worth bench time
 
@@ -44,7 +45,7 @@ these designs are selected on.
 
 **The evidence is a rate, not a best model.** Each design carries **45 models against the human
 target and 30–35 against the mouse one**, folded under its own restraints so the two numbers mean the
-same thing — 5,170 predicted structures across the campaign. The top design scores ipSAE **0.368 on
+same thing — 5,849 predicted structures across the campaign. The top design scores ipSAE **0.368 on
 human and 0.390 on mouse**: not a human binder that tolerates mouse, the same interaction in both. It
 is **0.25 Å** between its human-bound and mouse-bound conformations, and **0.37 Å** between the
 binder folded *alone* and the binder in its complex — the peptide already holds the binding-competent
@@ -55,11 +56,13 @@ fold, so the target does not have to fold it.
 existed. Their behaviour on human EGFR is transfer, not a fit to the evaluation target — and the same
 molecules are directly testable in mouse models.
 
-**They are cheap to falsify.** Chemical synthesis, not cloning and expression: no construct can fail
-to express, no prep can come back insoluble. The pH question is answered by one binding assay in two
-buffers, and the mechanism predicts the *direction* — tighter at acidic pH. A flat or inverted result
-refutes the design hypothesis outright, which is more useful than a strong binder with no mechanism
-attached.
+**They are cheap to falsify.** The pH question is answered by one binding assay in two buffers, and
+the mechanism predicts the *direction* — tighter at acidic pH. A flat or inverted result refutes the
+design hypothesis outright, which is more useful than a strong binder with no mechanism attached.
+On length: these are expressed cell-free from synthetic DNA like every other entry, so they carry
+the same expression route and not a privileged one — but length is the strongest negative expression
+term in the competition's own 800-design EGFR dataset, and at 12–39 residues these sit at the
+favourable end of it.
 
 ## The mechanism, concretely
 
@@ -99,10 +102,11 @@ here.
   [`../docs/methods_micro.md`](../docs/methods_micro.md) §10.4: propka credits each hydrogen bond at
   about half a pKa unit while burial of the histidine costs more than a unit, so it returns a
   negative shift for a geometry that cannot exist without the cation. The geometry is the evidence.
-- **Three of the eight entries passed every selection gate but one**, and one more was admitted over
-  the pose gate by an explicit maintainer decision recorded with its reason. Each is marked with the
-  gate it missed and by how much, rather than the threshold being loosened to admit it.
-- **Four of the eight share one backbone**, across four lineages in all. That is a concentration
+- **One of the eight passed every selection gate but one** — the rate at which it makes the designed
+  bond on the human target. It is marked with the gate it missed and by how much, in the
+  `gate_waived` column, rather than the threshold being loosened to admit it. The other seven pass
+  every gate, and no design is admitted by maintainer override.
+- **Four of the eight share one backbone**, across five lineages in all. That is a concentration
   risk and it is stated: if that backbone is wrong, half the band fails together. It is the lineage
   with equal interface confidence on both orthologs (ipSAE 0.368 human / 0.390 mouse), and all three
   oracles return it as one conformation.

@@ -26,9 +26,10 @@ refined by **interaction-preserving inverse folding (CARBonAra)**: the hydrogen 
 and stacking coordinated to the histidine were held fixed while the rest of the binder was repacked.
 This reached what the standard RFdiffusion3→ProteinMPNN route did not — that pipeline produced
 nothing below 60 residues and could not target His358, a site whose double-carbonyl motif occurs in
-~0.455 % of PDB histidines, about six times rarer than the carboxylate-bridged alternative. At 12–39 aa they are also well inside the expression
-regime — length is the strongest *negative* expression term in this competition's own 800-design EGFR
-dataset — and the pH question is answered by one binding assay in two buffers.
+~0.455 % of PDB histidines, about six times rarer than the carboxylate-bridged alternative. They take
+the same cell-free route from synthetic DNA as every other entry, and at 12–39 aa they sit at the
+favourable end of the strongest *negative* expression term in this competition's own 800-design EGFR
+dataset — length. That cuts the other way for *binding*, and we state it plainly below.
 
 **Mini and large — 12 scaffolded proteins, 94–129 aa, engaging His433 by a reciprocal two-point
 motif.** This is the concept the series exists to test. Most pH-switch designs hang the effect on a
@@ -73,13 +74,16 @@ ring nitrogens donating is only constructible on the **imidazolium**. That predi
 at acidic pH; a flat or inverted result refutes the hypothesis outright, which is more informative
 than an unexplained binder.
 
-**Selection rested on 5,170 predicted structures.** Every micro design was refolded to 45 models
+**Selection rested on 5,849 predicted structures.** Every micro design was refolded to 45 models
 against human and 30–35 against mouse under its own restraints, so the two rates mean the same
 thing; nothing is ranked on a best model. Four axes — cross-reactivity (ipSAE and binder–target ipTM
 with engagement rate, taken from the *worse* species, never the average), pH sensitivity (read from
-geometry), binding consistency, fold consistency. Gates: a design extended in either species is out;
-a design whose median pose sits more than 6 Å from its own best pose is out, and that cannot be
-waived. The leading micro design has **equal interface confidence on human and mouse** (ipSAE
+geometry), binding consistency, fold consistency. Three disqualifications are mechanism failures and
+cannot be waived: extended in either species; a binder that **lands somewhere different on every
+refold**, measured as the average RMSD between its poses with every model superposed on the target
+alone — reference-free, because deviation from a design's own best pose flatters a scattered set; and
+a binder lysine or arginine held against the imidazolium, which pushes the histidine's pKa the wrong
+way and works against our own switch. The leading micro design has **equal interface confidence on human and mouse** (ipSAE
 0.368/0.390), is the **same structure in both** (0.25 Å), and **already holds its bound conformation
 unaided** (0.37 Å between the free peptide and its bound form). The micro campaign ran against the
 **mouse** ortholog and was evaluated on human without re-optimisation — transfer, not a fit to the
@@ -94,13 +98,14 @@ published but deliberately **not scored**: propka credits each hydrogen bond at 
 burial of the histidine costs more than 1, so it returns a negative shift for a geometry that cannot
 exist without the cation.
 
-**The length risk, from your own data:** that same dataset gives a 3.4 % hit rate at ≤30 aa and **0 %
-at 31–45 aa**, and six of these eight are 39 aa. We submit them because that prior comes from
+**The length risk, from your own data.** Length helps expression and hurts binding, and the second
+effect is the one that should worry you here: that same dataset gives a 3.4 % hit rate at ≤30 aa and
+**0 % at 31–45 aa**, and six of these eight are 39 aa. We submit them because that prior comes from
 campaigns optimising affinity while this one optimises selectivity; because the site forces the size
 (the scaffolded route could not reach His358 at all); and because those bins are small enough that
-the regime is closer to untested than to excluded.
+the regime is closer to untested than to excluded. The two 12-mers sit in the better bin.
 
-Four of the eight micro designs share one backbone, four lineages in all — a stated concentration risk: it
+Four of the eight micro designs share one backbone, five lineages in all — a stated concentration risk: it
 is the only lineage with equal interface confidence on both orthologs and the only one all three
 oracles return as a single conformation. The design engine behind the micro series is the subject of
 a manuscript in preparation and is described in principle ahead of publication; every sequence,

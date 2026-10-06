@@ -30,9 +30,11 @@ from a different method — sequences optimised directly against the structure o
 evolutionary algorithm, then refined by interaction-preserving inverse folding with CARBonAra, rather
 than diffused backbones threaded with a sequence model.
 
-**The micro band is cheap and fast to falsify.** Eight disulfide-cyclised peptides of 12–39 residues
-are solid-phase synthesis, not expression — no cloning, no insoluble prep — and the pH question is
-answered by running one binding assay in two buffers. Whatever the answer, it arrives quickly.
+**The micro band is cheap and fast to falsify.** The pH question is answered by running one binding
+assay in two buffers, so whatever the answer, it arrives quickly. And at 12–39 residues these eight
+sit at the favourable end of the strongest negative expression term in this competition's own
+800-design EGFR dataset — length — while taking the same cell-free route from synthetic DNA as
+every other entry.
 
 **The mechanism predicts a direction, not just an affinity.** These designs accept hydrogen bonds
 from the protonated imidazolium, an interaction that exists only while the ring carries its proton.

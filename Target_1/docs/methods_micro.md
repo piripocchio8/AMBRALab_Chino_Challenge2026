@@ -813,16 +813,30 @@ scoring well on the others.
 
 ### 10.1 Does it dock in the same place every time?
 
-Every refold of a design was superposed on the **target** chain, and the binder's deviation from the
-design's own best pose measured. This is a different question from whether the peptide folds
-consistently: a peptide can hold one structure and still bind a different patch each time, and the
-complex metrics report that as a good interface either way.
+Every refold of a design was superposed on the **target** chain and the binder carried through that
+transform, so the binder's own shape never enters the superposition and what is left is purely where
+it sits. This is a different question from whether the peptide folds consistently: a peptide can hold
+one structure and still bind a different patch each time, and the complex metrics report that as a
+good interface either way.
 
-The spread is reported as the median pose RMSD to the best pose, the fraction of refolds within
-2 Å of it, and the RMSF — the spread of each binder residue about its mean position. The leading
-design docks within a median 1.03 Å in 45 of 45 independent human refolds, with an RMSF of 0.80 Å.
-Most designs do not: of the shortlist, pose RMSDs run from 1.03 Å to 21.8 Å, and several designs
-with respectable bond rates turn out to be making those bonds from inconsistent positions.
+The quantity that ranks is the **average RMSD over every pair of binder poses** in that species.
+This is reference-free, and that is the point. The first version of this measurement took each
+model's deviation from the design's own best pose, which needs a reference and therefore a rule for
+choosing one — and it flatters a scattered set, because the best pose of a scattered set sits in the
+middle of the scatter and every model looks closer to it than the models are to each other. The
+discrepancy is not academic: one design reads **5.05 Å to its own best pose and 13.32 Å pairwise**,
+with 2 % of its models within 2 Å of each other. Under the pairwise measure the shortlist separates
+into two populations with a gap between them — 1.1–8.9 Å, then nothing until 10.4–15.5 Å — and the
+gate is set in that gap, so no design sits near enough to the threshold for its exact value to
+decide the outcome.
+
+Both forms are published, per species, with their denominators: `pose_dispersion_human_A` is the one
+that ranks, `pose_rmsd_human_A` the earlier form, retained so the difference can be inspected.
+
+The best design in the band holds its poses to a 2.06 Å average on 45 independent human refolds.
+Most do not. An entire lineage of otherwise strong 39-mers holds **one fold** to 1.5–1.7 Å and still
+scatters its poses over 12–14 Å: a well-folded peptide with no reliable binding mode, which is why
+this is a gate and not a term in the weighted sum.
 
 ### 10.2 Is it one structure, in both species?
 
@@ -946,21 +960,38 @@ substantial fraction of models — one of them in both orthologs.
 ### 10.5 How the four combine
 
 `overall_score` is a weighted sum of four sub-scores, each on 0–1 and each reported beside it:
-cross-reactivity 0.30, pH sensitivity and bond strength 0.25 (bidentate rate 0.45, carboxylate rate 0.35, vina 0.20), binding consistency 0.25, fold consistency 0.20. The
-weights are a judgement; the components are measurements, and are published so the weighting can be
-disagreed with without redoing the work.
+cross-reactivity 0.30, pH sensitivity and bond strength 0.25 (bidentate rate 0.35, binder
+carboxylate rate 0.25, the target's own Glu11 held in both species 0.25, vina 0.15), binding
+consistency 0.25, fold consistency 0.20. The weights are a judgement; the components are
+measurements, and are published so the weighting can be disagreed with without redoing the work.
 
 **Membership, as distinct from order.** The gates decide who is in the band and the overall score
-decides the order; the two are not mixed. Three gates cannot be waived or are waived only on stated
-grounds: a design extended in either species is out; a design whose median pose sits more than 6 Å
-from its own best pose is out, and that gate is not waived by the filling rule, because binding
-somewhere different on most refolds is not binding. One design is admitted over it by an explicit
-maintainer decision, named with its reason in `metrics_full.csv`: its 8.89 Å was measured on 15
-models while every other pose verdict rests on 45, and it beats the alternative on score,
-cross-reactivity, mouse ipSAE, cation distance and the rate at which it makes the designed bond; and the interface-confidence floor is read from the worse species, waived
-only for a design that presents a binder carboxylate in both species with one consistent fold. Where
-the gates leave a slot unfilled it goes to the best-scoring design that misses exactly one of the
-*other* gates, recorded with which gate and by how much.
+decides the order; the two are not mixed. Three gates cannot be waived at all, because each is a
+mechanism failure rather than a weak number:
+
+- a design **extended in either species** is out;
+- a design whose **poses average more than 9 Å apart** (§10.1) is out — binding in a different place
+  each time is not binding. The threshold sits in the gap the measurement itself produces, between a
+  population at 1.1–8.9 Å and one at 10.4–15.5 Å;
+- a design holding a **binder lysine or arginine within 6 Å of the ring** is out. A cation parked
+  against the imidazolium destabilises the protonated form and pushes the histidine's pKa down,
+  narrowing the very window the design exists to exploit. The worst case in the shortlist sits at a
+  median 5.56 Å with a cation inside 6 Å in 80 % of its models; nothing in the band is under 6.3 Å.
+
+The remaining two gates may be waived to fill a slot: a floor on how often the designed bond is made
+on the human target, and an interface-confidence floor read from the worse species — the latter
+waived only for a design that presents a binder carboxylate in both species with one consistent
+fold, since ipSAE normalises by interface size and a 12-residue cycle scores near zero whatever it
+does. Where the gates leave a slot unfilled it goes to the best-scoring design that misses exactly
+one of those two, recorded with which gate and by how much. **One design in the band carries such a
+waiver**; the other seven pass every gate.
+
+An earlier version of this band admitted a design over the pose gate by an explicit maintainer
+decision, on the grounds that its figure rested on 15 models while every other pose verdict rested on
+45. That design has since been refolded to 45 human and 35 mouse models and passes the gate on its
+own, so the override is gone and `OVERRIDES` is empty. The fuller sampling also corrected its human
+bond rate downward, from 0.40 on 15 models to 0.222 on 45 — which is the reason the re-measurement
+was worth doing rather than a formality.
 
 **At most five designs come from one lineage.** That number was two, then three, and is five. It is
 a judgement about evidence against correlated risk and it is stated because it drove the band: at
@@ -976,14 +1007,14 @@ oracles return as a single conformation.
 <!-- GENERATED:RANKING -->
 | # | design | overall | cross (H/M bond rate) | pH (bidentate, carboxylate H/M) | binding (pose, repro) | fold (extended H/M, H↔M Å) | refolds H/M |
 |---|---|---|---|---|---|---|---|
-| 1 | `AMBRA_T1_micro_01` | **0.500** | 0.48 (0.22/0.31) | 0.59 (0.07, 0.00/0.00) | 0.07 (3.41 Å, 0.24) | 0.95 (0.00/0.00, 0.25) | 45/35 |
-| 2 | `AMBRA_T1_micro_02` | **0.395** | 0.38 (0.04/0.31) | 0.35 (0.01, 0.00/0.00) | 0.01 (4.65 Å, 0.04) | 0.96 (0.00/0.00, 0.19) | 75/55 |
-| 3 | `AMBRA_T1_micro_03` | **0.376** | 0.38 (0.03/0.22) | 0.29 (0.00, 0.00/0.00) | 0.00 (4.19 Å, 0.25) | 0.94 (0.00/0.00, 0.30) | 60/55 |
-| 4 | `AMBRA_T1_micro_04` | **0.363** | 0.46 (0.36/0.23) | 0.21 (0.00, 0.00/0.00) | 0.00 (1.34 Å, 0.89) | 0.86 (0.00/0.00, 0.32) | 45/35 |
-| 5 | `AMBRA_T1_micro_05` | **0.358** | 0.20 (0.36/0.37) | 0.53 (0.04, 0.33/0.20) | 0.00 (3.41 Å, 0.22) | 0.83 (0.00/0.00, 0.69) | 45/35 |
-| 6 | `AMBRA_T1_micro_06` | **0.334** | 0.27 (0.58/0.17) | 0.31 (0.00, 0.58/0.17) | 0.00 (3.37 Å, 0.20) | 0.88 (0.00/0.00, 0.65) | 45/35 |
-| 7 | `AMBRA_T1_micro_07` | **0.325** | 0.37 (0.40/0.20) | 0.20 (0.00, 0.00/0.00) | 0.01 (8.89 Å, 0.20) | 0.80 (0.00/0.00, 0.74) | 15/15 |
-| 8 | `AMBRA_T1_micro_08` | **0.246** | 0.27 (0.22/0.17) | 0.00 (0.00, 0.00/0.00) | 0.00 (5.05 Å, 0.02) | 0.82 (0.00/0.00, 0.44) | 45/35 |
+| 1 | `AMBRA_T1_micro_01` | **0.623** | 0.48 (0.22/0.31) | 0.59 (0.07, 0.00/0.00) | 0.56 (3.41 Å, 0.24) | 0.95 (0.00/0.00, 0.25) | 45/35 |
+| 2 | `AMBRA_T1_micro_02` | **0.515** | 0.38 (0.04/0.31) | 0.34 (0.01, 0.00/0.00) | 0.49 (4.65 Å, 0.04) | 0.96 (0.00/0.00, 0.19) | 75/55 |
+| 3 | `AMBRA_T1_micro_03` | **0.469** | 0.46 (0.36/0.23) | 0.21 (0.00, 0.00/0.00) | 0.42 (1.34 Å, 0.89) | 0.86 (0.00/0.00, 0.32) | 45/35 |
+| 4 | `AMBRA_T1_micro_04` | **0.445** | 0.20 (0.36/0.37) | 0.53 (0.04, 0.33/0.20) | 0.35 (3.41 Å, 0.22) | 0.83 (0.00/0.00, 0.69) | 45/35 |
+| 5 | `AMBRA_T1_micro_05` | **0.419** | 0.51 (0.16/0.60) | 0.09 (0.00, 0.00/0.00) | 0.32 (10.63 Å, 0.22) | 0.82 (0.00/0.00, 0.26) | 45/35 |
+| 6 | `AMBRA_T1_micro_06` | **0.355** | 0.27 (0.58/0.17) | 0.31 (0.00, 0.58/0.17) | 0.08 (3.37 Å, 0.20) | 0.88 (0.00/0.00, 0.65) | 45/35 |
+| 7 | `AMBRA_T1_micro_07` | **0.348** | 0.34 (0.22/0.14) | 0.08 (0.00, 0.00/0.00) | 0.26 (6.26 Å, 0.02) | 0.80 (0.00/0.00, 0.74) | 45/35 |
+| 8 | `AMBRA_T1_micro_08` | **0.332** | 0.19 (0.33/0.34) | 0.09 (0.02, 0.02/0.17) | 0.37 (6.65 Å, 0.02) | 0.80 (0.00/0.00, 0.59) | 45/35 |
 
 Read the refold counts first: a rate is only as good as its denominator. Rows where a value
 is missing were not measured, which is not the same as measuring zero.
@@ -1092,9 +1123,10 @@ frame.
 Interface confidence is ipSAE computed **per token** (the residue-aggregated form collapses its d0
 on atom-tokenised residues) and the **binder–target entry** of the per-chain-pair ipTM matrix, never
 the global ipTM, which on a 161-residue target is dominated by the target's own confidence. Pose
-consistency superposes each model on the **target** and measures the binder's deviation from the
-design's own best pose; fold consistency superposes binder on binder. Both are reported per species
-and the worse one is scored.
+consistency superposes each model on the **target** and averages the binder's RMSD over every pair
+of poses; fold consistency superposes binder on binder. Both are reported per species and the worse
+one is scored. `.tmp/pose_dispersion.py` computes the pose measure, `.tmp/cation_census.py` the
+cation gate.
 
 ### 11.4 What a reader can check without running anything
 
@@ -1118,12 +1150,12 @@ per species. Protenix: 2 seeds x 5 samples per species. Commands in §11.2.
 |---|---|---|---|---|---|---|---|
 | `AMBRA_T1_micro_01` | 0.22/0.31 | 0.20/0.20 | 0.00/0.00 | 0.24 | 1.72 | 0.33 | 0.38 |
 | `AMBRA_T1_micro_02` | 0.04/0.31 | 0.50/0.10 | 0.00/0.00 | 0.51 | 0.28 | 0.22 | 0.88 |
-| `AMBRA_T1_micro_03` | 0.03/0.22 | 0.30/0.10 | 0.00/0.10 | 0.23 | 0.21 | 0.32 | 0.88 |
-| `AMBRA_T1_micro_04` | 0.36/0.23 | 0.20/0.00 | 0.10/0.20 | 0.24 | 3.66 | 0.25 | 0.45 |
-| `AMBRA_T1_micro_05` | 0.36/0.37 | 0.40/0.20 | 0.30/0.00 | 2.68 | 0.84 | 0.24 | 0.30 |
+| `AMBRA_T1_micro_03` | 0.36/0.23 | 0.20/0.00 | 0.00/0.10 | 0.24 | 0.21 | 0.25 | 0.88 |
+| `AMBRA_T1_micro_04` | 0.36/0.37 | 0.40/0.20 | 0.10/0.20 | 2.68 | 3.66 | 0.24 | 0.45 |
+| `AMBRA_T1_micro_05` | 0.16/0.60 | —/— | 0.30/0.00 | — | 0.84 | — | 0.30 |
 | `AMBRA_T1_micro_06` | 0.58/0.17 | 0.30/0.30 | 0.10/0.10 | 3.35 | 3.18 | 0.17 | 0.47 |
-| `AMBRA_T1_micro_07` | 0.40/0.20 | —/— | 0.10/0.10 | — | 0.49 | — | 0.43 |
-| `AMBRA_T1_micro_08` | 0.22/0.17 | 0.40/0.10 | 0.00/0.00 | 2.06 | 0.60 | 0.19 | 0.46 |
+| `AMBRA_T1_micro_07` | 0.22/0.14 | —/— | 0.10/0.10 | — | 0.49 | — | 0.43 |
+| `AMBRA_T1_micro_08` | 0.33/0.34 | —/— | 0.00/0.00 | — | 0.60 | — | 0.46 |
 
 A dash is *not measured for this design*, never measured as zero.
 <!-- /GENERATED:ORACLES -->

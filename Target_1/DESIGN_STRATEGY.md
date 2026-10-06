@@ -172,7 +172,7 @@ evaluation target — and the same molecules are directly testable in mouse mode
 ## 4. How the eight were selected
 
 Each design was refolded from scratch until it carried **45 models against human and 30–35 against
-mouse**, under its own restraint file so the two numbers mean the same thing — **5,170 predicted
+mouse**, under its own restraint file so the two numbers mean the same thing — **5,849 predicted
 structures** across the campaign. Nothing is ranked on a best model; everything is a rate reported
 with its denominator.
 
@@ -182,16 +182,24 @@ Four measurements, each on 0–1, each published beside the total:
 |---|---|---|
 | cross-reactivity | 0.30 | interface confidence (ipSAE, binder–target ipTM) and engagement rate, taken from the **lower** of the two species — never the average |
 | pH sensitivity | 0.25 | both ring nitrogens engaged; a binder carboxylate on the ring; the target's own Glu11 held in a charge pair with it in both species |
-| binding consistency | 0.25 | does it dock in the same place on every refold (pose RMSD and RMSF to its own best pose, superposed on the target) |
+| binding consistency | 0.25 | does it dock in the same place on every refold — the average RMSD between its binder poses, every model superposed on the **target** alone, so the binder's own shape never enters the superposition and what is left is purely where it sits |
 | fold consistency | 0.20 | is it one structure, in **both** species, and does the free peptide already hold it |
 
-Three gates decide membership before any score is applied: a design **extended in either species** is
-out; a design whose median pose sits **more than 6 Å from its own best pose** is out and this cannot
-be waived, because binding somewhere different on most refolds is not binding; and an
-interface-confidence floor read from the worse species. Where the gates leave a slot unfilled it goes
-to the best-scoring design missing exactly one of the *other* gates, recorded with which gate and by
-how much. Three of the eight carry such a waiver, and one further design was admitted over the pose
-gate by an explicit maintainer decision, recorded with its reason in `metrics_full.csv`.
+Gates decide membership before any score is applied. Three of them cannot be waived, because each is
+a mechanism failure rather than a weak number: a design **extended in either species**; one whose
+binder **lands somewhere different on every refold**, since binding in a different place each time is
+not binding; and one holding a **binder lysine or arginine against the imidazolium**, which
+destabilises the cation and pushes the histidine's pKa the wrong way — against the design's own
+switch. The remaining gates — a floor on how often the designed bond is made on the human target, and
+an interface-confidence floor read from the worse species — may be waived to fill a slot, which then
+goes to the best-scoring design missing exactly one of them, recorded with which gate and by how much.
+
+The pose measure is deliberately **reference-free**. Deviation from a design's own best pose needs a
+reference and flatters a scattered set: when the poses are spread, the best one sits in the middle of
+the scatter and every model looks closer to it than the models are to each other. One design reads
+5.05 Å to its own best pose and 13.32 Å pairwise, with 2 % of its models within 2 Å of each other. The
+pairwise average makes that visible, and the shortlist separates cleanly under it — 1.1–8.9 Å, then a
+gap, then 10.4–15.5 Å.
 
 A hydrogen bond is treated as a **direction, not a distance**: 2.5–3.4 Å, within 45° of the in-plane
 N–H vector, ≥2.9 Å from every ring carbon, within 1.2 Å of the ring plane. The ring-carbon clause
@@ -232,7 +240,7 @@ bound form) with **equal interface confidence on human and mouse** (ipSAE 0.368 
 What they do not support: a sharp switch. The bidentate clamp is rare in the predictions, as the motif
 is rare in nature. Expect the pH dependence to be real but modest.
 
-**Four of the eight micro designs share one backbone**, four lineages in all. That is a concentration
+**Four of the eight micro designs share one backbone**, five lineages in all. That is a concentration
 risk we state rather than hide: it is the only lineage with equal interface confidence on both
 orthologs and the only one all three oracles return as a single conformation — but if that backbone
 is wrong, half the band fails together.

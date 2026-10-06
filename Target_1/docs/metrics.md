@@ -61,7 +61,8 @@ consistently and still dock somewhere different each time.
 | column | meaning |
 |---|---|
 | `n_refolds_human`, `n_refolds_mouse` | how many independent models the rates below are computed from. Read these first: a rate over five models is not a rate |
-| `pose_rmsd_human_A` | median backbone RMSD of the binder to its own best pose, after superposing the two structures on the **target**. This asks whether the peptide docks in the same place every time |
+| `pose_dispersion_human_A`, `pose_dispersion_mouse_A` | **the pose measure the ranking uses.** Average backbone RMSD over every *pair* of binder poses in that species, after superposing each model on the **target** alone — so the binder's own shape never enters the superposition and what is left is purely where it sits. Reference-free: no model is privileged, which matters because a scattered set's own best pose sits in the middle of the scatter and makes every model look closer to it than the models are to each other |
+| `pose_rmsd_human_A` | the earlier form of the same question: median backbone RMSD of the binder to its own **best** pose. Retained for comparison and no longer used to rank, because it flatters a scattered set — one design reads 5.05 Å to its own best pose and 13.32 Å pairwise, with 2 % of its models within 2 Å of each other |
 | `pose_reproducible_human` | fraction of refolds landing within 2 Å of that best pose |
 | `rmsf_human_A` | mean spread of each binder residue about its average position across refolds |
 | `fold_spread_human_A`, `fold_spread_mouse_A` | median pairwise RMSD of the binder to itself within one species, superposing binder on binder. This asks whether it is one structure, independently of where it sits |
@@ -83,17 +84,35 @@ Burial and hydrogen bonding pull `dpka` in opposite directions: putting a histid
 interface lowers its pKa, while accepting a hydrogen bond from it raises the pKa. For most designs
 burial wins, and only a few show a net shift in the direction the mechanism intends.
 
-## Two gates applied before scoring
+## The gates applied before scoring
 
-A weighted sum lets a design that fails badly on one axis be carried by the other three, so two
-disqualifications are applied as gates rather than penalties:
+A weighted sum lets a design that fails badly on one axis be carried by the other three, so a few
+disqualifications are applied as gates rather than penalties. Two of them are mechanism failures and
+cannot be waived; the rest may be waived to fill the band, and every waiver is recorded in the
+`gate_waived` column with the gate and the margin.
+
+Not waivable:
 
 - **extended in either species** (`frac_extended` above half for human or mouse) — not a folded
   binder against that ortholog, whatever the other numbers say;
-- **median pose RMSD above 6 Å** from the design's own best pose — it is not binding one site.
+- **pose dispersion above 9 Å** (`pose_dispersion_human_A`) — the binder is not occupying one site.
+  The threshold sits in a gap the measurement itself produces: the shortlist runs 1.1–8.9 Å and then
+  jumps to 10.4–15.5 Å, so no design sits near enough to the value for it to decide the outcome;
+- **a binder cation within 6 Å of the ring** (`cation_to_ring_A`) — a lysine or arginine held against
+  the imidazolium destabilises the cation and pushes the histidine's pKa the wrong way. This one
+  opposes the design's own switch, so no amount of confidence compensates for it.
 
-Designs rejected by a gate are named in `docs/methods_micro.md` with the reason, rather than quietly
-dropped.
+Waivable, to fill the band:
+
+- **the designed bond on the human target in fewer than 15 % of models** (`bond_rate_human`);
+- **interface ipSAE below 0.10 in the worse species** — the oracle declining to place the two chains
+  together at all. Waived for a design that makes the mechanism's case on geometry instead: a binder
+  carboxylate on the ring in *both* species, one conformation in both, never extended. ipSAE
+  normalises by interface size, so a 12-residue cycle scores near zero whatever it does, which is a
+  property of the metric rather than a verdict on the molecule.
+
+A cap on how many designs may come from one backbone lineage is applied last. Designs rejected by a
+gate are named in `docs/methods_micro.md` with the reason, rather than quietly dropped.
 
 ## The overall score
 
@@ -103,8 +122,8 @@ ranking can be argued with rather than taken on trust:
 | component | weight | what it is |
 |---|---|---|
 | `score_cross` | 0.30 | computed per species from the interface confidence (ipSAE and the binder-target ipTM) **and** the engagement rate, then taken as the **lower** of the two species — never the average, because a design that works on one ortholog and not the other is not cross-reactive and an average hides exactly that. Both halves must hold: a 12-mer can make the hydrogen bond in 40 % of models with an ipSAE of 0.03, which is an interface too small to believe |
-| `score_ph` | 0.25 | bond direction, number and energy together: half the propka shift in the intended direction, a quarter the rate of double engagement, a quarter the vina interaction energy |
-| `score_binding` | 0.25 | pose reproducibility, discounted by the per-residue spread |
+| `score_ph` | 0.25 | read from the **geometry**, not from a predicted pKa: 0.35 the rate of double engagement (both ring nitrogens donating, which is only constructible on the imidazolium), 0.25 the rate at which the binder presents a carboxylate to the ring, 0.25 the rate at which the target's own Glu11 is held against the ring in **both** species, 0.15 the vina interaction energy. The propka shift is reported in `dpka_his_human` and deliberately **not** scored — see the physics argument in `methods_micro.md` §10.4 |
+| `score_binding` | 0.25 | the pose dispersion, taken from the worse species once that species has at least 15 models. Below that the mouse figure is noise and would rank designs by sample size rather than behaviour, so only the human evidence is used and the thin sampling is flagged |
 | `score_fold` | 0.20 | one structure, **in both species** (extension taken from the worse one, never pooled) and - where measured - unaided |
 
 Cross-reactivity and pH sensitivity are what the challenge is judged on, so they carry half the
