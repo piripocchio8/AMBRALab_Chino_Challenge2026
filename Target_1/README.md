@@ -53,6 +53,17 @@ independent: a failure of either says nothing about the other.
 | scaffold | disulfide-cyclised peptide, 12–39 residues | motif-scaffolded de novo protein, 60–134 residues |
 | methods | [`docs/methods_micro.md`](docs/methods_micro.md) | [`docs/methods_mini_large/`](docs/methods_mini_large/) |
 
+The mini and large bands were refreshed from the source series on 6 Oct 2026, when it grew from
+fourteen designs to twenty-three with a fifth design round. That round enforces an amino-acid
+**composition envelope** — taken from experimentally confirmed sub-micromolar all-alpha EGFR binders
+— *before* any folding, rather than resurfacing designs afterwards, and a later pass removed 18
+unpaired buried cysteines across 12 designs. Eight of the twelve designs carried here come from
+rounds 4–5. Interface confidence across the band is close to equal on the human and mouse orthologs
+(ipSAE 0.83–0.90 against 0.79–0.89), which is the cross-reactivity property the challenge asks for.
+
+> `pHsel-NN` names were **reassigned** in that revision: a name does not refer to the same molecule
+> it did before. Designs are matched by sequence, and each carries its source rank and local id.
+
 The two sites are 75 residues apart in sequence. His358 is the more demanding of the two: the
 double-carbonyl arrangement the micro series builds occurs in **0.455 %** of histidines in the PDB,
 about one in 220, where the carboxylate-assisted arrangement the other series uses is six times more

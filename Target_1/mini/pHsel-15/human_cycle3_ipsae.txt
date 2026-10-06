@@ -1,0 +1,6 @@
+
+Chn1 Chn2  PAE Dist  Type   ipSAE    ipSAE_d0chn ipSAE_d0dom  ipTM_af  ipTM_d0chn     pDockQ     pDockQ2    LIS       n0res  n0chn  n0dom   d0res   d0chn   d0dom  nres1   nres2   dist1   dist2  Model
+A    B     15   15   asym  0.844780    0.935781    0.935581    0.911    0.935781      0.5966     0.8971     0.7102      99    269    268    3.63    6.05    6.04    169      99      95      71   /lustre/scratch/gsgueglia/challenge2026/runs/cysfix/out_human/seed7919/shard16/boltz_results_shard16/predictions/cys_R3_04_036/cys_R3_04_036_model_0
+B    A     15   15   asym  0.870414    0.911002    0.910735    0.934    0.911002      0.5966     0.9016     0.7410     170    269    268    4.86    6.05    6.04     98     170      71      95   /lustre/scratch/gsgueglia/challenge2026/runs/cysfix/out_human/seed7919/shard16/boltz_results_shard16/predictions/cys_R3_04_036/cys_R3_04_036_model_0
+A    B     15   15   max   0.870414    0.935781    0.935581    0.934    0.935781      0.5966     0.9016     0.7256     170    269    268    4.86    6.05    6.04    170      99      95      71   /lustre/scratch/gsgueglia/challenge2026/runs/cysfix/out_human/seed7919/shard16/boltz_results_shard16/predictions/cys_R3_04_036/cys_R3_04_036_model_0
+

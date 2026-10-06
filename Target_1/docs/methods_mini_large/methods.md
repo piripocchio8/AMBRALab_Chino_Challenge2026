@@ -61,7 +61,7 @@ negative-log-likelihood recovered via a forward hook on `decoder_features.log_pr
 the true NLL (significant at n = 2789 but only 1.08x enrichment). We therefore do not filter on them;
 we fold more sequences and let ipSAE decide.
 
-## 3b. Surface/core polarity optimisation (applied to 5 of the 14)
+## 3b. Surface/core polarity optimisation (rounds 3-4 only; applied to 5 of those 14)
 
 Five designs carry a sequence optimised to bring alanine content and apolarity into the range
 occupied by experimentally confirmed all-alpha EGFR binders (alanine 4.5-10.4%, hydrophobic fraction
@@ -95,7 +95,7 @@ assumed -- the binder acid must still be Asp/Glu and the binder His still His.
 Note that threading onto a *fixed* backbone measures backbone-adaptation strain, not foldability, so
 PyRosetta is used here only as a clash screen; whether a sequence folds is decided by the refold.
 
-## 4. Three-cycle refinement with restraint release
+## 4. Three-cycle refinement with restraint release (rounds 3-4)
 
 | cycle | restraints | purpose |
 |---|---|---|
@@ -133,7 +133,7 @@ Two checks that are not optional:
   single trailing NUL byte in a cached `.a3m` once made every record fail while the job still exited 0.
 - export a per-shard `NUMBA_CACHE_DIR`; concurrent shards otherwise race on Boltz's `@njit(cache=True)`.
 
-## 6. Acceptance gate
+## 6. Acceptance gate (rounds 3-4; round 5 uses the stricter gate in 7b)
 
 Applied to **all three** folds independently:
 
@@ -168,6 +168,149 @@ Measurement protocol, with five guards each of which was learned from a failure:
 **pKa is protocol-dependent by ~0.7 units, far more than replicate noise**: the same variant gives
 6.88 +- 0.30 under a local relax and 7.58 +- 0.01 whole-pose. Always relax whole-pose before PROPKA.
 
+## 7b. Round 5 — composition-first redesign (9 of the 23 designs)
+
+Rounds 3-4 produced designs whose predicted interfaces were good but whose **amino-acid composition
+sat outside the envelope of experimentally confirmed sub-uM all-alpha EGFR binders** (8 of 14
+outside). Section 3b resurfaced five of them after the fact and recovered only those five. Round 5
+moved the constraint upstream.
+
+**Envelope enforced** (observed range of the experimentally confirmed sub-uM all-alpha binders of
+the previous round; derivation and limits in `analysis/composition_envelope.md`):
+alanine <= 0.104, hydrophobic AVILMFWY 0.329-0.42, net charge pH7 -19.3..-5.0, pI 4.60-5.00.
+The hydrophobic **floor** is enforced as well as the ceiling: minimising apolarity produces
+serine-core proteins, so the objective is closeness to the binder centroid (0.085 / 0.376), not
+minimisation.
+
+**Pipeline as run** (`protocol/scripts/round5/`):
+
+| stage | what | scale |
+|---|---|---|
+| backbones | RFdiffusion3, same 9 anchor pairs as round 4, two length arms (86-146 and 179-245 aa) | 8640 designs |
+| sequences | soluble ProteinMPNN with an **alanine bias of -2.0** | 37312 sequences |
+| composition gate | the envelope above, applied **before any folding** | 3157 candidates |
+| fold 1 | Boltz-2 with the two contact constraints, `force: true` | 2370 folds |
+| founder gate | pDockQ >= 0.20, both bridges <= 5.5 A, binder pLDDT >= 0.85, scRMSD <= 2.0 A, bridge realism_dev <= 2.5 | 98 founders |
+| verification | Boltz-2 **unconstrained**, two independent seeds (7919, 20261005) | 196 folds |
+| acceptance | every mechanism criterion in **both** seeds; confidence criteria on the **worst** seed | **11 accepted, 9 submitted** |
+| cross-species | mouse domain III unconstrained fold | 11 folds |
+| pH | PyRosetta pH mode, whole-pose, 8 replicates, pH 6.5 vs 7.4 | 11 designs |
+
+Two of the 11 accepted designs are **not** submitted: `R5_01` (187 aa, excluded on length -- our
+cell-free expression evidence covers only 60-134 aa) and `R5_11` (collapsed on the mouse ortholog,
+ipSAE 0.094). Both are retained in `metrics/round5_*`. See README section 3.
+
+The alanine bias is the whole intervention: it moved the composition-gate pass rate from 4.7% to
+49.2%, alanine from 0.157 to 0.072 and hydrophobic fraction from 0.452 to 0.367. All 11 accepted
+designs -- and all 9 submitted -- are inside the envelope on every axis.
+
+**Acceptance is stricter than rounds 3-4.** A design is accepted only if the binder re-docks and
+*both* designed bridges re-form with no restraint **in both seeds** (<= 5.5 A in both, <= 4.0 A in at
+least one), with ipSAE >= 0.50 and binder pLDDT >= 0.85 on the *worst* seed, the fold retained within
+2.0 A of the constrained pose, and bridge geometry inside the native envelope. The two-seed
+requirement is not redundancy theatre: the designed salt bridge replicates across folds at only
+Spearman rho +0.36, so a bridge observed once unconstrained is not evidence.
+
+> **The realism reference rests on 39 contacts.** `metrics/native_bridge_envelope.json` is built from
+> 20 crystal and 19 AlphaFold His-carboxylate contacts, and the file's own caveat is that "the
+> envelope tails are loosely determined -- widen or replace with a full PDB survey before treating
+> the 5th/95th percentiles as hard physical limits". Since realism is the criterion that actually
+> decides acceptance, that limitation propagates directly into how many designs pass.
+
+**What actually limits yield.** Of the 98 founders, 84 fail on **bridge-geometry realism** alone;
+dropping that single criterion would accept 25 instead of 11, while dropping any other criterion
+changes the count by at most one. Interface confidence, docking and fold stability are effectively
+free at this stage -- native-like bridge *geometry* is the scarce property. Realism is therefore a
+stringency dial, and the value used here (`realism_dev <= 2.5`) is stated so it can be re-applied.
+
+**Two results worth recording for anyone repeating this.**
+
+1. **A `force: true` Boltz contact constraint does not mean the contact forms.** In round 4 the worst
+   designed bridge had a median of 16.7 A across constrained folds with both constraints present and
+   verified on disk. Any bridge threshold must be calibrated on the *current* round's distribution:
+   the round-4-derived gate retained 5 of 1580 round-5 folds, while recalibrating gave 70.
+2. **Designed length is a window, not a trend.** 86-146 aa gave a 5.58% founder rate and 10 of the 11
+   accepted designs; 179-245 aa gave 1.45% and one -- but that one (`R5_01`, 187 aa) was the best
+   round-5 design by ipSAE. Low yield, not a low ceiling. It is excluded from the submission on
+   expression grounds, not on quality.
+
+## 7c. Cysteine removal (applied to 9 of the 23 designs)
+
+An audit of the shipped structures found **18 unpaired cysteines across 12 designs**, all of them
+buried (relSASA 0.00-0.12), only one genuine disulfide in the set (`pHsel-02`). Cysteine had never
+been excluded at ProteinMPNN sampling time. Free thiols are an aggregation and heterogeneity
+liability, so they were redesigned away where that cost nothing.
+
+**Only the cysteine positions were designable.** `designed_residues` named exactly those positions,
+so MPNN could not touch anything else; CYS was omitted there by construction, and because every site
+is core the charged and backbone-disruptive residues were omitted too. Scripts:
+`protocol/scripts/cysfix/`.
+
+> **Slice safety.** MPNN returns the whole complex and which end carries the binder depends on chain
+> order in the input -- an RFD3 output puts the binder first, a Boltz co-fold puts the target first.
+> Guessing wrong silently returns a slice of the TARGET. The binder slice is therefore *discovered*:
+> the only acceptable slice is one reproducing the parent sequence at every non-designable position.
+> All 41 candidates passed, so nothing outside the cysteine positions changed.
+
+Two MPNN passes were run, the second with an alanine bias of -2.0. The first pass chose alanine 22
+times in 40 substitutions, which would have pushed designs past the composition ceilings that round 5
+exists to respect; the biased pass supplied Ser/Thr/Val/Asn/Gln alternatives. 192 samples collapsed
+to **41 distinct candidates** across the 12 designs.
+
+**Acceptance is relative to the parent**, because a cysteine is a liability rather than a defect and
+the bar for replacing one is that the design is no worse. In all three unconstrained folds: ipSAE
+within 0.05 of the parent, fold kept within 2.0 A, both designed bridges <= 4.0 A, binder pLDDT
+>= 0.80, fewer cysteines, and the composition envelope not worsened. **25 of 41 candidates passed,
+covering 9 of the 12 designs.**
+
+**pH selectivity is a third criterion where it exists.** For the round-5 designs a fix was also
+required not to cost more than 0.5 REU of switch. This proved decisive rather than cosmetic: at the
+same positions, different residues swing ddG_bind by up to **3.7 REU** (`pHsel-09`: `C17S;C50S`
++0.85 against `C17M;C50T` -2.81), so these buried cysteines are coupled to the His switch in a way
+no interface metric detects. Selecting on interface quality alone would have cost `pHsel-07` 1.66 REU
+and `pHsel-08` 2.19 REU; selecting on all three axes instead **gained** `pHsel-07` +3.65 REU, giving
+it the strongest switch in the submission.
+
+**Apolar is preferred at a buried position, but not unconditionally.** A buried serine was only
+accepted where an apolar alternative was not equal-or-better: of the nine substitutions, five go to
+A/V/I/L/M/F. Two considerations limited that. First, all nine introduced polar side chains do find an
+H-bond partner in the predicted structure (2.4-3.4 A, usually a local backbone carbonyl), so the
+usual buried-unsatisfied-hydroxyl penalty is not in evidence here. Second, and decisively, for the
+three round-5 designs the serine is **load-bearing for the pH switch**: replacing it with an apolar
+residue costs 1.8-4.9 REU of ddG (`pHsel-07` +5.98 -> +1.06 as C48S;C91A -> C48A;C91V). That is the
+same coupling reported above -- these buried cysteines sit in the electrostatic network that sets the
+anchor His pKa -- so an apolar swap that looks free on interface metrics is not free on selectivity.
+
+The nine substitutions as shipped:
+
+| design | local_id | substitution | class |
+|---|---|---|---|
+| `pHsel-01` | `R3_01` | `C85A` | apolar |
+| `pHsel-02` | `R4_03` | `C9I` | apolar |
+| `pHsel-07` | `R5_05` | `C48S,C91A` | contains a polar residue |
+| `pHsel-08` | `R5_08` | `C55S,C107S` | contains a polar residue |
+| `pHsel-09` | `R5_07` | `C17S,C50S` | contains a polar residue |
+| `pHsel-10` | `R4_07` | `C9S` | contains a polar residue |
+| `pHsel-15` | `R3_04` | `C22V,C25V` | apolar |
+| `pHsel-19` | `R3_02` | `C50M` | apolar |
+| `pHsel-20` | `R4_05` | `C18A` | apolar |
+
+Five are fully apolar. `pHsel-01` (C85A), `pHsel-15` (C22V;C25V) and `pHsel-19` (C50M) were
+moved from a polar first choice to an apolar one after the fact, each being equal or better on
+ipSAE, bridge distance and composition; none of those three moves pushed a design newly outside
+the composition envelope.
+
+
+`pHsel-14`, `-16` and `-22` keep their cysteines: no candidate held the interface (one broke a
+designed bridge at 4.81 A, three collapsed ipSAE by 0.11-0.25). They remain flagged `free-cys:N`.
+
+> **scRMSD is computed independently here.** `protocol/scripts/loop/loop_score.py` picks its reference chain by walking
+> A..Z for the first chain whose CA count matches the binder, forcing chain B only when the reference
+> path contains "boltz" or "loop". With a reference under `designs/<id>/`, neither token is present,
+> so it aligns the binder onto a slice of the 170-residue target and returns a uniform 12-16 A
+> artefact -- 15.87 A where the true value is 0.27 A. Every scRMSD in this round is measured with the
+> binder chain identified explicitly in both structures.
+
 ## 8. Reproducing this
 
 ```bash
@@ -175,7 +318,13 @@ source scripts/env.sh                     # redirects all caches to scratch; rai
 conda activate rfd3                       # backbones + MPNN
 conda activate boltz2                     # co-folding
 conda activate pyros                      # pH / pKa work
-bash protocol/scripts/campaign/run_campaign.sh    # 7-stage driver
+bash protocol/scripts/campaign/run_campaign.sh    # rounds 3-4, 7-stage driver
+
+# round 5: chained SLURM orchestrators (sbatch runs from compute nodes, so each stage
+# submits the next with --dependency and a wall-clock guard)
+sbatch protocol/scripts/round5/r5_sbatch/r5_orch_a.sbatch   # verify + score the constrained folds
+#   -> orch_b gate + 2-seed unconstrained fold + acceptance
+#   -> orch_c export + pH;  orch_d mouse;  orch_e batch-2 merge;  orch_f refresh tables
 ```
 
 Environment exports in `protocol/envs/`. Note `scripts/env.sh` must be sourced first: PyRosetta and
