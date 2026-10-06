@@ -1125,8 +1125,8 @@ on atom-tokenised residues) and the **binder–target entry** of the per-chain-p
 the global ipTM, which on a 161-residue target is dominated by the target's own confidence. Pose
 consistency superposes each model on the **target** and averages the binder's RMSD over every pair
 of poses; fold consistency superposes binder on binder. Both are reported per species and the worse
-one is scored. `.tmp/pose_dispersion.py` computes the pose measure, `.tmp/cation_census.py` the
-cation gate.
+one is scored. `scripts/local/pose_dispersion.py` computes the pose measure,
+`scripts/local/cation_census.py` the cation gate.
 
 ### 11.4 What a reader can check without running anything
 
