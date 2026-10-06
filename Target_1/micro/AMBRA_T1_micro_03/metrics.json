@@ -29,10 +29,10 @@
  "n_residue_contacts": 28,
  "n_interchain_hbonds": 7,
  "n_interface_residues_binder": 13,
- "human_binder_bond_models": "13/30",
- "human_bidentate_models": "3/30",
- "human_engaged_models": "14/30",
- "inverse_direction_models": 8,
+ "human_binder_bond_models": "18/55",
+ "human_bidentate_models": "5/55",
+ "human_engaged_models": "21/55",
+ "inverse_direction_models": 10,
  "mouse_bidentate_models": "0/15",
  "rg_ratio": 1.052,
  "his_bonds": [
@@ -44,5 +44,7 @@
  "boltz_iptm": 0.8312,
  "boltz_binder_ptm": 0.9365,
  "boltz_dist_to_His25_A": 2.48,
- "boltz_ring_engaged": 0
+ "boltz_ring_engaged": 0,
+ "human_models_total": 55,
+ "previous_name": "AMBRA_T1_micro_03"
 }

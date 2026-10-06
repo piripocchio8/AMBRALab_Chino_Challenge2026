@@ -43,5 +43,7 @@
  "boltz_iptm": 0.5472,
  "boltz_binder_ptm": 0.7315,
  "boltz_dist_to_His25_A": 11.77,
- "boltz_ring_engaged": 0
+ "boltz_ring_engaged": 0,
+ "human_models_total": 30,
+ "previous_name": "AMBRA_T1_micro_02"
 }
