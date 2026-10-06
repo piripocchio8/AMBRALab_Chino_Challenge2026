@@ -2,7 +2,26 @@
 
 Challenge 2026, Target 1. Written for challenge reviewers and for other designers who may want to
 reuse or criticise the protocol. Every number quoted here was measured by us; where a quantity was
-not measured it is marked TBD rather than estimated.
+not measured it is said so rather than estimated.
+
+> ### A note on what is and is not disclosed here
+>
+> The design engine behind the micro series — a population-based evolutionary optimiser that scores
+> candidate sequences directly against the structure oracle, coupled to an interaction-preserving
+> inverse-folding refinement — is **the subject of a manuscript in preparation**. Its internal
+> machinery (the objective's term set and weights, the population scheme and its operators, the
+> acceptance and re-grounding logic) is therefore described here in principle rather than in
+> reproducible detail, **ahead of publication**.
+>
+> Nothing needed to *evaluate these designs* is withheld. The sequences, the predicted structures,
+> every per-model measurement, the selection criteria, the gates and their thresholds, the failures
+> and the designs we rejected are all in this repository, and every number quoted can be recomputed
+> from the files beside it. The restraints given to the oracle, the hydrogen-bond criteria, the
+> validation protocol and the ranking are stated in full. What is held back is how the candidate
+> sequences were *generated*, not how they were *judged*.
+>
+> We will release the engine and its parameters with the publication, and are glad to discuss the
+> method in confidence with the organisers in the meantime.
 
 ---
 
@@ -664,12 +683,11 @@ Stated plainly, because several of them are load-bearing.
     structure, and sanity-checking them in that structure, is the better discipline and is what we
     would do again; 1MFM A 43 is the natural reference.
 
-12. **TBD.** The final submitted designs and their sequences are not in this repository yet: the
-    design campaign is still running and the authors will select the final designs before the
-    deadline. The submission CSV generator and its documented format are provided now, with clearly
-    marked placeholder records, so that the format can be checked ahead of the content. Per-design
-    metric values, and the structure models for the submitted designs, are TBD until that selection
-    is made.
+12. **Resolved.** The campaign is finished and the selection is made. The eight submitted designs,
+    their sequences, their predicted structures and every per-model measurement behind them are in
+    `../micro/`, with `../submission.csv` (the challenge template: name, sequence, molecule_class)
+    and `../metrics_full.csv` (the same designs with all metrics) at the target root. Section 10
+    describes how the eight were chosen, and names the designs that were rejected and why.
 
 ---
 
@@ -899,13 +917,13 @@ disagreed with without redoing the work.
 | # | design | overall | cross (H/M bond rate) | pH (bidentate, carboxylate H/M) | binding (pose, repro) | fold (extended H/M, H↔M Å) | refolds H/M |
 |---|---|---|---|---|---|---|---|
 | 1 | `AMBRA_T1_micro_01` | **0.500** | 0.48 (0.22/0.31) | 0.59 (0.07, 0.00/0.00) | 0.07 (3.41 Å, 0.24) | 0.95 (0.00/0.00, 0.25) | 45/35 |
-| 2 | `AMBRA_T1_micro_02` | **0.363** | 0.46 (0.36/0.23) | 0.21 (0.00, 0.00/0.00) | 0.00 (1.34 Å, 0.89) | 0.86 (0.00/0.00, 0.32) | 45/35 |
-| 3 | `AMBRA_T1_micro_03` | **0.358** | 0.20 (0.36/0.37) | 0.53 (0.04, 0.33/0.20) | 0.00 (3.41 Å, 0.22) | 0.83 (0.00/0.00, 0.69) | 45/35 |
-| 4 | `AMBRA_T1_micro_04` | **0.334** | 0.27 (0.58/0.17) | 0.31 (0.00, 0.58/0.17) | 0.00 (3.37 Å, 0.20) | 0.88 (0.00/0.00, 0.65) | 45/35 |
-| 5 | `AMBRA_T1_micro_05` | **0.147** | 0.07 (0.42/0.10) | 0.15 (0.02, 0.00/0.00) | 0.01 (3.02 Å, 0.18) | 0.44 (0.00/0.00, 3.51) | 45/30 |
-| 6 | `AMBRA_T1_micro_06` | **0.412** | 0.40 (0.00/0.40) | 0.37 (0.00, 0.00/0.00) | 0.04 (5.07 Å, 0.20) | 0.94 (0.00/0.00, 0.24) | 15/15 |
-| 7 | `AMBRA_T1_micro_07` | **0.411** | 0.42 (0.27/0.46) | 0.41 (0.04, 0.00/0.00) | 0.00 (21.76 Å, 0.13) | 0.91 (0.00/0.00, 0.30) | 45/35 |
-| 8 | `AMBRA_T1_micro_08` | **0.354** | 0.28 (0.18/0.14) | 0.40 (0.07, 0.00/0.00) | 0.00 (21.12 Å, 0.27) | 0.84 (0.00/0.00, 0.53) | 45/35 |
+| 2 | `AMBRA_T1_micro_02` | **0.412** | 0.40 (0.00/0.40) | 0.37 (0.00, 0.00/0.00) | 0.04 (5.07 Å, 0.20) | 0.94 (0.00/0.00, 0.24) | 15/15 |
+| 3 | `AMBRA_T1_micro_03` | **0.411** | 0.42 (0.27/0.46) | 0.41 (0.04, 0.00/0.00) | 0.00 (21.76 Å, 0.13) | 0.91 (0.00/0.00, 0.30) | 45/35 |
+| 4 | `AMBRA_T1_micro_04` | **0.363** | 0.46 (0.36/0.23) | 0.21 (0.00, 0.00/0.00) | 0.00 (1.34 Å, 0.89) | 0.86 (0.00/0.00, 0.32) | 45/35 |
+| 5 | `AMBRA_T1_micro_05` | **0.358** | 0.20 (0.36/0.37) | 0.53 (0.04, 0.33/0.20) | 0.00 (3.41 Å, 0.22) | 0.83 (0.00/0.00, 0.69) | 45/35 |
+| 6 | `AMBRA_T1_micro_06` | **0.354** | 0.28 (0.18/0.14) | 0.40 (0.07, 0.00/0.00) | 0.00 (21.12 Å, 0.27) | 0.84 (0.00/0.00, 0.53) | 45/35 |
+| 7 | `AMBRA_T1_micro_07` | **0.349** | 0.25 (0.29/0.06) | 0.40 (0.07, 0.00/0.00) | 0.00 (22.21 Å, 0.07) | 0.88 (0.00/0.00, 0.54) | 45/35 |
+| 8 | `AMBRA_T1_micro_08` | **0.334** | 0.27 (0.58/0.17) | 0.31 (0.00, 0.58/0.17) | 0.00 (3.37 Å, 0.20) | 0.88 (0.00/0.00, 0.65) | 45/35 |
 
 Read the refold counts first: a rate is only as good as its denominator. Rows where a value
 is missing were not measured, which is not the same as measuring zero.

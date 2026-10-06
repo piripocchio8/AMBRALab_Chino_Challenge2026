@@ -21,6 +21,14 @@ His358 is approached by main-chain carbonyls accepting from the imidazolium — 
 **0.455 % of histidines in the PDB, about one in 220**, roughly six times rarer than the
 carboxylate-bridged arrangement. The micro series is aimed at the less accessible target.
 
+**The method is new, and is being published separately.** The design engine — a population-based
+evolutionary optimiser scoring candidates directly against the structure oracle, with an
+interaction-preserving inverse-folding refinement — is the subject of a manuscript in preparation, so
+it is described here in principle rather than in reproducible detail, ahead of publication. Nothing
+needed to judge these designs is withheld: sequences, structures, every per-model measurement, the
+gates and their thresholds, and the designs we rejected are all here. What is held back is how the
+candidates were generated, not how they were judged.
+
 **A different method, and the reason it matters here.** Backbones were not diffused and threaded.
 Sequences were optimised directly against the structure oracle by an evolutionary algorithm, then
 refined by **interaction-preserving inverse folding with CARBonAra**: the specific contacts worth
