@@ -911,6 +911,24 @@ cross-reactivity 0.30, pH sensitivity and bond strength 0.25 (bidentate rate 0.4
 weights are a judgement; the components are measurements, and are published so the weighting can be
 disagreed with without redoing the work.
 
+**Membership, as distinct from order.** The gates decide who is in the band and the overall score
+decides the order; the two are not mixed. Three gates cannot be waived or are waived only on stated
+grounds: a design extended in either species is out; a design whose median pose sits more than 6 Å
+from its own best pose is out and **cannot be waived**, because binding somewhere different on most
+refolds is not binding; and the interface-confidence floor is read from the worse species, waived
+only for a design that presents a binder carboxylate in both species with one consistent fold. Where
+the gates leave a slot unfilled it goes to the best-scoring design that misses exactly one of the
+*other* gates, recorded with which gate and by how much.
+
+**At most five designs come from one lineage.** That number was two, then three, and is five. It is
+a judgement about evidence against correlated risk and it is stated because it drove the band: at
+three, the cap was blocking designs scoring 0.390 and 0.388 while admitting 0.252 and 0.189 in their
+place, and those three admitted designs were also the ones whose own five delivered models disagree
+most — up to 4.1 Å apart, against 0.2–0.6 Å for the lineage being capped. **The risk this takes is
+real: five of the eight share a backbone, and if that backbone is wrong they fail together.** It is
+the only lineage with equal interface confidence on both orthologs and the only one all three
+oracles return as a single conformation.
+
 ### 10.6 The submitted band, on these measurements
 
 <!-- GENERATED:RANKING -->
@@ -918,12 +936,12 @@ disagreed with without redoing the work.
 |---|---|---|---|---|---|---|---|
 | 1 | `AMBRA_T1_micro_01` | **0.500** | 0.48 (0.22/0.31) | 0.59 (0.07, 0.00/0.00) | 0.07 (3.41 Å, 0.24) | 0.95 (0.00/0.00, 0.25) | 45/35 |
 | 2 | `AMBRA_T1_micro_02` | **0.412** | 0.40 (0.00/0.40) | 0.37 (0.00, 0.00/0.00) | 0.04 (5.07 Å, 0.20) | 0.94 (0.00/0.00, 0.24) | 15/15 |
-| 3 | `AMBRA_T1_micro_03` | **0.363** | 0.46 (0.36/0.23) | 0.21 (0.00, 0.00/0.00) | 0.00 (1.34 Å, 0.89) | 0.86 (0.00/0.00, 0.32) | 45/35 |
-| 4 | `AMBRA_T1_micro_04` | **0.358** | 0.20 (0.36/0.37) | 0.53 (0.04, 0.33/0.20) | 0.00 (3.41 Å, 0.22) | 0.83 (0.00/0.00, 0.69) | 45/35 |
-| 5 | `AMBRA_T1_micro_05` | **0.334** | 0.27 (0.58/0.17) | 0.31 (0.00, 0.58/0.17) | 0.00 (3.37 Å, 0.20) | 0.88 (0.00/0.00, 0.65) | 45/35 |
-| 6 | `AMBRA_T1_micro_06` | **0.262** | 0.13 (0.60/0.23) | 0.31 (0.00, 0.60/0.00) | 0.00 (3.82 Å, 0.20) | 0.71 (0.00/0.00, 1.73) | 45/30 |
-| 7 | `AMBRA_T1_micro_07` | **0.252** | 0.26 (0.00/0.20) | 0.06 (0.00, 0.00/0.00) | 0.00 (3.46 Å, 0.27) | 0.79 (0.00/0.00, 0.66) | 15/15 |
-| 8 | `AMBRA_T1_micro_08` | **0.189** | 0.07 (0.44/0.09) | 0.12 (0.00, 0.00/0.00) | 0.02 (5.50 Å, 0.07) | 0.66 (0.00/0.00, 1.85) | 45/35 |
+| 3 | `AMBRA_T1_micro_03` | **0.390** | 0.36 (0.00/0.40) | 0.24 (0.00, 0.00/0.00) | 0.12 (3.23 Å, 0.20) | 0.95 (0.00/0.00, 0.26) | 15/15 |
+| 4 | `AMBRA_T1_micro_04` | **0.388** | 0.36 (0.00/0.47) | 0.20 (0.00, 0.00/0.00) | 0.16 (1.35 Å, 0.60) | 0.95 (0.00/0.00, 0.27) | 15/15 |
+| 5 | `AMBRA_T1_micro_05` | **0.363** | 0.46 (0.36/0.23) | 0.21 (0.00, 0.00/0.00) | 0.00 (1.34 Å, 0.89) | 0.86 (0.00/0.00, 0.32) | 45/35 |
+| 6 | `AMBRA_T1_micro_06` | **0.358** | 0.20 (0.36/0.37) | 0.53 (0.04, 0.33/0.20) | 0.00 (3.41 Å, 0.22) | 0.83 (0.00/0.00, 0.69) | 45/35 |
+| 7 | `AMBRA_T1_micro_07` | **0.334** | 0.27 (0.58/0.17) | 0.31 (0.00, 0.58/0.17) | 0.00 (3.37 Å, 0.20) | 0.88 (0.00/0.00, 0.65) | 45/35 |
+| 8 | `AMBRA_T1_micro_08` | **0.262** | 0.13 (0.60/0.23) | 0.31 (0.00, 0.60/0.00) | 0.00 (3.82 Å, 0.20) | 0.71 (0.00/0.00, 1.73) | 45/30 |
 
 Read the refold counts first: a rate is only as good as its denominator. Rows where a value
 is missing were not measured, which is not the same as measuring zero.
@@ -1066,7 +1084,8 @@ per species. Protenix: 2 seeds x 5 samples per species. Commands in §11.2.
 
 **They agree about the molecule and disagree about the bond.** That split is the honest headline.
 
-*Agreement.* The three `micro_01`-lineage designs (`micro_01`, `micro_02`, `micro_03` as submitted)
+*Agreement.* The `micro_01`-lineage designs — five of the eight submitted, `AMBRA_T1_micro_01`
+through `AMBRA_T1_micro_05` —
 come back as one conformation from every oracle: Boltz fold spread **0.23–0.24 Å** across independent
 seeds, Protenix **0.21–1.72 Å**, Chai **0.31–0.34 Å**. Three models that share no code converge on
 the same structure for these peptides. Protenix is also markedly confident about the complexes —

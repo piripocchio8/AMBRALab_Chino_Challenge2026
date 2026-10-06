@@ -1,7 +1,7 @@
 chainA,res_idxA,chainB,res_idxB,connection_type,confidence,min_distance_angstrom,max_distance_angstrom,comment,restraint_id
 B,C1@SG,B,C39@SG,covalent,1.0,0.0,2.05,disulfide_1_39,disulfide_1_39
 B,C1,B,C39,contact,1.0,0.0,8.0,intra-contact,ic_1_39
-B,X17,A,H25,contact,0.9,4.0,6.0,acceptor position; states WHICH residue sits at the site,contact_his25_17
+B,X16,A,H25,contact,0.9,4.0,6.0,acceptor position; states WHICH residue sits at the site,contact_his25_16
 B,X22,A,H25,contact,0.9,4.0,6.0,acceptor position; states WHICH residue sits at the site,contact_his25_22
 B,,A,N22,pocket,0.8,0.0,8.0,epitope-pocket,pocket_epitope_0
 B,,A,K24,pocket,0.8,0.0,8.0,epitope-pocket,pocket_epitope_1

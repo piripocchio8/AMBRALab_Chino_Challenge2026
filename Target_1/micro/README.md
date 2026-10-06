@@ -101,6 +101,11 @@ here.
   negative shift for a geometry that cannot exist without the cation. The geometry is the evidence.
 - **Four of the eight entries passed every selection gate but one** and are marked with the gate they
   missed and by how much, rather than the threshold being loosened to admit them.
+- **Five of the eight share one backbone.** That is deliberate and it is a concentration risk: if
+  that backbone is wrong, five of the eight fail together. It is the only lineage with equal
+  interface confidence on both orthologs (ipSAE 0.368 human / 0.390 mouse), and all three oracles
+  return it as one conformation (fold spread 0.21–0.35 Å). The alternative was to spend those
+  slots on designs scoring half as much whose own five models disagree by up to 4 Å.
 - **EGFR domain III carries a free cysteine** (local 137). These peptides are disulfide-cyclised and
   one predictor paired a binder cysteine with it; no model from the primary oracle shows it, but it
   is a bench consideration.
