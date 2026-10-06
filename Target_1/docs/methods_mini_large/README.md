@@ -7,7 +7,7 @@ documentation, reproduced so the submission is self-contained:
 - `METHODS.md` — how the designs were made: motif-scaffolded RFdiffusion3 backbones, soluble
   ProteinMPNN sequences, Boltz-2 co-folding and ipSAE validation.
 - `SUBMISSION_NOTES.md` — the notes accompanying that series.
-- `SUBMISSION_full14.csv` — the complete metric table for all fourteen designs of the series. Twelve
+- `SUBMISSION_full23.csv` — the complete metric table for all twenty-three designs of the series. Twelve
   are submitted here; the two lowest-ranked were not carried over.
 - `analysis/pka.md`, `analysis/what_predicts_binding.md` — the supporting analyses.
 - `README_source.md` — the original repository README, kept verbatim.
