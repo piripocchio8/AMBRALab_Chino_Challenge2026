@@ -12,14 +12,23 @@ submit **two independent series, against two different histidines, by two differ
 from pipelines that share no code**. Neither can take the other down.
 
 **Micro — 8 disulfide-cyclised peptides, 12–39 aa, engaging His358.** Binder main-chain carbonyls
-accept from the protonated imidazolium. Sequences were optimised **directly against a structure
-oracle** by an evolutionary algorithm, then refined by **interaction-preserving inverse folding
-(CARBonAra)**: the hydrogen bonds, charge pairs and stacking coordinated to the histidine were held
-fixed while the rest of the binder was repacked. This reached what the standard
-RFdiffusion3→ProteinMPNN route did not — that pipeline produced nothing below 60 residues and could
-not target His358, a site whose double-carbonyl motif occurs in ~0.455 % of PDB histidines, about
-six times rarer than the carboxylate-bridged alternative. At 12–39 aa these are solid-phase
-synthesis: no expression risk, and the pH question answered by one binding assay in two buffers.
+accept from the protonated imidazolium. **This histidine was chosen because the target already
+supplies a charge partner for it:** Glu11 sits adjacent to the conserved Asn355–Lys357–His358 cluster
+and is identical in position in both orthologs, so a binder holding that cluster also holds the
+target's own carboxylate against the protonated ring — the same physics the scaffolded series
+engineers onto its binders, reached from the opposite side. Glu11 was deliberately never declared as
+a restraint, so whether the pair forms is the binder's doing: it ranges from **2.9 to 18.1 Å across
+the shortlist**, and the leading design holds it under 4 Å in **76 % of human and 100 % of mouse**
+models.
+
+Sequences were optimised **directly against a structure oracle** by an evolutionary algorithm, then
+refined by **interaction-preserving inverse folding (CARBonAra)**: the hydrogen bonds, charge pairs
+and stacking coordinated to the histidine were held fixed while the rest of the binder was repacked.
+This reached what the standard RFdiffusion3→ProteinMPNN route did not — that pipeline produced
+nothing below 60 residues and could not target His358, a site whose double-carbonyl motif occurs in
+~0.455 % of PDB histidines, about six times rarer than the carboxylate-bridged alternative. At
+12–39 aa these are solid-phase synthesis: no expression risk, and the pH question answered by one
+binding assay in two buffers.
 
 **Mini and large — 12 scaffolded proteins, 94–129 aa, engaging His433 by a reciprocal two-point
 motif.** This is the concept the series exists to test. Most pH-switch designs hang the effect on a

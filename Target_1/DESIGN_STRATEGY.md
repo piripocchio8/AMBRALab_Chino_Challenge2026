@@ -51,6 +51,25 @@ could address this site at this size.
 > candidate sequences were *generated*, not how they were *judged*. We are glad to discuss the method
 > in confidence with the organisers.
 
+
+### Why this histidine, and not the other one
+
+The submission engages two histidines, and the choice of **His358** for the micro series was made for
+a reason worth stating: it sits next to a carboxylate the target already provides. **Glu11** (local
+numbering) is adjacent to the conserved Asn355–Lys357–His358 cluster and is **identical in position in
+both orthologs**, so a binder that holds that cluster can also hold Glu11 against the protonated
+His358 — the target supplies its own charge partner for the switch.
+
+That is the same physics the scaffolded series engineers onto the binder (§2b), reached from the
+opposite side: there a carboxylate is built into the design to meet the target's histidine; here the
+target's own carboxylate is recruited to meet it. His433 has no equivalent partner in reach, which is
+why the micro series went to His358 rather than following the scaffolded series to the same site.
+
+Glu11 was deliberately **never declared as a restraint** — the declared contacts are Asn355, Lys357
+and His358 — so whether the pair forms is the binder's doing. It is measured, not enforced, and it
+varies from **2.9 to 18.1 Å across the shortlist** depending on the binder: the binder decides it. The
+leading design holds it under 4 Å in **76 % of human and 100 % of mouse** models. It is scored.
+
 ## 2b. The mini and large series — a reciprocal, doubly protonation-dependent interface
 
 **The idea, which is the point of this series.** Most pH-switch designs hang the whole effect on one
@@ -75,9 +94,7 @@ serine that sits in that network costs **1.8–4.9 REU** of pH-switch ΔΔG (`pH
 to +1.06), even though the swap is free on every interface metric. Selectivity and affinity are
 separable here, and the design optimises the former explicitly.
 
-(The micro series arrived at a related effect from the other direction: its best designs hold the
-target's *own* Glu11 in a charge pair with the protonated His358 — found by measurement rather than
-designed, 2.9–18.1 Å across the shortlist depending on the binder, and scored.)
+
 
 **How they were built.** Motif-scaffolded RFdiffusion3 backbones on nine enumerated anchor-pair
 geometries drawn from PDB His–carboxylate contacts, soluble ProteinMPNN sequences, Boltz-2 co-folding
