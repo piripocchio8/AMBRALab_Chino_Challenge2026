@@ -37,5 +37,7 @@
  "rg_ratio": 1.049,
  "his_bonds": [
   "ND1<-binder:LEU19.O@3.31A"
- ]
+ ],
+ "ipsae": 0.4084,
+ "lis": 0.447
 }

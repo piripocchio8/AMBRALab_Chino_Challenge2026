@@ -38,5 +38,7 @@
  "his_bonds": [
   "ND1<-target:ASN22.O@3.25A",
   "NE2<-binder:GLU15.O@2.76A"
- ]
+ ],
+ "ipsae": 0.025,
+ "lis": 0.2709
 }

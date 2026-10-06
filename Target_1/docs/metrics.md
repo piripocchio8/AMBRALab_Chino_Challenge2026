@@ -22,7 +22,8 @@ different tools, and a blank means *not measured*, never *measured as zero*.
 | column | meaning |
 |---|---|
 | `interface_iptm` | interface predicted TM-score. Note it is **not** comparable across predictors, and it carries no information about whether the binder is at the intended site - one design scored 0.918 while sitting 18 Å away |
-| `ipsae` | interface pSAE, the stricter interface score; for the mini/large rows this is the minimum over three independent folds |
+| `ipsae` | interface pSAE, the stricter interface score; for the mini/large rows this is the minimum over three independent folds. **The two series are not comparable on this number**: the micro peptides score 0.03-0.41 and the scaffolded designs 0.89-0.91, which is what a 12-39 residue binder burying a fraction of the surface of a 110-residue one looks like, not a measure of which is more likely to work |
+| `lis` | local interaction score: the mean of (1 - PAE/12) over inter-chain pairs below 12 Å, so a small confident interface is not averaged away by a large uncertain one |
 | `pdockq` | pDockQ from interface pLDDT and contact count (Bryant 2022 constants, untuned) |
 | `plddt_binder`, `plddt_complex` | mean pLDDT, 0-1 |
 | `shape_complementarity` | interface shape complementarity estimate |

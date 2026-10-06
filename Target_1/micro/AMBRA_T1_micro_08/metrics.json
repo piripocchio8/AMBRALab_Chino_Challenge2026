@@ -37,5 +37,7 @@
  "rg_ratio": 1.02,
  "his_bonds": [
   "NE2<-binder:ASP4.O@3.02A"
- ]
+ ],
+ "ipsae": 0.2179,
+ "lis": 0.4642
 }
