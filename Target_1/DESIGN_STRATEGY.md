@@ -190,7 +190,8 @@ out; a design whose median pose sits **more than 6 Å from its own best pose** i
 be waived, because binding somewhere different on most refolds is not binding; and an
 interface-confidence floor read from the worse species. Where the gates leave a slot unfilled it goes
 to the best-scoring design missing exactly one of the *other* gates, recorded with which gate and by
-how much. Four of the eight carry such a waiver.
+how much. Three of the eight carry such a waiver, and one further design was admitted over the pose
+gate by an explicit maintainer decision, recorded with its reason in `metrics_full.csv`.
 
 A hydrogen bond is treated as a **direction, not a distance**: 2.5–3.4 Å, within 45° of the in-plane
 N–H vector, ≥2.9 Å from every ring carbon, within 1.2 Å of the ring plane. The ring-carbon clause
@@ -231,10 +232,10 @@ bound form) with **equal interface confidence on human and mouse** (ipSAE 0.368 
 What they do not support: a sharp switch. The bidentate clamp is rare in the predictions, as the motif
 is rare in nature. Expect the pH dependence to be real but modest.
 
-**Five of the eight micro designs share one backbone.** That is deliberate and it is a concentration
+**Four of the eight micro designs share one backbone**, four lineages in all. That is a concentration
 risk we state rather than hide: it is the only lineage with equal interface confidence on both
 orthologs and the only one all three oracles return as a single conformation — but if that backbone
-is wrong, five of the eight fail together.
+is wrong, half the band fails together.
 
 ---
 

@@ -100,7 +100,7 @@ campaigns optimising affinity while this one optimises selectivity; because the 
 (the scaffolded route could not reach His358 at all); and because those bins are small enough that
 the regime is closer to untested than to excluded.
 
-Five of the eight micro designs share one backbone — deliberate, and a stated concentration risk: it
+Four of the eight micro designs share one backbone, four lineages in all — a stated concentration risk: it
 is the only lineage with equal interface confidence on both orthologs and the only one all three
 oracles return as a single conformation. The design engine behind the micro series is the subject of
 a manuscript in preparation and is described in principle ahead of publication; every sequence,
