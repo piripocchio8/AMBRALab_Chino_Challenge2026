@@ -39,5 +39,9 @@
   "NE2<-binder:GLN9.O@2.99A"
  ],
  "ipsae": 0.0479,
- "lis": 0.4362
+ "lis": 0.4362,
+ "boltz_iptm": 0.86,
+ "boltz_binder_ptm": 0.9615,
+ "boltz_dist_to_His25_A": 3.02,
+ "boltz_ring_engaged": 2
 }

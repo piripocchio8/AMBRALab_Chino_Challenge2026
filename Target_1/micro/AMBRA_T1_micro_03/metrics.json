@@ -40,5 +40,9 @@
   "NE2<-binder:THR20.OG1@2.54A"
  ],
  "ipsae": 0.1146,
- "lis": 0.3012
+ "lis": 0.3012,
+ "boltz_iptm": 0.8312,
+ "boltz_binder_ptm": 0.9365,
+ "boltz_dist_to_His25_A": 2.48,
+ "boltz_ring_engaged": 0
 }

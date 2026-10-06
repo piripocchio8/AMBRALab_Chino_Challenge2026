@@ -39,5 +39,9 @@
   "ND1<-binder:LEU19.O@3.31A"
  ],
  "ipsae": 0.4084,
- "lis": 0.447
+ "lis": 0.447,
+ "boltz_iptm": 0.7659,
+ "boltz_binder_ptm": 0.9747,
+ "boltz_dist_to_His25_A": 15.44,
+ "boltz_ring_engaged": 0
 }

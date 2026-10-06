@@ -45,6 +45,26 @@ evidence base rather than a single lucky draw.
 | `mouse_bidentate_models` | the same count on the mouse ortholog, which is what the search optimised against |
 | `rg_ratio` | radius of gyration over the compact expectation for that length; above about 1.3 the chain is extended |
 
+## The second predictor
+
+Four columns report an independent co-folding model given the same two statements as the primary
+oracle - the binder's disulfide and a pocket on the target histidine.
+
+| column | meaning |
+|---|---|
+| `boltz_iptm`, `boltz_binder_ptm` | its confidence in the complex and in the binder |
+| `boltz_dist_to_His25_A` | **the distance from the binder to the target histidine in its prediction** |
+| `boltz_ring_engaged` | ring nitrogens it finds engaged, by the same four criteria |
+
+Read the distance column first. The second predictor places five of the eight within 8 Å of the
+target histidine and the other three 11.8 to 15.4 Å away, while reporting interface confidences of
+0.55 to 0.90 regardless - the highest-confidence case among all designs tested sat 18 Å from the
+site. **Its confidence carries no information about whether the binder is in the right place**, so
+it is reported beside a measured distance and never instead of one. It is also a model trained
+largely on natural complexes with alignments on both chains, and a designed peptide with no
+homologues is outside that distribution, so its disagreement with the primary oracle is weak
+evidence either way.
+
 ## Expressibility
 
 `net_charge_pH70`, `net_charge_pH74`, `pI`, `gravy`, `n_cys`, `frac_hydrophobic_AVILMFWY` and

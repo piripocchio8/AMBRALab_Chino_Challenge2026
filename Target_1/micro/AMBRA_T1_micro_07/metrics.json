@@ -40,5 +40,9 @@
   "NE2<-binder:GLU15.O@2.76A"
  ],
  "ipsae": 0.025,
- "lis": 0.2709
+ "lis": 0.2709,
+ "boltz_iptm": 0.9014,
+ "boltz_binder_ptm": 0.8779,
+ "boltz_dist_to_His25_A": 3.63,
+ "boltz_ring_engaged": 0
 }

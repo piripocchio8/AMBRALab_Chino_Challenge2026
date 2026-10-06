@@ -39,5 +39,9 @@
   "ND1<-binder:SER7.OG@3.25A"
  ],
  "ipsae": 0.0277,
- "lis": 0.3466
+ "lis": 0.3466,
+ "boltz_iptm": 0.6121,
+ "boltz_binder_ptm": 0.8156,
+ "boltz_dist_to_His25_A": 2.91,
+ "boltz_ring_engaged": 1
 }

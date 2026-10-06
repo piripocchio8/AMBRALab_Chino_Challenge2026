@@ -39,5 +39,9 @@
   "NE2<-binder:ASP4.O@3.02A"
  ],
  "ipsae": 0.2179,
- "lis": 0.4642
+ "lis": 0.4642,
+ "boltz_iptm": 0.8879,
+ "boltz_binder_ptm": 0.9707,
+ "boltz_dist_to_His25_A": 2.64,
+ "boltz_ring_engaged": 1
 }

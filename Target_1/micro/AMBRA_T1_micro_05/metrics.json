@@ -39,5 +39,9 @@
   "NE2<-binder:MET24.O@2.83A"
  ],
  "ipsae": 0.0264,
- "lis": 0.2869
+ "lis": 0.2869,
+ "boltz_iptm": 0.8725,
+ "boltz_binder_ptm": 0.9452,
+ "boltz_dist_to_His25_A": 12.56,
+ "boltz_ring_engaged": 0
 }
