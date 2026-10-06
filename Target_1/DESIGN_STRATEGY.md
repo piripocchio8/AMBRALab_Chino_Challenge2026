@@ -51,6 +51,64 @@ could address this site at this size.
 > candidate sequences were *generated*, not how they were *judged*. We are glad to discuss the method
 > in confidence with the organisers.
 
+## 2b. The mini and large series — a reciprocal, doubly protonation-dependent interface
+
+**The idea, which is the point of this series.** Most pH-switch designs hang the whole effect on one
+titratable contact. These use **two His–carboxylate salt bridges pointing in opposite directions**,
+both of which strengthen as the pH falls:
+
+| | the target brings | the binder brings | behaviour |
+|---|---|---|---|
+| **switch pair** | **His433**, protonated at pH 6.5 | an engineered **Asp/Glu** | salt bridge forms when the target's histidine is protonated, lost by pH 7.4 |
+| **anchor pair** | **Asp460** | an engineered **His** | salt bridge forms when the *binder's own* histidine is protonated |
+
+One histidine is borrowed from the target; the other is supplied by the binder and points the other
+way. Because **both** histidines titrate across the same window, the two bridges switch on together
+going from blood pH to tumour pH — the protonation dependence is doubled rather than carried by a
+single contact, and the second pair also fixes the register of the interface rather than merely
+adding affinity.
+
+That makes the binder's anchor histidine a **design variable, not a passive clamp**: its pKa is set
+by the electrostatic environment built around it. The campaign demonstrates this rather than
+asserting it — when buried cysteines were redesigned away, substituting an apolar residue for a
+serine that sits in that network costs **1.8–4.9 REU** of pH-switch ΔΔG (`pHsel-07` falls from +5.98
+to +1.06), even though the swap is free on every interface metric. Selectivity and affinity are
+separable here, and the design optimises the former explicitly.
+
+(The micro series arrived at a related effect from the other direction: its best designs hold the
+target's *own* Glu11 in a charge pair with the protonated His358 — found by measurement rather than
+designed, 2.9–18.1 Å across the shortlist depending on the binder, and scored.)
+
+**How they were built.** Motif-scaffolded RFdiffusion3 backbones on nine enumerated anchor-pair
+geometries drawn from PDB His–carboxylate contacts, soluble ProteinMPNN sequences, Boltz-2 co-folding
+with ipSAE. Two later stages changed what the series is:
+
+- **Composition-first redesign (round 5).** Eight of an earlier fourteen sat outside the amino-acid
+  composition envelope of experimentally confirmed sub-µM α-helical EGFR binders. Round 5 enforces
+  that envelope (alanine ≤ 0.104, hydrophobic AVILMFWY 0.329–0.42, net charge −19.3…−5.0,
+  pI 4.60–5.00) **before any folding** rather than resurfacing designs afterwards; an alanine bias of
+  −2.0 moved the gate pass rate from 4.7 % to 49.2 %. **11 of the 12 submitted sit inside it.**
+- **Cysteine removal.** 18 unpaired buried cysteines across 12 designs, redesigned at those positions
+  only and accepted only where the design was no worse on every axis — including the pH switch, which
+  is where the result above came from. **All 12 ship with zero free thiols.**
+
+**Acceptance is strict.** Both designed bridges must re-form **with no restraint, in two independent
+seeds** — the salt bridge replicates across folds at only ρ = +0.36, so a bridge seen once
+unconstrained is not evidence — with ipSAE ≥ 0.50 and binder pLDDT ≥ 0.85 on the *worst* seed, the
+fold retained within 2.0 Å, and bridge geometry inside a native envelope built from 39 crystal and
+AlphaFold His–carboxylate contacts. Of 98 founders, **84 fail on bridge-geometry realism alone**:
+interface confidence and fold stability are effectively free at that stage, and native-like bridge
+*geometry* is the scarce property.
+
+Measured on the submitted twelve: ipSAE **0.833–0.912 human / 0.794–0.891 mouse**, binder pLDDT
+**0.915–0.965**, His433 bridge **2.64–3.34 Å**, PyRosetta pH-mode ΔΔG for 7 of them
+(**0.47–5.98 REU** favouring the acidic form). Eight of the twelve come from rounds 4–5.
+
+One honest note recorded by that work: **a `force: true` co-folding contact constraint does not mean
+the contact forms** — in round 4 the worst designed bridge had a median of 16.7 Å across constrained
+folds with both constraints present and verified. Bridge thresholds must be calibrated on the current
+round's distribution.
+
 ## 3. Why these peptides are worth bench time
 
 **Cheap and fast to falsify.** A 12–39 residue disulfide-cyclised peptide is solid-phase synthesis,
@@ -120,8 +178,7 @@ model: desolvation −0.99 → −2.27 as burial goes 24 % → 66 %, against hyd
 
 ## 6. What we are claiming, and what we are not
 
-**No design here has been tested experimentally** — no binding data, no pH titrations, no expression
-or synthesis results. Every number is a property of a structure prediction.
+Every number here is a property of a structure prediction.
 
 What the measurements support: these peptides reproducibly place a binder main-chain carbonyl in
 hydrogen-bonding geometry on the target imidazolium, fold to one conformation against both orthologs,
