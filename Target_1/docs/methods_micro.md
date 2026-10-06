@@ -737,30 +737,43 @@ predicted models, and is not an established property of any submitted design.**
 
 ### The ranking, on the evidence as it finally stood
 
-Each submitted design was refolded until it carried **50 to 55 predicted models** on the human
-target, pooled across both oracle settings. At that depth the ordering is driven by the rate at
-which the **binder itself** supplies a hydrogen bond to the target imidazolium, penalised by the
-rate of the inverse direction, with the double engagement as a tiebreak rather than a driver -
-because on human it is too rare to rank on.
+Every candidate was refolded on the human target until it carried **55 to 60 predicted models**,
+pooled across both oracle settings, before any of them was ranked against the others. That mattered:
+an earlier ordering built on 15 to 30 models put six designs in the submission that the fuller
+evidence does not support, and only two of those eight survive here. The designs were not wrong
+then; there was less of them measured.
 
-| rank | binder-supplied bond | double engagement | inverse direction |
-|---|---|---|---|
-| 1 | 23/55 | 0/55 | **0** |
-| 2 | 10/30 | 0/30 | **0** |
-| 3 | 18/55 | **5/55** | 10 |
-| 4 | 15/50 | 0/50 | 3 |
-| 5 | 16/55 | 2/55 | 6 |
-| 6 | 18/55 | 0/55 | 11 |
-| 7 | 9/55 | 1/55 | 1 |
-| 8 | 9/55 | 0/55 | 4 |
+Ranking is on the rate at which **the binder itself** donates a hydrogen bond to the target
+imidazolium, penalised by the rate of the inverse direction, with the double engagement as a
+tiebreak rather than a driver - on human it is too rare to rank on. A fold that is extended is
+excluded, and at most two designs are taken from any one lineage, so a single bad scaffold cannot
+carry the submission.
 
-Two consequences are worth stating because they are not what the campaign set out to find.
+| rank | binder-supplied bond | double engagement | inverse direction | Rg ratio |
+|---|---|---|---|---|
+| 1 | 40/60 | 0/60 | 0 | 1.153 |
+| 2 | 29/60 | 0/60 | 1 | 1.165 |
+| 3 | 28/60 | 0/60 | 1 | 1.01 |
+| 4 | 23/55 | 0/55 | 0 | 1.048 |
+| 5 | 25/60 | 5/60 | 12 | 1.101 |
+| 6 | 21/60 | 1/60 | 1 | 0.986 |
+| 7 | 20/60 | 0/60 | 0 | 1.066 |
+| 8 | 22/60 | 0/60 | 6 | 0.984 |
 
-**The top-ranked design never shows the double engagement.** It earns its place on the most
-reproducible single hydrogen bond in the set - 42 % of models, with the binder supplying it in every
-case and not one model showing the inverse direction. The design that does show the double
-engagement most often, 5 models in 55, also shows the inverse direction in 10, so its interaction is
-mixed rather than clean.
+Three things are worth stating because they are not what the campaign set out to find.
 
-**Across all eight, the double engagement appears in 8 of 435 predicted models, under 2 %.** It is
-reported where it occurs and is not claimed as a property of any design.
+**The best design engages in two models out of three and never doubly.** It donates a binder
+main-chain carbonyl to the imidazolium in **40 of 60 models**, with not one model showing the
+inverse direction, and shows the double engagement in none. It is the most reproducible single
+hydrogen bond measured anywhere in this work, and it is a one-bond interaction.
+
+**It came from refinement, not from search.** It is an inverse-folding repack of a backbone the
+search had found but could not encode in a sequence - the backbone folded compactly only while an
+explicit restraint held it, and the repack produced a sequence that holds it unaided. The design
+ranked second by that route is of the same kind. The search waves that ran against this site
+produced nothing that survives into the top three.
+
+**Across all eight, the double engagement appears in 6 of 465 predicted models, about 1 %.** It is
+reported where it occurs and claimed for nothing. What this submission asserts is a reproducibly
+placed single hydrogen bond from the binder to the target imidazolium, which is a weaker claim than
+the campaign set out to make and is the one the measurements support.
