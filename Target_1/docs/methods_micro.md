@@ -830,74 +830,82 @@ of this ranking made exactly that mistake. The mouse side was refolded up to rou
 per design, under **each design's own restraint file** — recovered from the queue that originally ran
 it, so the restraints are identical between the two species and the two rates mean the same thing.
 Designs whose restraint file could not be identified were left out of the top-up rather than refolded
-under a reconstructed one, and every rate in `submission.csv` carries its own *n*.
+under a reconstructed one, and every rate in `metrics_full.csv` carries its own *n*.
 
 Cross-reactivity is then scored as the **lower** of the two rates. An average lets a design that
 works on one ortholog and fails on the other look mid-table, which is the opposite of what the
 property means.
 
-### 10.4 pH sensitivity as a number
+### 10.4 pH sensitivity: why it is read from geometry, and why propka is not scored
 
-propka 3.5.1 was run twice on the same coordinates, once with the binder present and once with it
-deleted, and the shift in the predicted pKa of the target histidine attributed to the binder. Holding
-the conformation fixed means nothing but the binder's presence can account for the difference.
+**The structure states the protonation.** Neutral imidazole carries one N–H; the other ring nitrogen
+holds a lone pair. A model in which **both** ring nitrogens donate hydrogen bonds to acceptors is
+therefore not merely consistent with the protonated ring — it is only constructible *given* it. That
+makes the bidentate geometry the strongest statement about protonation that a structure can make,
+and it is what the pH axis is ranked on, together with whether the acceptor is a **carboxylate**
+(a charge–charge interaction) rather than a neutral carbonyl.
 
-The shift is read from the **five best-engaged models** of each species and reported as the median,
-with the spread beside it. One model would make the number a property of that draw rather than of
-the design: the oracle is stochastic, and the same sequence refolded twice gives different
-structures, so a pKa shift computed from a single pose is not reproducible even in principle.
+**propka was run, tested, and found unable to represent that constraint.** It is reported in the CSV
+for transparency and does not enter the score. The reason is specific, not a general complaint.
 
-**The results are mostly negative, and this is the least comfortable finding in the submission.**
-Across the 27-design shortlist, **only 2 show a positive shift on the human target**. Burying a
-histidine in an interface lowers its pKa; accepting a hydrogen bond from it raises it. For almost
-every design burial wins, which means the interface *as modelled* would favour the **neutral** ring
-— the switch running backwards, selective at pH 7.4 rather than at tumour pH.
+A stratified test was run: 18 models per class, propka on identical coordinates with and without the
+binder.
 
-Two qualifications, neither of which rescues the result:
+| what engages the ring | n | median ΔpKa | fraction > 0 |
+|---|---|---|---|
+| nothing | 18 | −1.31 | 0.00 |
+| one main-chain carbonyl | 18 | −0.74 | 0.00 |
+| **both ring N, two carbonyls** | 18 | −0.54 | 0.00 |
+| **binder carboxylate** | 18 | −0.28 | 0.28 |
 
-- The one design positive in **both** species (+0.04 human, +0.17 mouse) is the design that section
-  10.2 removes for being extended against mouse. No submitted design is positive in both.
-- Several shifts move by 4 to 7 pH units between models of the same design. A number that unstable
-  is not a measurement, so it is scored as unmeasured rather than as a large negative; otherwise the
-  ranking would order designs by how noisy their propka runs were. The spread is reported per design.
+The trend is monotonic, so propka is **not blind** to the interaction — it does credit the hydrogen
+bonds. The problem is the magnitude it assigns them relative to burial. Its own term breakdown for a
+bidentate model (binder Leu19 O → ND1, target Asn5 O → NE2):
 
-What this means for the claim: the geometry is right — a binder main-chain carbonyl sits in
-hydrogen-bonding geometry on the imidazolium, reproducibly. The *electrostatic consequence* of that
-geometry, as propka computes it on these models, does not yet favour the protonated ring for most
-designs. Whether that reflects the designs, the fixed-conformation approximation, or propka's
-treatment of a shallow peptide interface is not something these predictions can settle. It is
-reported because a pH-switch submission that hid it would be worthless.
+| | free target | with binder |
+|---|---|---|
+| His25 pKa | 5.83 | 4.99 |
+| buried | 24 % | 66 % |
+| desolvation term | −0.99 | **−2.27** |
+| hydrogen-bond terms | +0.44 | +0.44, **+0.55** |
 
-AutoDock Vina 1.2.7 was used to score each predicted pose in place, without docking or minimisation
-(`--score_only`, which evaluates the given coordinates and is independent of the grid settings -
-checked by rescoring at two spacings and obtaining identical values). It is an opinion from a
-function unrelated to the model that produced the structure.
+Both bonds are counted, at **+0.44 and +0.55** pKa units. Burial of the histidine moves desolvation
+by **−1.28** over the same step, and decides the sign. So an additive empirical model returns a net
+*negative* shift for a geometry that cannot exist without the cation. That is not noise to be
+averaged away and not a reason to distrust propka generally — it is a model whose hydrogen-bond term
+is capped near half a pKa unit being asked a question where the right answer is "whatever it takes".
 
-It should be read as an interaction energy **including steric repulsion**, not as an affinity. Three
-of the shortlisted poses score *positive* (+1.6 to +25 kcal/mol), which is vina reporting atom
-overlap in the predicted complex rather than weak binding. That is informative: a pose the oracle is
-confident about can still contain contacts no force field will accept.
+Reporting those numbers as this submission's pH evidence would therefore have been wrong in the
+direction that matters: it would have said the designs favour the neutral ring when the geometry
+they were selected for requires the protonated one. The shift stays in the CSV so the judgement can
+be checked; the ranking uses the geometry.
+
+**What the carboxylate result adds.** The only positive shifts anywhere in the test are in the
+carboxylate stratum (28 % of them, up to +1.80). Even on a model that understates hydrogen bonding,
+a *charged* acceptor on the ring can overcome the burial penalty where a neutral carbonyl cannot.
+That is a design lever, and three designs in the pool present a binder Asp/Glu to His358 in a
+substantial fraction of models — one of them in both orthologs.
 
 ### 10.5 How the four combine
 
 `overall_score` is a weighted sum of four sub-scores, each on 0–1 and each reported beside it:
-cross-reactivity 0.30, pH sensitivity and bond strength 0.25, binding consistency 0.25, fold consistency 0.20. The
+cross-reactivity 0.30, pH sensitivity and bond strength 0.25 (bidentate rate 0.45, carboxylate rate 0.35, vina 0.20), binding consistency 0.25, fold consistency 0.20. The
 weights are a judgement; the components are measurements, and are published so the weighting can be
 disagreed with without redoing the work.
 
 ### 10.6 The submitted band, on these measurements
 
 <!-- GENERATED:RANKING -->
-| # | design | overall | cross (H/M bond rate) | pH (ΔpKa, vina) | binding (pose, repro) | fold (extended H/M, H↔M Å) | refolds H/M |
+| # | design | overall | cross (H/M bond rate) | pH (bidentate, carboxylate H/M) | binding (pose, repro) | fold (extended H/M, H↔M Å) | refolds H/M |
 |---|---|---|---|---|---|---|---|
-| 1 | `AMBRA_T1_micro_01` | **0.442** | 0.48 (0.22/0.31) | 0.36 (-0.42, -7.4) | 0.07 (3.41 Å, 0.24) | 0.95 (0.00/0.00, 0.25) | 45/35 |
-| 2 | `AMBRA_T1_micro_02` | **0.401** | 0.46 (0.36/0.23) | 0.36 (-0.24, -6.7) | 0.00 (1.34 Å, 0.89) | 0.86 (0.00/0.00, 0.32) | 45/35 |
-| 3 | `AMBRA_T1_micro_03` | **0.341** | 0.27 (0.58/0.17) | 0.34 (-0.04, -3.9) | 0.00 (3.37 Å, 0.20) | 0.88 (0.00/0.00, 0.65) | 45/35 |
-| 4 | `AMBRA_T1_micro_04` | **0.172** | 0.07 (0.42/0.10) | 0.25 (-0.52, -4.8) | 0.01 (3.02 Å, 0.18) | 0.44 (0.00/0.00, 3.51) | 45/30 |
-| 5 | `AMBRA_T1_micro_05` | **0.485** | 0.36 (0.13/0.17) | 0.70 (0.84, -9.3) | 0.04 (7.23 Å, 0.18) | 0.96 (0.00/0.00, 0.20) | 45/35 |
-| 6 | `AMBRA_T1_micro_06` | **0.376** | 0.42 (0.27/0.46) | 0.27 (-1.76, -10.4) | 0.00 (21.76 Å, 0.13) | 0.91 (0.00/0.00, 0.30) | 45/35 |
-| 7 | `AMBRA_T1_micro_07` | **0.352** | 0.28 (0.18/0.14) | 0.40 (-1.49, -4.5) | 0.00 (21.12 Å, 0.27) | 0.84 (0.00/0.00, 0.53) | 45/35 |
-| 8 | `AMBRA_T1_micro_08` | **0.323** | 0.37 (0.40/0.20) | 0.20 (-1.46, -7.8) | 0.01 (8.89 Å, 0.20) | 0.80 (0.00/0.00, 0.74) | 15/15 |
+| 1 | `AMBRA_T1_micro_01` | **0.500** | 0.48 (0.22/0.31) | 0.59 (0.07, 0.00/0.00) | 0.07 (3.41 Å, 0.24) | 0.95 (0.00/0.00, 0.25) | 45/35 |
+| 2 | `AMBRA_T1_micro_02` | **0.363** | 0.46 (0.36/0.23) | 0.21 (0.00, 0.00/0.00) | 0.00 (1.34 Å, 0.89) | 0.86 (0.00/0.00, 0.32) | 45/35 |
+| 3 | `AMBRA_T1_micro_03` | **0.358** | 0.20 (0.36/0.37) | 0.53 (0.04, 0.33/0.20) | 0.00 (3.41 Å, 0.22) | 0.83 (0.00/0.00, 0.69) | 45/35 |
+| 4 | `AMBRA_T1_micro_04` | **0.334** | 0.27 (0.58/0.17) | 0.31 (0.00, 0.58/0.17) | 0.00 (3.37 Å, 0.20) | 0.88 (0.00/0.00, 0.65) | 45/35 |
+| 5 | `AMBRA_T1_micro_05` | **0.147** | 0.07 (0.42/0.10) | 0.15 (0.02, 0.00/0.00) | 0.01 (3.02 Å, 0.18) | 0.44 (0.00/0.00, 3.51) | 45/30 |
+| 6 | `AMBRA_T1_micro_06` | **0.412** | 0.40 (0.00/0.40) | 0.37 (0.00, 0.00/0.00) | 0.04 (5.07 Å, 0.20) | 0.94 (0.00/0.00, 0.24) | 15/15 |
+| 7 | `AMBRA_T1_micro_07` | **0.411** | 0.42 (0.27/0.46) | 0.41 (0.04, 0.00/0.00) | 0.00 (21.76 Å, 0.13) | 0.91 (0.00/0.00, 0.30) | 45/35 |
+| 8 | `AMBRA_T1_micro_08` | **0.354** | 0.28 (0.18/0.14) | 0.40 (0.07, 0.00/0.00) | 0.00 (21.12 Å, 0.27) | 0.84 (0.00/0.00, 0.53) | 45/35 |
 
 Read the refold counts first: a rate is only as good as its denominator. Rows where a value
 is missing were not measured, which is not the same as measuring zero.

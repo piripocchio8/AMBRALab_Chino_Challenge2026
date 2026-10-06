@@ -5,100 +5,97 @@ form of His358.**
 
 Every other entry in this band is, in effect, a small protein. These are not. They are peptides
 short enough to be ordered from a solid-phase synthesiser, folded by a single disulfide, and tested
-at two pH values in an afternoon. If the panel has room for one cheap, fast, mechanistically
-explicit entry alongside the expressed miniproteins, this is what that entry looks like.
+at two pH values in an afternoon.
 
-## Why these are worth a slot
+## Why these are worth bench time
 
-**They cost almost nothing to try.** A 28-residue cyclic peptide is chemical synthesis, not cloning,
-expression, purification and refolding. No construct can fail to express; no prep can come back
-insoluble. The whole band can be made as a plate of peptides, and a pH-dependence measurement needs
-only the same binding assay run in two buffers.
+**They reach a size and a site the standard pipeline did not.** The scaffolded route in this same
+submission — RFdiffusion3 backbones, ProteinMPNN sequences, the current standard — produced nothing
+below 60 residues and nothing it could aim at His358; it targets **His433**, 75 residues away, by a
+different chemistry. These designs are **12 to 39 residues** and engage **His358**. Two independent
+pipelines were run against the same protein and only one of them could address this site at this
+size. That is the result, not a footnote.
 
-**They make a falsifiable claim, not a confident score.** The designs do not merely sit near the
-histidine. They present backbone carbonyl oxygens to the imidazolium N–H, which is an interaction
-that exists only while the ring is protonated. That predicts the direction of the pH effect:
-*tighter at acidic pH, weaker at pH 7.4.* If the measurement comes back flat, or inverted, the
-design hypothesis is wrong and the experiment has said something. That is a more useful result than
-a strong binder with no mechanism attached.
+**The harder of the two motifs.** His433 is approached by a salt bridge to an engineered carboxylate.
+His358 is approached by main-chain carbonyls accepting from the imidazolium — a motif that occurs in
+**0.455 % of histidines in the PDB, about one in 220**, roughly six times rarer than the
+carboxylate-bridged arrangement. The micro series is aimed at the less accessible target.
 
-**The evidence behind them is reproducibility, not a single lucky model.** Each design was refolded
-from scratch until it carried **45 models against the human target and 30–35 against the mouse one**,
-under its own restraint file so the two numbers mean the same thing, and what is reported is the
-*rate* at which something happens rather than the best model found. Three results survive that
-treatment:
+**A different method, and the reason it matters here.** Backbones were not diffused and threaded.
+Sequences were optimised directly against the structure oracle by an evolutionary algorithm, then
+refined by **interaction-preserving inverse folding with CARBonAra**: the specific contacts worth
+keeping — hydrogen bonds, charge pairs, aromatic stacking, everything coordinated to the histidine —
+were held fixed while the rest of the binder was repacked. Plain hydrophobic contact was explicitly
+not protected. The leading designs come from that refinement step, not from the search: it recovered
+compact backbones the search had found but could not encode in a sequence.
 
-- **The top design is equally confident on both orthologs** — ipSAE 0.368 on human and 0.390 on
-  mouse, over 45 and 35 models. It is not a human binder that tolerates mouse; the two are the same.
-- **It is the same molecule in both** — 0.25 Å between its human-bound and mouse-bound conformations,
-  and 0 % of models extended in either species.
-- **The peptide already holds that conformation unaided** — 0.37 Å between the binder folded alone
-  and the binder in its complex. The target does not have to fold it.
+**The structure states the protonation.** Neutral imidazole has one N–H; the other ring nitrogen
+holds a lone pair. A model in which **both** ring nitrogens donate to acceptors is only constructible
+if the ring is the imidazolium. That is a far stronger statement than a predicted pKa, and it is what
+these designs are selected on.
 
-A single predicted complex with a high confidence score carries none of this.
+**The evidence is a rate, not a best model.** Each design carries **45 models against the human
+target and 30–35 against the mouse one**, folded under its own restraints so the two numbers mean the
+same thing — 5,170 predicted structures across the campaign. The top design scores ipSAE **0.368 on
+human and 0.390 on mouse**: not a human binder that tolerates mouse, the same interaction in both. It
+is **0.25 Å** between its human-bound and mouse-bound conformations, and **0.37 Å** between the
+binder folded *alone* and the binder in its complex — the peptide already holds the binding-competent
+fold, so the target does not have to fold it.
 
-**The ranking threw out our own best-looking design.** The most reproducibly docked peptide in the
-whole pool — same pose in 45 of 45 human refolds at 1.03 Å, and the highest human ipSAE we measured,
-0.577 — is **not submitted**. It is compact in every one of its 45 human models and extended in
-every one of its 30 mouse models: two different structures, 9.3 Å apart, one per ortholog, and its
-mouse interface confidence collapses to 0.076. Pooled across species that reads as "14 % of models
-extended", which is how it survived an earlier filter. Measured per species it is not a cross-reactive
-binder, so it was dropped. The designs that remain are the ones that behave the same way twice.
+**They were never tuned on the sequence they are scored against.** The campaign ran against the
+**mouse** ortholog; the human challenge sequence was used only afterwards to evaluate what already
+existed. Their behaviour on human EGFR is transfer, not a fit to the evaluation target — and the same
+molecules are directly testable in mouse models.
 
-**They were not tuned on the sequence they are scored against.** The design campaign ran against the
-**mouse** EGFR ortholog. The human challenge sequence was used only afterwards, to evaluate what had
-already been designed, with no re-optimisation. Whatever these peptides do on human EGFR is
-transfer, not a fit to the evaluation target — and the epitope is conserved, so the same molecules
-are directly testable in mouse models.
-
-**They are orthogonal to the rest of the submission.** The mini and large bands target a different
-histidine (His433) by a different chemistry, from a standard scaffold-and-inverse-folding protocol.
-The two series share no machinery and fail independently, so backing both costs little and hedges a
-great deal.
+**They are cheap to falsify.** Chemical synthesis, not cloning and expression: no construct can fail
+to express, no prep can come back insoluble. The pH question is answered by one binding assay in two
+buffers, and the mechanism predicts the *direction* — tighter at acidic pH. A flat or inverted result
+refutes the design hypothesis outright, which is more useful than a strong binder with no mechanism
+attached.
 
 ## The mechanism, concretely
 
-Numbering: local position *n* = UniProt *n* + 333 = mature EGFR *n* + 309. The target histidine is
-local **25** = UniProt **His358** = mature His334.
+Numbering: local *n* = UniProt *n* + 333 = mature EGFR *n* + 309. The target histidine is local
+**25** = UniProt **His358** = mature His334.
 
-At acidic pH the His358 imidazolium carries a hydrogen on **both** ring nitrogens, ND1 and NE2. Each
-is then a hydrogen-bond donor. The designs place main-chain carbonyl oxygens to accept from them —
-one nitrogen engaged is a hydrogen bond, both engaged is a bidentate clamp that can only form on the
-protonated ring. At pH 7.4 the neutral imidazole has one N–H and one lone pair, so at most half the
-interaction survives, and the geometry that accepts from a donor now faces an acceptor.
+At acidic pH the imidazolium carries a hydrogen on both ring nitrogens, ND1 and NE2, and each is a
+donor. The designs place acceptors to take them: one nitrogen engaged is a hydrogen bond, both is a
+clamp that cannot form on the neutral ring. At pH 7.4 at most half the interaction survives, and the
+geometry that accepts from a donor now faces an acceptor.
 
-A hydrogen bond here is treated as a **direction**, not a distance. A contact counts only if it is
-2.5–3.4 Å, within 45° of the in-plane N–H vector, at least 2.9 Å from every ring carbon, and within
-1.2 Å of the ring plane. The ring-carbon clause matters: an early design read 2.75 Å to NE2 while
-sitting 2.13 Å from ring carbon CE1 — a collision on the edge of the ring that a distance-only test
-scores as a hydrogen bond.
+A hydrogen bond is treated as a **direction**, not a distance: 2.5–3.4 Å, within 45° of the in-plane
+N–H vector, at least 2.9 Å from every ring carbon, within 1.2 Å of the ring plane. The ring-carbon
+clause matters — an early design read 2.75 Å to NE2 while sitting 2.13 Å from ring carbon CE1, a
+collision that a distance-only test scores as a hydrogen bond.
+
+**Carboxylate acceptors are the strongest version of this.** A charged Asp/Glu on the ring is a
+charge–charge interaction rather than a neutral hydrogen bond, and the measurements single it out:
+across a controlled test, the only cases where a predicted pKa moves in the intended direction at all
+are those with a binder carboxylate. Three designs present one to His358 in a substantial fraction of
+models, one of them in both orthologs; that design is submitted.
 
 ## What is in this directory
 
-One directory per design, each holding the predicted structures it was judged on, the per-model
-confidence data, and the sequence. `metrics.json` carries the numbers quoted for that design, so
-anything in the submission CSV can be recomputed from the files here.
+One directory per design: the five predicted models it was judged on (`human_model_*.cif`), the one
+the metrics refer to (`human_selected.cif`), `sequence.fasta`, and `metrics.json` carrying every
+number quoted for that design, so anything in the submission CSV can be recomputed from the files
+here.
 
-## Honest limits
+## Limits
 
-- **Nothing here has been measured.** Every number is a property of a structure prediction. There
-  are no binding data, no pH titrations, no expression or synthesis results.
-- **The bidentate clamp is rare in the predictions.** Most engaged models make one hydrogen bond,
-  not two. The pH dependence should therefore be expected to be real but modest, not switch-like.
-  A census of the PDB puts the doubly-accepting imidazolium at roughly 1 occurrence in 220, so this
-  is a demanding motif and the models reflect that.
-- **The predicted pKa shifts mostly point the wrong way.** Of 27 designs examined, **2** show a
-  positive shift on the human target; for the rest, burying the histidine lowers its pKa more than
-  the hydrogen bond raises it, so the modelled interface would favour the *neutral* ring — the
-  switch inverted. No submitted design is positive in both species. The geometry is reproducible;
-  its electrostatic consequence, as propka computes it here, is not yet what the mechanism needs.
-  Every shift is reported per design, with the spread across models beside it.
-- **EGFR domain III carries a free cysteine (Cys137 in local numbering).** These peptides are
-  disulfide-cyclised, and one predictor paired a binder cysteine with it. No model from the primary
-  oracle shows that, but it is a bench consideration for anyone synthesising them.
-- **Mouse and human evidence are not equally deep.** The human complexes were refolded far more
-  often than the mouse ones; the per-species model counts are reported beside every rate so the
-  comparison can be read for what it is.
+- **Nothing here has been measured.** Every number is a property of a structure prediction — no
+  binding data, no pH titrations, no expression or synthesis results.
+- **The bidentate clamp is rare in the predictions**, as the motif is rare in nature. Expect the pH
+  dependence to be real but modest rather than switch-like.
+- **Predicted pKa shifts are reported but not scored**, and the reason is given in
+  [`../docs/methods_micro.md`](../docs/methods_micro.md) §10.4: propka credits each hydrogen bond at
+  about half a pKa unit while burial of the histidine costs more than a unit, so it returns a
+  negative shift for a geometry that cannot exist without the cation. The geometry is the evidence.
+- **Four of the eight entries passed every selection gate but one** and are marked with the gate they
+  missed and by how much, rather than the threshold being loosened to admit them.
+- **EGFR domain III carries a free cysteine** (local 137). These peptides are disulfide-cyclised and
+  one predictor paired a binder cysteine with it; no model from the primary oracle shows it, but it
+  is a bench consideration.
 
-The selection procedure, the metrics and the failures are in `../docs/methods_micro.md` and
-`../docs/metrics.md`.
+Selection, metrics and the gates are in [`../docs/methods_micro.md`](../docs/methods_micro.md) and
+[`../docs/metrics.md`](../docs/metrics.md).

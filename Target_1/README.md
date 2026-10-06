@@ -10,13 +10,25 @@ micro/          8 designs under 40 residues   — disulfide-cyclised peptides, t
 mini/           4 designs 40–100 residues     — scaffolded proteins, target His433
 large/          8 designs over 100 residues   — scaffolded proteins, target His433
 docs/           the methods for each series
-submission.csv  all 20 rows, ranked, with the metrics they were selected on
+submission.csv  the submitted file: 20 ranked rows, exactly name/sequence/molecule_class
+metrics_full.csv  the same 20 rows with every metric they were selected on
 ```
 
 ## Why these are worth bench time
 
-**Two independent shots for the price of one entry.** The two series target different histidines by
-different chemistries, from different pipelines. Neither can take the other down with it.
+**Two independent shots for the price of one entry, and they are not variations on a theme.** The
+two series target different histidines by different chemistries, from pipelines that share no
+machinery. Neither can take the other down with it.
+
+**One of them reaches a site and a size the standard pipeline could not.** The scaffolded route —
+RFdiffusion3 backbones, ProteinMPNN sequences, the current standard — produced nothing below 60
+residues and could not aim at His358; it targets His433. The micro series is **12–39 residues** and
+engages **His358**, a site whose double-carbonyl motif is about **six times rarer** in the PDB than
+the carboxylate-bridged arrangement the scaffolded route uses. Both pipelines were run against the
+same protein; only one of them could address this site at this size. The micro designs also come
+from a different method — sequences optimised directly against the structure oracle by an
+evolutionary algorithm, then refined by interaction-preserving inverse folding with CARBonAra, rather
+than diffused backbones threaded with a sequence model.
 
 **The micro band is cheap and fast to falsify.** Eight disulfide-cyclised peptides of 12–39 residues
 are solid-phase synthesis, not expression — no cloning, no insoluble prep — and the pH question is
@@ -90,7 +102,7 @@ model and collapsed over fifteen.
 
 ## What these numbers are, and are not
 
-Every value in `submission.csv` and in each `metrics.json` is a property of a **structure
+Every value in `metrics_full.csv` and in each `metrics.json` is a property of a **structure
 prediction**. **No design in this submission has been tested experimentally** — there are no binding
 measurements, no pH titrations and no expression data. The methods documents state the selection
 criteria, the failures, and what was measured rather than assumed.

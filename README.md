@@ -11,7 +11,8 @@ Target_1/            EGFR domain III, pH-selective binders
   mini/              40 to 100 residues
   large/             over 100 residues
   docs/              the methods for this target
-  submission.csv     the ranked rows submitted
+  submission.csv     the submitted file (name, sequence, molecule_class)
+  metrics_full.csv   the same rows with every metric behind the ranking
 Target_2/ ...        added as each target opens
 ```
 

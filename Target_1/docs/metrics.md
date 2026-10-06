@@ -1,4 +1,10 @@
-# What each column of `submission.csv` means
+# What each column of `metrics_full.csv` means
+
+> `submission.csv` is the file submitted to the challenge and carries **only** the three columns
+> the template defines — `name`, `sequence`, `molecule_class` — with `molecule_class` =
+> `single_chain` for every design. Everything measured here lives beside it in
+> `metrics_full.csv`, keyed by the same `name`, so the submission stays in the required format
+> while nothing is lost.
 
 The twenty rows share one schema so the two series can be read side by side. Not every column is
 filled for every row: the two series were produced by different pipelines and measured with
