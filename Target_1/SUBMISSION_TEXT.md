@@ -11,7 +11,7 @@ blood pH (7.4), built on a histidine of the target whose imidazole is protonated
 submit **two independent series, against two different histidines, by two different chemistries,
 from pipelines that share no code**. Neither can take the other down.
 
-**Micro — 8 disulfide-cyclised peptides, 12–39 aa, engaging His358.** Binder main-chain carbonyls
+**Micro — 8 disulfide-cyclised peptides, 39 aa, engaging His358.** Binder main-chain carbonyls
 accept from the protonated imidazolium. **This histidine was chosen because the target already
 supplies a charge partner for it:** Glu11 sits adjacent to the conserved Asn355–Lys357–His358 cluster
 and is identical in position in both orthologs, so a binder holding that cluster also holds the
@@ -27,9 +27,10 @@ and stacking coordinated to the histidine were held fixed while the rest of the 
 This reached what the standard RFdiffusion3→ProteinMPNN route did not — that pipeline produced
 nothing below 60 residues and could not target His358, a site whose double-carbonyl motif occurs in
 ~0.455 % of PDB histidines, about six times rarer than the carboxylate-bridged alternative. They take
-the same cell-free route from synthetic DNA as every other entry, and at 12–39 aa they sit at the
-favourable end of the strongest *negative* expression term in this competition's own 800-design EGFR
-dataset — length. That cuts the other way for *binding*, and we state it plainly below.
+the same cell-free route from synthetic DNA as every other entry, and at 39 aa they sit well below
+the length at which expression starts to fail — the strongest *negative* expression term in this
+competition's own 800-design EGFR dataset. That cuts the other way for *binding*, and we state it
+plainly below.
 
 **Mini and large — 12 scaffolded proteins, 94–129 aa, engaging His433 by a reciprocal two-point
 motif.** This is the concept the series exists to test. Most pH-switch designs hang the effect on a
@@ -98,16 +99,31 @@ published but deliberately **not scored**: propka credits each hydrogen bond at 
 burial of the histidine costs more than 1, so it returns a negative shift for a geometry that cannot
 exist without the cation.
 
-**The length risk, from your own data.** Length helps expression and hurts binding, and the second
-effect is the one that should worry you here: that same dataset gives a 3.4 % hit rate at ≤30 aa and
-**0 % at 31–45 aa**, and six of these eight are 39 aa. We submit them because that prior comes from
-campaigns optimising affinity while this one optimises selectivity; because the site forces the size
-(the scaffolded route could not reach His358 at all); and because those bins are small enough that
-the regime is closer to untested than to excluded. The two 12-mers sit in the better bin.
+**The length risk, from your own data, and it got worse.** Length helps expression and hurts binding,
+and the second effect is the one that should worry you here: that same dataset gives a 3.4 % hit rate
+at ≤30 aa and **0 % at 31–45 aa**. **All eight micro designs are 39 aa, so all eight sit in the empty
+bin.** They were not meant to: the band included two 12-residue cyclic peptides, in the only bin with
+a non-zero rate, and we withdrew them because this competition's **novelty check timed out on both of
+them** and could not be completed, twice, while all eighteen longer designs scored. Both had passed
+every selection gate. We replaced them with the next eligible designs rather than submit unscored
+entries, and the cost is stated here rather than buried: we lost our only two short peptides, and the
+backbone concentration below went up because of it. We submit the eight anyway because that prior
+comes from campaigns optimising affinity while this one optimises selectivity; because the site forces
+the size (the scaffolded route could not reach His358 at all); and because those bins are small enough
+that the regime is closer to untested than to excluded.
 
-Four of the eight micro designs share one backbone, five lineages in all — a stated concentration risk: it
+If the timeout is something you can lift, the two withdrawn peptides are in the repository with all
+their measurements, and we would rather you tested them. They are 12 residues, and TM-score — which
+your novelty pipeline thresholds on — has a normalisation, d₀ = 1.24·∛(L−15) − 1.8, that takes the
+cube root of a negative number below L = 15 and stays non-positive to L = 18. We could not reproduce
+the hang, so that is a hypothesis, not a diagnosis.
+
+Six of the eight micro designs now share one backbone, three lineages in all — a concentration risk we
+state plainly, and one the withdrawal made worse, since both replacements came from that lineage: it
 is the only lineage with equal interface confidence on both orthologs and the only one all three
-oracles return as a single conformation. The design engine behind the micro series is the subject of
+oracles return as a single conformation, but if it is wrong, six fail together. Three of the eight
+carry a recorded waiver on the rate at which they make the designed bond on human, each naming the
+gate and the margin. The design engine behind the micro series is the subject of
 a manuscript in preparation and is described in principle ahead of publication; every sequence,
 structure, per-model measurement, restraint file and command line needed to evaluate the designs is
 public at **github.com/piripocchio8/AMBRALab_Chino_Challenge2026**.

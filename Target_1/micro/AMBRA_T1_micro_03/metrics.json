@@ -7,6 +7,7 @@
  "submission_rank": 3,
  "binder_length": 39,
  "series": "micro",
+ "score_rank_micro": 5,
  "target_histidine_uniprot": "His358",
  "mechanism": "main-chain carbonyl accepts from the protonated imidazolium",
  "overall_score": 0.4685,

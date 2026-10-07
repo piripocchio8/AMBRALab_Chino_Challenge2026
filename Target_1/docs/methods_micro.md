@@ -984,7 +984,8 @@ waived only for a design that presents a binder carboxylate in both species with
 fold, since ipSAE normalises by interface size and a 12-residue cycle scores near zero whatever it
 does. Where the gates leave a slot unfilled it goes to the best-scoring design that misses exactly
 one of those two, recorded with which gate and by how much. **One design in the band carries such a
-waiver**; the other seven pass every gate.
+waiver**; the other seven pass every gate. *(After the withdrawal in §10.7 this became three waivers
+and five clean passers — replacing two gate-passing designs cost two of them.)*
 
 An earlier version of this band admitted a design over the pose gate by an explicit maintainer
 decision, on the grounds that its figure rested on 15 models while every other pose verdict rested on
@@ -993,14 +994,30 @@ own, so the override is gone and `OVERRIDES` is empty. The fuller sampling also 
 bond rate downward, from 0.40 on 15 models to 0.222 on 45 — which is the reason the re-measurement
 was worth doing rather than a formality.
 
-**At most five designs come from one lineage.** That number was two, then three, and is five. It is
-a judgement about evidence against correlated risk and it is stated because it drove the band: at
-three, the cap was blocking designs scoring 0.390 and 0.388 while admitting 0.252 and 0.189 in their
-place, and those three admitted designs were also the ones whose own five delivered models disagree
-most — up to 4.1 Å apart, against 0.2–0.6 Å for the lineage being capped. **The risk this takes is
-real: four of the eight share a backbone, and if that backbone is wrong half the band fails together.** It is
-the only lineage with equal interface confidence on both orthologs and the only one all three
-oracles return as a single conformation.
+**At most six designs come from one lineage.** That number was two, then three, then five, and is
+six. The first raises were judgements about evidence against correlated risk, and they drove the
+band: at three, the cap was blocking designs scoring 0.390 and 0.388 while admitting 0.252 and 0.189
+in their place, and those three admitted designs were also the ones whose own five delivered models
+disagree most — up to 4.1 Å apart, against 0.2–0.6 Å for the lineage being capped.
+
+**The last raise, from five to six, was forced rather than chosen** (§10.7). Withdrawing the two
+12-residue designs removed both of the band's non-micro_01 short peptides, and every remaining
+eligible candidate in the shortlist belongs to that one lineage, so the two replacements could only
+come from it. **The risk this takes is real and it grew: six of the eight now share a backbone, and
+if that backbone is wrong, three quarters of the band fails together.** It is the only lineage with
+equal interface confidence on both orthologs and the only one all three oracles return as a single
+conformation, which is the argument for it — but that argument was not strengthened by the
+withdrawal, only leaned on harder.
+
+**A design must rest on the standard sampling.** Every rate in this document is computed from 45
+independent human refolds, and a design whose numbers come from fewer is not eligible for the band,
+whatever it scores. This is a gate rather than a caution because a thin rate is not a conservative
+number, it is a wrong one: the design once admitted over the pose gate on 15 models reported a human
+bond rate of **0.40**, and the same design at 45 models reports **0.222**. Differences of a few
+thousandths in `overall_score` are far below the noise of a nondeterministic oracle, so a design
+cannot take a slot on a score computed from a third of the evidence. It removed exactly one
+candidate — `micro_01__strict__v2`, n=15, score 0.480 — in favour of `micro_01__strict__v5`, n=75,
+score 0.479.
 
 ### 10.6 The submitted band, on these measurements
 
@@ -1010,15 +1027,59 @@ oracles return as a single conformation.
 | 1 | `AMBRA_T1_micro_01` | **0.623** | 0.48 (0.22/0.31) | 0.59 (0.07, 0.00/0.00) | 0.56 (3.41 Å, 0.24) | 0.95 (0.00/0.00, 0.25) | 45/35 |
 | 2 | `AMBRA_T1_micro_02` | **0.515** | 0.38 (0.04/0.31) | 0.34 (0.01, 0.00/0.00) | 0.49 (4.65 Å, 0.04) | 0.96 (0.00/0.00, 0.19) | 75/55 |
 | 3 | `AMBRA_T1_micro_03` | **0.469** | 0.46 (0.36/0.23) | 0.21 (0.00, 0.00/0.00) | 0.42 (1.34 Å, 0.89) | 0.86 (0.00/0.00, 0.32) | 45/35 |
-| 4 | `AMBRA_T1_micro_04` | **0.445** | 0.20 (0.36/0.37) | 0.53 (0.04, 0.33/0.20) | 0.35 (3.41 Å, 0.22) | 0.83 (0.00/0.00, 0.69) | 45/35 |
-| 5 | `AMBRA_T1_micro_05` | **0.419** | 0.51 (0.16/0.60) | 0.09 (0.00, 0.00/0.00) | 0.32 (10.63 Å, 0.22) | 0.82 (0.00/0.00, 0.26) | 45/35 |
-| 6 | `AMBRA_T1_micro_06` | **0.355** | 0.27 (0.58/0.17) | 0.31 (0.00, 0.58/0.17) | 0.08 (3.37 Å, 0.20) | 0.88 (0.00/0.00, 0.65) | 45/35 |
-| 7 | `AMBRA_T1_micro_07` | **0.348** | 0.34 (0.22/0.14) | 0.08 (0.00, 0.00/0.00) | 0.26 (6.26 Å, 0.02) | 0.80 (0.00/0.00, 0.74) | 45/35 |
-| 8 | `AMBRA_T1_micro_08` | **0.332** | 0.19 (0.33/0.34) | 0.09 (0.02, 0.02/0.17) | 0.37 (6.65 Å, 0.02) | 0.80 (0.00/0.00, 0.59) | 45/35 |
+| 4 | `AMBRA_T1_micro_05` | **0.419** | 0.51 (0.16/0.60) | 0.09 (0.00, 0.00/0.00) | 0.32 (10.63 Å, 0.22) | 0.82 (0.00/0.00, 0.26) | 45/35 |
+| 5 | `AMBRA_T1_micro_06` | **0.355** | 0.27 (0.58/0.17) | 0.31 (0.00, 0.58/0.17) | 0.08 (3.37 Å, 0.20) | 0.88 (0.00/0.00, 0.65) | 45/35 |
+| 6 | `AMBRA_T1_micro_07` | **0.348** | 0.34 (0.22/0.14) | 0.08 (0.00, 0.00/0.00) | 0.26 (6.26 Å, 0.02) | 0.80 (0.00/0.00, 0.74) | 45/35 |
+| 7 | `AMBRA_T1_micro_09` | **0.507** | 0.36 (0.13/0.17) | 0.35 (0.02, 0.00/0.00) | 0.48 (7.23 Å, 0.18) | 0.96 (0.00/0.00, 0.20) | 45/35 |
+| 8 | `AMBRA_T1_micro_10` | **0.479** | 0.36 (0.00/0.29) | 0.23 (0.00, 0.00/0.00) | 0.48 (13.40 Å, 0.01) | 0.96 (0.00/0.00, 0.15) | 75/55 |
 
 Read the refold counts first: a rate is only as good as its denominator. Rows where a value
 is missing were not measured, which is not the same as measuring zero.
 <!-- /GENERATED:RANKING -->
+
+### 10.7 Two designs withdrawn after selection
+
+**The submitted band is not the band these measurements chose.** Two 12-residue cyclic peptides,
+`AMBRA_T1_micro_07__open__v0` and `AMBRA_T1_micro_08__open__v6`, passed every gate in §10.5 and were
+withdrawn for a reason no measurement here can see: the competition's **novelty check timed out on
+both of them**, twice, and could not be completed, while all eighteen longer designs in the
+submission scored (one at 4/4 "de novo", six at 3/4). A design with no novelty score cannot be
+submitted, so they were replaced by the next two eligible designs.
+
+**The likely cause is length, not sequence.** That pipeline predicts a structure with ESMFold and
+then measures structural similarity with Foldseek and TM-align, scoring against TM-score thresholds.
+TM-score normalises by
+
+&nbsp;&nbsp;&nbsp;&nbsp;*d*₀ = 1.24·∛(*L* − 15) − 1.8
+
+which takes the cube root of a **negative** number for any chain shorter than 15 residues and remains
+non-positive up to *L* = 18. At *L* = 12 it is undefined; at *L* = 39, 94 and 129 — every design that
+scored — it is well behaved (+1.78, +3.52, +4.21). In C, `pow(-3, 1./3)` evaluates to NaN, and NaN
+makes every comparison false, which in an iterative superposition search produces a hang rather than
+an error — consistent with a timeout rather than a crash. Two alternatives we cannot exclude: the
+three domain predictors in that pipeline, run on a chain with no domain to find, and an MMseqs2
+search in which a 12-residue motif matches an unmanageable number of database entries.
+
+**This is a hypothesis, not a diagnosis.** We ran Foldseek's TM-align mode on one of the withdrawn
+12-mers locally and it returned in 0.8 s against a small database, so we did **not** reproduce the
+hang.
+
+**What the withdrawal cost, recorded rather than absorbed:**
+
+| | before | after |
+|---|---|---|
+| designs in the ≤30 aa bin (3.4 % hit rate in the organisers' own data) | 2 | **0** |
+| designs in the 31–45 aa bin (**0 %** hit rate) | 6 | **8** |
+| largest lineage | 4 of 8 | **6 of 8** |
+| distinct lineages | 5 | **3** |
+| recorded gate waivers | 1 | **3** |
+
+Both replacements came from the dominant lineage because every other eligible candidate in the
+shortlist is itself a 12-mer and would face the same check. The withdrawn designs keep their folders,
+structures, restraints and measurements in `Target_1/micro/`, under the names
+`AMBRA_T1_micro_04` and `AMBRA_T1_micro_08`. **Those two numbers are retired, not recycled** — giving
+a freed name to a different molecule would make one name denote two sequences — which is why the
+submitted names run 01, 02, 03, 05, 06, 07, 09, 10 and the gap is deliberate.
 
 ---
 
@@ -1151,11 +1212,11 @@ per species. Protenix: 2 seeds x 5 samples per species. Commands in §11.2.
 | `AMBRA_T1_micro_01` | 0.22/0.31 | 0.20/0.20 | 0.00/0.00 | 0.24 | 1.72 | 0.33 | 0.38 |
 | `AMBRA_T1_micro_02` | 0.04/0.31 | 0.50/0.10 | 0.00/0.00 | 0.51 | 0.28 | 0.22 | 0.88 |
 | `AMBRA_T1_micro_03` | 0.36/0.23 | 0.20/0.00 | 0.00/0.10 | 0.24 | 0.21 | 0.25 | 0.88 |
-| `AMBRA_T1_micro_04` | 0.36/0.37 | 0.40/0.20 | 0.10/0.20 | 2.68 | 3.66 | 0.24 | 0.45 |
 | `AMBRA_T1_micro_05` | 0.16/0.60 | —/— | 0.30/0.00 | — | 0.84 | — | 0.30 |
 | `AMBRA_T1_micro_06` | 0.58/0.17 | 0.30/0.30 | 0.10/0.10 | 3.35 | 3.18 | 0.17 | 0.47 |
 | `AMBRA_T1_micro_07` | 0.22/0.14 | —/— | 0.10/0.10 | — | 0.49 | — | 0.43 |
-| `AMBRA_T1_micro_08` | 0.33/0.34 | —/— | 0.00/0.00 | — | 0.60 | — | 0.46 |
+| `AMBRA_T1_micro_09` | 0.13/0.17 | —/— | —/— | — | — | — | — |
+| `AMBRA_T1_micro_10` | 0.00/0.29 | 0.20/0.40 | —/— | 0.53 | — | 0.23 | — |
 
 A dash is *not measured for this design*, never measured as zero.
 <!-- /GENERATED:ORACLES -->

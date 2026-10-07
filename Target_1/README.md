@@ -22,7 +22,7 @@ machinery. Neither can take the other down with it.
 
 **One of them reaches a site and a size the standard pipeline could not.** The scaffolded route —
 RFdiffusion3 backbones, ProteinMPNN sequences, the current standard — produced nothing below 60
-residues and could not aim at His358; it targets His433. The micro series is **12–39 residues** and
+residues and could not aim at His358; it targets His433. The micro series is **39 residues** and
 engages **His358**, a site whose double-carbonyl motif is about **six times rarer** in the PDB than
 the carboxylate-bridged arrangement the scaffolded route uses. Both pipelines were run against the
 same protein; only one of them could address this site at this size. The micro designs also come
@@ -31,7 +31,7 @@ evolutionary algorithm, then refined by interaction-preserving inverse folding w
 than diffused backbones threaded with a sequence model.
 
 **The micro band is cheap and fast to falsify.** The pH question is answered by running one binding
-assay in two buffers, so whatever the answer, it arrives quickly. And at 12–39 residues these eight
+assay in two buffers, so whatever the answer, it arrives quickly. And at 39 residues these eight
 sit at the favourable end of the strongest negative expression term in this competition's own
 800-design EGFR dataset — length — while taking the same cell-free route from synthetic DNA as
 every other entry.
@@ -64,7 +64,7 @@ independent: a failure of either says nothing about the other.
 |---|---|---|
 | target histidine | **His358** UniProt (mature His334) | **His433** UniProt (mature His409) |
 | mechanism | **main-chain carbonyls accept** from the protonated imidazolium's two N–H donors | **salt bridge** from the imidazolium to an engineered carboxylate, plus a reciprocal His–Asp anchor |
-| scaffold | disulfide-cyclised peptide, 12–39 residues | motif-scaffolded de novo protein, 60–134 residues |
+| scaffold | disulfide-cyclised peptide, 39 residues | motif-scaffolded de novo protein, 60–134 residues |
 | methods | [`docs/methods_micro.md`](docs/methods_micro.md) | [`docs/methods_mini_large/`](docs/methods_mini_large/) |
 
 The mini and large bands were refreshed from the source series on 6 Oct 2026, when it grew from

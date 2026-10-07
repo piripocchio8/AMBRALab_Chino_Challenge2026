@@ -1,6 +1,6 @@
 # Design strategy — AMBRA group, Chino lab (University of Naples Federico II)
 
-**Challenge 1, EGFR domain III. Twenty designs: 8 micro (12–39 aa), 4 mini (94–99 aa), 8 large
+**Challenge 1, EGFR domain III. Twenty designs: 8 micro (39 aa), 4 mini (94–99 aa), 8 large
 (101–129 aa).**
 
 Repository (structures, metrics, methods, restraints):
@@ -21,7 +21,7 @@ from pipelines that share no code. Neither can take the other down with it.
 |---|---|---|
 | target histidine | **His358** (UniProt P00533; mature His334) | **His433** (mature His409) |
 | mechanism | binder main-chain carbonyls **accept** from the protonated imidazolium | salt bridge from the imidazolium to an engineered carboxylate, plus a reciprocal His–Asp anchor |
-| size | 12–39 aa, disulfide-cyclised peptides | 94–129 aa scaffolded proteins |
+| size | 39 aa, disulfide-cyclised peptides | 94–129 aa scaffolded proteins |
 | route | sequence optimisation against a structure oracle + interaction-preserving inverse folding | RFdiffusion3 → soluble ProteinMPNN → Boltz-2 validation |
 
 The two sites are 75 residues apart. **His358 is the harder of the two**: the double-carbonyl
@@ -40,8 +40,9 @@ compact backbones the search had found but could not encode in a sequence.
 
 **What this reached that the standard pipeline did not.** The scaffolded route in this same
 submission produced nothing below 60 residues and could not aim at His358. The micro designs are
-**12–39 residues** and engage **His358**. Both pipelines were run against the same protein; only one
-could address this site at this size.
+**39 residues** and engage **His358**. Both pipelines were run against the same protein; only one
+could address this site at this size. The band also held two **12-residue** cyclic peptides until
+they were withdrawn (§4a).
 
 > **A note on disclosure.** The design engine is the subject of a manuscript in preparation and is
 > described here in principle rather than in reproducible detail, **ahead of publication**. Nothing
@@ -150,13 +151,40 @@ buffers.
 
 **The length risk, stated plainly, because it comes from our own analysis of their data.** On that
 same 800-design EGFR set the hit rate is 3.4 % at ≤30 aa and **0 % at 31–45 aa**, against 34.7 % at
-200+ aa — and six of these eight sit at 39 aa, two at 12 aa. We submit them anyway, for three
-reasons. That prior comes from campaigns optimising **affinity**; this one optimises **selectivity**,
-and a modest binder with a real pH window is what the challenge asks for. The site forces the size:
-the scaffolded route in this same submission could not reach His358 at all, so there is no 200-aa
-version of this experiment to compare against. And the bins are small — a 0 % bin of a few dozen
-designs is not a law — so the honest reading is that **this size regime is close to untested at this
-target**, which is part of why eight cheap peptides are worth a plate.
+200+ aa — and **all eight of these sit at 39 aa**, in the empty bin. That is worse than we intended:
+the band carried two 12-residue peptides in the favourable bin until they were withdrawn (§4a). We
+submit the eight anyway, for three reasons. That prior comes from campaigns optimising **affinity**;
+this one optimises **selectivity**, and a modest binder with a real pH window is what the challenge
+asks for. The site forces the size: the scaffolded route in this same submission could not reach
+His358 at all, so there is no 200-aa version of this experiment to compare against. And the bins are
+small — a 0 % bin of a few dozen designs is not a law — so the honest reading is that **this size
+regime is close to untested at this target**, which is part of why eight cheap peptides are worth a
+plate.
+
+## 4a. Two designs withdrawn, and why
+
+The submitted band is **not** the band our measurements chose. Two 12-residue cyclic peptides —
+`micro_07__open__v0` and `micro_08__open__v6` — passed every selection gate and were withdrawn
+because the competition's **novelty check timed out on both**, twice, and could not be completed,
+while all eighteen longer designs scored (one at 4/4, six at 3/4). We replaced them with the next two
+eligible designs rather than submit entries that carry no novelty score.
+
+The cause is almost certainly length rather than sequence. That pipeline predicts a structure and
+measures similarity with TM-align, and TM-score's normalisation
+
+&nbsp;&nbsp;&nbsp;&nbsp;*d*₀ = 1.24·∛(*L* − 15) − 1.8
+
+takes the cube root of a **negative** number for any chain shorter than 15 residues and stays
+non-positive up to 18. At *L* = 12 it is undefined; at *L* = 39, 94 and 129 — every design that
+scored — it is well behaved. In C, `pow(-3, 1./3)` is NaN, and NaN makes every comparison false,
+which in an iterative superposition search gives a hang rather than an error. We could not reproduce
+the hang locally against a small database, so this is the leading explanation and **not** a proven
+one.
+
+**What it cost, stated rather than absorbed.** We lost both designs in the only length bin with a
+non-zero hit rate; both replacements came from the dominant lineage, taking it from four of eight to
+**six of eight**; and the band went from one recorded waiver to **three**. The withdrawn designs
+remain in this repository with all of their measurements, and we would rather they were tested.
 
 **The mechanism predicts a direction, not just an affinity.** Neutral imidazole carries one N–H; the
 other ring nitrogen holds a lone pair. A geometry in which **both** ring nitrogens donate to acceptors
@@ -240,10 +268,11 @@ bound form) with **equal interface confidence on human and mouse** (ipSAE 0.368 
 What they do not support: a sharp switch. The bidentate clamp is rare in the predictions, as the motif
 is rare in nature. Expect the pH dependence to be real but modest.
 
-**Four of the eight micro designs share one backbone**, five lineages in all. That is a concentration
-risk we state rather than hide: it is the only lineage with equal interface confidence on both
-orthologs and the only one all three oracles return as a single conformation — but if that backbone
-is wrong, half the band fails together.
+**Six of the eight micro designs share one backbone**, three lineages in all. That is a concentration
+risk we state rather than hide, and one the withdrawal in §4a made worse, since both replacements
+came from that lineage: it is the only lineage with equal interface confidence on both orthologs and
+the only one all three oracles return as a single conformation — but if that backbone is wrong,
+three quarters of the band fails together.
 
 ---
 
