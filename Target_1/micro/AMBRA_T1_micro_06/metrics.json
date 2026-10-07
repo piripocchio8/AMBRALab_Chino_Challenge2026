@@ -4,6 +4,7 @@
  "name": "AMBRA_T1_micro_06",
  "sequence": "CSYEPLLREGRQGRKDAVARAKAQMIEAEYAEAKGRGVC",
  "molecule_class": "protein",
+ "status": "submitted",
  "submission_rank": 5,
  "binder_length": 39,
  "series": "micro",

@@ -169,6 +169,8 @@ because the competition's **novelty check timed out on both**, twice, and could 
 while all eighteen longer designs scored (one at 4/4, six at 3/4). We replaced them with the next two
 eligible designs rather than submit entries that carry no novelty score.
 
+They are **not hidden**: `submission.csv` and `metrics_full.csv` both carry all ten micro designs, and the two withdrawn entries were deselected in the upload form. `metrics_full.csv` marks them in its `status` column, and only the twenty submitted designs carry a `submission_rank`.
+
 The cause is almost certainly length rather than sequence. That pipeline predicts a structure and
 measures similarity with TM-align, and TM-score's normalisation
 

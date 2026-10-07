@@ -1027,11 +1027,13 @@ score 0.479.
 | 1 | `AMBRA_T1_micro_01` | **0.623** | 0.48 (0.22/0.31) | 0.59 (0.07, 0.00/0.00) | 0.56 (3.41 Å, 0.24) | 0.95 (0.00/0.00, 0.25) | 45/35 |
 | 2 | `AMBRA_T1_micro_02` | **0.515** | 0.38 (0.04/0.31) | 0.34 (0.01, 0.00/0.00) | 0.49 (4.65 Å, 0.04) | 0.96 (0.00/0.00, 0.19) | 75/55 |
 | 3 | `AMBRA_T1_micro_03` | **0.469** | 0.46 (0.36/0.23) | 0.21 (0.00, 0.00/0.00) | 0.42 (1.34 Å, 0.89) | 0.86 (0.00/0.00, 0.32) | 45/35 |
-| 4 | `AMBRA_T1_micro_05` | **0.419** | 0.51 (0.16/0.60) | 0.09 (0.00, 0.00/0.00) | 0.32 (10.63 Å, 0.22) | 0.82 (0.00/0.00, 0.26) | 45/35 |
-| 5 | `AMBRA_T1_micro_06` | **0.355** | 0.27 (0.58/0.17) | 0.31 (0.00, 0.58/0.17) | 0.08 (3.37 Å, 0.20) | 0.88 (0.00/0.00, 0.65) | 45/35 |
-| 6 | `AMBRA_T1_micro_07` | **0.348** | 0.34 (0.22/0.14) | 0.08 (0.00, 0.00/0.00) | 0.26 (6.26 Å, 0.02) | 0.80 (0.00/0.00, 0.74) | 45/35 |
-| 7 | `AMBRA_T1_micro_09` | **0.507** | 0.36 (0.13/0.17) | 0.35 (0.02, 0.00/0.00) | 0.48 (7.23 Å, 0.18) | 0.96 (0.00/0.00, 0.20) | 45/35 |
-| 8 | `AMBRA_T1_micro_10` | **0.479** | 0.36 (0.00/0.29) | 0.23 (0.00, 0.00/0.00) | 0.48 (13.40 Å, 0.01) | 0.96 (0.00/0.00, 0.15) | 75/55 |
+| 4 | `AMBRA_T1_micro_04` | **0.445** | 0.20 (0.36/0.37) | 0.53 (0.04, 0.33/0.20) | 0.35 (3.41 Å, 0.22) | 0.83 (0.00/0.00, 0.69) | 45/35 |
+| 5 | `AMBRA_T1_micro_05` | **0.419** | 0.51 (0.16/0.60) | 0.09 (0.00, 0.00/0.00) | 0.32 (10.63 Å, 0.22) | 0.82 (0.00/0.00, 0.26) | 45/35 |
+| 6 | `AMBRA_T1_micro_06` | **0.355** | 0.27 (0.58/0.17) | 0.31 (0.00, 0.58/0.17) | 0.08 (3.37 Å, 0.20) | 0.88 (0.00/0.00, 0.65) | 45/35 |
+| 7 | `AMBRA_T1_micro_07` | **0.348** | 0.34 (0.22/0.14) | 0.08 (0.00, 0.00/0.00) | 0.26 (6.26 Å, 0.02) | 0.80 (0.00/0.00, 0.74) | 45/35 |
+| 8 | `AMBRA_T1_micro_08` | **0.332** | 0.19 (0.33/0.34) | 0.09 (0.02, 0.02/0.17) | 0.37 (6.65 Å, 0.02) | 0.80 (0.00/0.00, 0.59) | 45/35 |
+| 9 | `AMBRA_T1_micro_09` | **0.507** | 0.36 (0.13/0.17) | 0.35 (0.02, 0.00/0.00) | 0.48 (7.23 Å, 0.18) | 0.96 (0.00/0.00, 0.20) | 45/35 |
+| 10 | `AMBRA_T1_micro_10` | **0.479** | 0.36 (0.00/0.29) | 0.23 (0.00, 0.00/0.00) | 0.48 (13.40 Å, 0.01) | 0.96 (0.00/0.00, 0.15) | 75/55 |
 
 Read the refold counts first: a rate is only as good as its denominator. Rows where a value
 is missing were not measured, which is not the same as measuring zero.
@@ -1077,9 +1079,15 @@ hang.
 Both replacements came from the dominant lineage because every other eligible candidate in the
 shortlist is itself a 12-mer and would face the same check. The withdrawn designs keep their folders,
 structures, restraints and measurements in `Target_1/micro/`, under the names
-`AMBRA_T1_micro_04` and `AMBRA_T1_micro_08`. **Those two numbers are retired, not recycled** — giving
-a freed name to a different molecule would make one name denote two sequences — which is why the
-submitted names run 01, 02, 03, 05, 06, 07, 09, 10 and the gap is deliberate.
+`AMBRA_T1_micro_04` and `AMBRA_T1_micro_08`.
+
+**They are shipped in the supporting files rather than hidden.** `submission.csv` and
+`metrics_full.csv` both carry all ten micro designs; the two withdrawn entries were **deselected
+in the upload form**, so they are documented without being submitted. `metrics_full.csv`
+distinguishes them in its **`status`** column, and `submission_rank` is assigned only to the
+twenty designs actually submitted — a withdrawn design has no rank in a submission it is not part
+of. **Their numbers are retired, not recycled**: giving a freed name to a different molecule would
+make one name denote two sequences, which this submission has already been bitten by three times.
 
 ---
 
@@ -1212,9 +1220,11 @@ per species. Protenix: 2 seeds x 5 samples per species. Commands in §11.2.
 | `AMBRA_T1_micro_01` | 0.22/0.31 | 0.20/0.20 | 0.00/0.00 | 0.24 | 1.72 | 0.33 | 0.38 |
 | `AMBRA_T1_micro_02` | 0.04/0.31 | 0.50/0.10 | 0.00/0.00 | 0.51 | 0.28 | 0.22 | 0.88 |
 | `AMBRA_T1_micro_03` | 0.36/0.23 | 0.20/0.00 | 0.00/0.10 | 0.24 | 0.21 | 0.25 | 0.88 |
+| `AMBRA_T1_micro_04` | 0.36/0.37 | 0.40/0.20 | 0.10/0.20 | 2.68 | 3.66 | 0.24 | 0.45 |
 | `AMBRA_T1_micro_05` | 0.16/0.60 | —/— | 0.30/0.00 | — | 0.84 | — | 0.30 |
 | `AMBRA_T1_micro_06` | 0.58/0.17 | 0.30/0.30 | 0.10/0.10 | 3.35 | 3.18 | 0.17 | 0.47 |
 | `AMBRA_T1_micro_07` | 0.22/0.14 | —/— | 0.10/0.10 | — | 0.49 | — | 0.43 |
+| `AMBRA_T1_micro_08` | 0.33/0.34 | —/— | 0.00/0.00 | — | 0.60 | — | 0.46 |
 | `AMBRA_T1_micro_09` | 0.13/0.17 | —/— | —/— | — | — | — | — |
 | `AMBRA_T1_micro_10` | 0.00/0.29 | 0.20/0.40 | —/— | 0.53 | — | 0.23 | — |
 

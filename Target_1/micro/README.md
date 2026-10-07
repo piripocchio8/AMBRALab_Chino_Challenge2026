@@ -115,8 +115,11 @@ here.
   root of a negative number below *L* = 15 and stays non-positive to *L* = 18, and it is TM-score
   that the novelty pipeline thresholds on. We could not reproduce the hang, so that is a hypothesis.
   Their folders, sequences and every measurement remain in this directory under
-  `AMBRA_T1_micro_04` and `AMBRA_T1_micro_08`; the two numbers stay retired rather than being
-  recycled, which is why the submitted names run 01, 02, 03, 05, 06, 07, 09, 10.
+  `AMBRA_T1_micro_04` and `AMBRA_T1_micro_08`, and they are carried in `submission.csv` and
+  `metrics_full.csv` alongside the rest so the supporting material documents all ten micro
+  designs; the two were **deselected in the upload form** and are not part of the submission.
+  `metrics_full.csv` says which is which in its `status` column, and only the twenty submitted
+  carry a `submission_rank`. Their numbers are never reassigned to another molecule.
 - **Six of the eight share one backbone**, across three lineages in all. That is a concentration
   risk and it is stated: if that backbone is wrong, half the band fails together. It is the lineage
   with equal interface confidence on both orthologs (ipSAE 0.368 human / 0.390 mouse), and all three
