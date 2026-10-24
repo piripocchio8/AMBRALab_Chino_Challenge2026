@@ -1,0 +1,2 @@
+chainA,res_idxA,chainB,res_idxB,connection_type,confidence,min_distance_angstrom,max_distance_angstrom,comment,restraint_id
+B,C4@SG,B,C15@SG,covalent,1.0,0.0,2.05,disulfide_4_15,disulfide_4_15

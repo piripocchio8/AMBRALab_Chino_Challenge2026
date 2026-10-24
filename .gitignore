@@ -12,3 +12,10 @@ __pycache__/
 
 # Scratch probes left by tooling; the maintainer removes them.
 .tmp_probe.txt
+
+# Self-test inputs and the scaffold's SAMPLE CSVs. They carry placeholder sequences,
+# and a placeholder CSV sitting beside a real submission has already cost this repo
+# time once — the Target_1 rule above exists for the same reason. Kept on disk, not
+# published; the maintainer removes them.
+Target_*/_selftest/
+Target_*/_sample/
