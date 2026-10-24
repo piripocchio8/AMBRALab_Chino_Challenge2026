@@ -13,14 +13,21 @@ Target_1/            EGFR domain III, pH-selective binders
   docs/              the methods for this target
   submission.csv     the submitted file (name, sequence, molecule_class)
   metrics_full.csv   the same rows with every metric behind the ranking
-Target_2/ ...        added as each target opens
+Target_2/            TNF-family homotrimer, binders designed to be released by acidification
+Target_3/            GLP-1R agonists — two bands, micro (cyclic peptides) and mini (miniproteins)
 ```
+
+Each target directory has the same shape. A size band is present only when that campaign produced
+designs in it: `Target_2/` has no `mini/` or `large/` because every candidate in its pool is 39
+residues, and an empty directory for a size we did not design would be an empty claim.
 
 ## Targets
 
 | target | protein | objective | status |
 |---|---|---|---|
 | **Target 1** | EGFR domain III (UniProt P00533, residues 334–494) | binders that engage a target histidine in a protonation-dependent way, so that affinity differs between the acidic tumour microenvironment and blood pH | submitted |
+| **Target 2** | a TNF-family homotrimer | binders carrying their own histidines against a lysine-rich epitope on one protomer, designed to be *released* on acidification rather than tightened | submitted |
+| **Target 3** | GLP-1R (UniProt P43220), class-B GPCR | de novo agonists — disulfide-cyclised peptides of 12–39 residues designed here, and 140-residue de novo miniproteins presenting a natural agonist anchor | prepared |
 
 ## How the entries are organised
 
