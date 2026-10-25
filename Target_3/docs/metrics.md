@@ -216,20 +216,31 @@ what that pipeline's package does and does not record, are in
 | `self_iptm` / `self_contacts` | the design folded against **a copy of itself**. **A LOW value is the good outcome** — this is a self-association check, and a design that binds itself competes with binding the receptor. |
 | `mini_score` | the pipeline's own composite |
 
-> **`rmsd_all_A` is deposited and is not used to argue anything.** Over the pipeline's 50 designs
-> it is bimodal — 23 at 0.76–9.11 Å and 27 at 12.87–21.42 Å with an empty gap — while
-> `rmsd_domain_A` stays tight (median 0.42 Å). Seven of the deposited ten are in the high mode. Two
-> readings produce that and the package records neither: the measure may include a rigid-body
-> placement, or the unbound prediction may really change register where `rmsd_domain_A` does not
-> look. Settling it needs the reference frame for one and the residue window for the other.
+> **`rmsd_all_A` is deposited and is not used to argue anything.** `rmsd_all_A` is the RMSD of the
+> binder between its bound and its alone prediction over all 140 residues, and `rmsd_domain_A` the
+> same over residues 30–140, each after a Kabsch superposition on those same residues (pipeline
+> author; written answers). Over the pipeline's 50 designs `rmsd_all_A` is bimodal — 23 at
+> 0.76–9.11 Å and 27 at 12.87–21.42 Å with an empty gap — while `rmsd_domain_A` stays tight (median
+> 0.42 Å). Six of the deposited ten (`AMBRA_T3_mini_01`, `_03`, `_04`, `_05`, `_08`, `_09`;
+> 13.598–17.583 Å) are in the high mode; the other four lie between 1.289 and 4.324 Å. Of the two
+> readings the package left open, the benign one is correct (pipeline author; written answers): the
+> fold is unchanged, and the high mode is a superposition artefact of a flexible N-terminal segment,
+> a rigid-body swing of the low-confidence stalk that carries the anchor. Over residues 30–140 the
+> distribution is unimodal (see [`../mini/README.md`](../mini/README.md)). Read `rmsd_domain_A` as
+> the fold measure and `rmsd_all_A` as the placement of that segment.
 
-> **`rank`, in the source package, is not a global ordering on `mini_score`.** The package is two
-> independently sorted blocks (ranks 1–34 and 35–50), each monotone internally and with block B
-> systematically higher, so a global sort on `mini_score` would be a block ordering rather than a
-> quality ordering. The submitted ten are five from each block and **their `mini_score` values
-> must not be compared across that boundary**; `mini_iptm`, `mini_ipsae`, `motif_rmsd_A` and
-> `self_iptm` may be. See [`../mini/README.md`](../mini/README.md) for the selection rule and the
-> novelty finding that forced it.
+> **`rank`, in the source package, is not an ordering on `mini_score`; `mini_score` itself is
+> comparable across the whole set.** The package was sorted by hotspot count first and `score`
+> second, so every design meeting 4 of 4 hotspots (ranks 1–34) sorts above every design meeting 3
+> of 3 (ranks 35–50) whatever its score (pipeline author; written answers). The submitted ten are
+> the five 4-of-4 designs (rows 11–15) and then the five 3-of-3 designs (rows 16–20), each group in
+> source order, so the submitted order is a block order, not a score order. `mini_score` is one
+> formula with one min–max normalisation over the campaign's whole gated set (187 designs), not per
+> block, so it can be compared design to design across rows 11–20 (pipeline author; this corrects
+> the author's earlier answer that it could not): `AMBRA_T3_mini_06` (row 16) scores 0.9122 and
+> `AMBRA_T3_mini_01` (row 11) 0.7864. Read `mini_score` by its value and the row number as a block.
+> See [`../mini/README.md`](../mini/README.md) for the selection rule and the novelty finding that
+> forced it.
 
 ---
 

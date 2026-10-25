@@ -135,9 +135,12 @@ measurement's own fold-to-fold spread is of order 0.001–0.007.
 chai takes its evolutionary signal from ESM-2 embeddings; the other two take theirs from an
 alignment. Every Boltz and Protenix number we had measured on this target before this deposition
 was single-sequence — which switched off the two models that need an alignment while chai kept its
-own pathway. That is not a comparison, and we corrected it: all deposited numbers were produced
-with alignments from a local UniRef90 database (receptor depth 2,280; **depth 1 for every binder**,
-because a de novo 12-mer has no homologues). The binder sequences never left the machine.
+own pathway. That is not a comparison, and we corrected it for the peptide band: every Boltz and
+Protenix number for the ten peptides was produced with alignments from a local UniRef90 database
+(receptor depth 2,280; **depth 1 for every binder**, because a de novo 12-mer has no homologues).
+The binder sequences never left the machine. The miniproteins' Boltz-2 predictions were made by the
+collaborating pipeline with its own receptor alignment (9,929 sequences) and a single-sequence
+binder.
 
 Giving Boltz the alignment **removed a failure mode rather than raising a ceiling**: three of the
 ten had collapsed single-sequence and recovered; on the other seven ipTM moved a median +0.002.
