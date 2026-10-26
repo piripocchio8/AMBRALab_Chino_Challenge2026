@@ -54,15 +54,16 @@ its own sequence.
 
 **Three oracles, all given an alignment, and they disagree.** chai-1 takes its evolutionary signal
 from ESM-2 embeddings; Boltz-2 and Protenix-v2 take theirs from an MSA. Every Boltz and Protenix
-number we had on this target was previously single-sequence, which switched those two off while
+number we had on our peptides was previously single-sequence, which switched those two off while
 chai kept its own pathway; we rebuilt them with alignments from a local UniRef90 database
-(receptor depth 2,280; depth 1 for every binder, because a de novo 12-mer has no homologues).
-Protenix is **unrestrained** — its constraint embedders are disabled in the released configuration
-and the checkpoint carries no constraint tensors — so it was asked a different question and is not
-averaged with the others. Over the ten peptides, Spearman ρ between chai's order and Boltz ipTM is
-+0.055, Protenix ipTM +0.188, Boltz ipSAE +0.370, while each oracle reproduces its own order across
-a seed change at +0.87 or better. **We rank on one oracle and report the others as checks, never as
-votes.**
+(receptor depth 2,280; depth 1 for every binder, because a de novo 12-mer has no homologues). The
+miniproteins' Boltz-2 numbers are their pipeline's own: a 9,929-sequence receptor alignment and a
+single-sequence binder. Protenix is **unrestrained** — its constraint embedders are disabled in the
+released configuration and the checkpoint carries no constraint tensors — so it was asked a
+different question and is not averaged with the others. Over the ten peptides, Spearman ρ between
+chai's order and Boltz ipTM is +0.055, Protenix ipTM +0.188, Boltz ipSAE +0.370, while each oracle
+reproduces its own order across a seed change at +0.87 or better. **We rank on one oracle and report
+the others as checks, never as votes.**
 
 **The rank is an order on a set, not a gradient.** The peptide band spans 0.699 to 0.820 on the
 ranking axis while the measurement's own fold-to-fold spread is 0.001–0.007. `submission_rank`

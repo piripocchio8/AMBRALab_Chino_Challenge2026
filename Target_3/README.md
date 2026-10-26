@@ -10,8 +10,9 @@ micro/            10 submitted + 34 documented — disulfide-cyclised peptides, 
                   designed in this group. Each directory carries FIFTEEN predicted structures:
                   five chai-1, five Boltz-2 and five Protenix-v2.
 mini/             10 submitted + 7 reserve — 140-residue de novo miniproteins from a
-                  collaborating RFdiffusion3 + ProteinMPNN pipeline, with the three predictions
-                  that pipeline made for each. RE-SELECTED after a novelty check; see below.
+                  collaborating RFdiffusion3 + ProteinMPNN pipeline, with the three Boltz-2
+                  predictions that pipeline made for each: bound to the receptor, alone, and
+                  against a copy of itself. RE-SELECTED after a novelty check; see below.
 docs/             the methods for each band, the metric definitions, and ranking.json (the build
                   input both CSVs are generated from)
 submission.csv    THE SUBMITTED FILE: name, sequence, molecule_class — 20 rows, nothing else
@@ -36,10 +37,12 @@ arithmetic performed on numbers that cannot be compared, and the result would lo
 than anything we measured.
 
 So the two are deposited as **consecutive blocks**: micro at ranks 1–10, mini at ranks 11–20, each
-internally ordered by its own rule. `submission_rank` exists because the upload form reads a
-ranking from the top row down; **the block boundary is not a claim that every micro design is a
-better candidate than every mini design.** On their own oracles' numbers the mini designs score
-higher, and they are longer, which on these models raises interface confidence by itself.
+internally ordered by its own rule (micro: chai interface pTM under a quota; mini: the source
+package's rank order, which sorts by hotspot count first and score second). `submission_rank`
+exists because the upload form reads a ranking from the top row down; **the block boundary is not
+a claim that every micro design is a better candidate than every mini design.** On their own
+oracles' numbers the mini designs score higher, and they are longer, which on these models raises
+interface confidence by itself.
 
 ## How the micro band is ranked, and the one thing that changed
 
@@ -71,9 +74,11 @@ chai-1 takes its evolutionary signal from ESM-2 embeddings; Boltz-2 and Protenix
 from a multiple sequence alignment. Every earlier Boltz and Protenix number on this target was run
 **single-sequence**, which switched off the two models that need an alignment while chai kept its
 own pathway. That is not a fair comparison, and it has been corrected: every Boltz and Protenix
-number deposited here was produced with an MSA built from a **local UniRef90** database — receptor
-depth **2,280**, and **depth 1 for every binder**, because a de novo 12-mer has no homologues. The
-binder sequences never left the machine.
+number deposited here for the micro band was produced with an MSA built from a **local UniRef90**
+database — receptor depth **2,280**, and **depth 1 for every binder**, because a de novo 12-mer has
+no homologues. The binder sequences never left the machine. The mini band's Boltz-2 predictions
+were run separately by the collaborating pipeline, with a different receptor alignment (9,929
+sequences); see *What the mini band's numbers can and cannot tell you*.
 
 | | condition | what it is here |
 |---|---|---|
@@ -131,6 +136,32 @@ identity. **Highest pairwise identity in the deposited ten is now 30.0 %.** The 
 list are `GLP1_NTERM` and `MINI_RANKS` in `scripts/build_target3_ranking.py`, and the build refuses
 if either condition is broken. **The ten micro designs all passed and are unchanged.**
 
+## What the mini band's numbers can and cannot tell you
+
+The mini band's predictions were made by the collaborating pipeline with **Boltz-2 2.2.1**, at a
+single seed. The receptor was the full 409-residue chain from an AlphaFold3 prediction of the
+receptor–GLP-1 complex; the binder was single-sequence. The pipeline's own ranking number, `score`,
+is the mean of three min–max normalised terms: anchor RMSD inverted, ipSAE and binder pLDDT. It is
+normalised once over the campaign's whole gated set, so it can be compared design to design across
+the whole band; the package's `rank`, which sorts by hotspot count first, cannot. Each
+parameter, sourced to the pipeline's author, is in [`docs/methods_mini.md`](docs/methods_mini.md).
+Two things the author measured after handing the package over bear on how much those numbers carry.
+
+- **A single prediction cannot tell you which designs are unstable.** The 150 top-ranked designs
+  were re-predicted at two further seeds, and 132 of 150 hold the gate (anchor RMSD below 2.0 Å, at
+  least 3 hotspots contacted, receptor RMSD below 5.0 Å) in all three. Confidence is stable between
+  seeds (binder pLDDT moves by a median of 0.005, ipSAE by 0.016); geometry is not (anchor RMSD
+  moves by a median of 0.48 Å, and by up to 1.52 Å). Separating the stable designs from the
+  unstable on one prediction's ipSAE or binder pLDDT is chance (AUC 0.487 and 0.468, n = 150). Nine
+  of the ten deposited designs hold the gate in all three seeds; the exception is
+  `AMBRA_T3_mini_08`, whose anchor RMSD is 0.96 / 2.40 / 2.19 Å across the three.
+- **ipSAE is near-blind to epitope adherence on this target.** Median ipSAE is 0.882 at 4 of 4
+  hotspots and 0.871 at 0 of 4 over 1,200 folds. Epitope engagement is established by the geometric
+  check alone, so ipSAE orders a set already verified that way and does not show that any design
+  engages the hotspots.
+
+The detail, with n, is in [`mini/README.md`](mini/README.md).
+
 ## The ring
 
 Every micro design declares one disulfide. It is measured on the shipped structures rather than
@@ -147,7 +178,7 @@ CSV and on every design's `metrics.json`. The deposition script refuses any row 
 | [`metrics_full.csv`](metrics_full.csv) | 61 rows, every metric. Blank means *not measured*, never zero. |
 | [`docs/ranking.json`](docs/ranking.json) | the build input; both CSVs are generated from it |
 | [`docs/methods_micro.md`](docs/methods_micro.md) | the micro band: design, search, gates, ranking |
-| [`docs/methods_mini.md`](docs/methods_mini.md) | the mini band, written from what its pipeline states |
+| [`docs/methods_mini.md`](docs/methods_mini.md) | the mini band, written from what its pipeline states and its author's later answers |
 | [`docs/metrics.md`](docs/metrics.md) | what every column means |
 | [`DESIGN_STRATEGY.md`](DESIGN_STRATEGY.md) | the attachable strategy document |
 | [`SUBMISSION_TEXT.md`](SUBMISSION_TEXT.md) | the text for the submission form's description box |

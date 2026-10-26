@@ -1,5 +1,5 @@
 {
- "_rule": "Two bands under one ranking, deposited as consecutive blocks rather than interleaved: micro ranks 1-10, mini ranks 11-20. Within the micro band, chai interface pTM measured WITHOUT the pocket restraint, under a quota guaranteeing places to designs whose ECL2+TM5 engagement is canonical. Within the mini band, the collaborating pipeline's own rank order, unchanged. The two bands are not merged because their scores come from different oracles in different conditions and were never on one scale.",
+ "_rule": "Two bands under one ranking, deposited as consecutive blocks rather than interleaved: micro ranks 1-10, mini ranks 11-20. Within the micro band, chai interface pTM measured WITHOUT the pocket restraint, under a quota guaranteeing places to designs whose ECL2+TM5 engagement is canonical. Within the mini band, source-package ranks 1, 2, 4, 8 and 10 (the survivors of the first novelty check) followed by 35, 36, 38, 39 and 42 (the highest-scoring eligible designs of the second block, one per parent backbone), each group in source order. The two bands are not merged because their scores come from different oracles in different conditions and were never on one scale.",
  "_sources": {
   "micro": "ranking_computed.json",
   "mini": "gianmattia_designs.json",
