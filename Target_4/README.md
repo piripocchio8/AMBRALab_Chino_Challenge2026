@@ -47,17 +47,17 @@ about them.
 
 **The selection criterion is the composition-matched scramble.** Each design was re-folded with its
 own residues shuffled — same length, same composition, same cysteine count, everything else
-identical. Across the 52 designs tested at the time of deposition:
+identical. Across **all 103 designs**:
 
 | | beat their own scramble | sign test |
 |---|---|---|
-| M | 45 / 52 | p = 3.5 × 10⁻⁸ |
-| H | 31 / 52 | p = 0.11 |
+| M | 80 / 103 | p = 7.3 × 10⁻⁹ |
+| H | 63 / 103 | p = 0.015 |
 
 Designed sequence **order** is distinguishable from composition on M, and is **not** on H. The
-median gap on M is +0.045, against an MSA-depth control of +0.010 (n = 3). **All twenty deposited
-designs beat their own scramble on both orthologues** — the conservative requirement, since only M
-carries signal.
+median gap on M is +0.035, against an MSA-depth control of +0.010 (n = 3). **54 of 103 beat it on both orthologues, and all twenty deposited designs are drawn from that
+set** — the conservative requirement, since the M signal is an order of magnitude stronger than
+the H one.
 
 ## The sink, and why the ranking is at full length
 

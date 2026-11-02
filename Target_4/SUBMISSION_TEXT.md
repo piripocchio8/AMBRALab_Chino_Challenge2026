@@ -32,9 +32,10 @@ two that are 17–19 Å wrong; with the pocket removed, all three fail including
 right. All 103 of our designs reach it 5/5, which tells us nothing.
 
 **We selected on each design against its own composition-matched scramble** — same residues, same
-length, shuffled order, everything else identical. Designed order beats composition on M (45/52,
-sign test p = 3.5 × 10⁻⁸) and does **not** on H (31/52, p = 0.11), against an MSA-depth control of
-+0.010. **All twenty deposited designs beat their own scramble on both orthologues.**
+length, shuffled order, everything else identical. Across all 103 designs, designed order beats composition on M
+(80/103, sign test p = 7.3 × 10⁻⁹) and far more weakly on H (63/103, p = 0.015), against an
+MSA-depth control of +0.010. **All twenty deposited designs beat their own scramble on both
+orthologues.**
 
 **The ranking is at full length because the 189-residue construct is misleading.** That window
 exposes the hydrophobic scar of the excised domain, where designs can score well by sitting in an
