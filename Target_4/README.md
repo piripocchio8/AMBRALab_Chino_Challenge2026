@@ -1,9 +1,16 @@
 # Target 4 — de novo binders to a 189-residue target window (H and M orthologues)
 
-Twenty designed peptides, 28–46 residues, forward-folding design on Chai-1, ranked on boltz-2.
-**All twenty are all-L.** The design framework allows a D or L assignment per position, and across
-all 129 t4 runs the search returned no D residue, so every sequence here is composed of the standard
-twenty L-amino acids. Entirely in silico; no experimental work.
+Twenty designed peptides of 28–46 residues, composed of the standard twenty L-amino acids,
+designed de novo in this group and ranked on boltz-2. Entirely in silico; no experimental work.
+
+> **A note on what is and is not disclosed here.** The design engine is **the subject of a
+> manuscript in preparation**, so it is described in principle rather than in reproducible detail,
+> **ahead of publication**. Nothing needed to *evaluate* these designs is withheld: the sequences,
+> the predicted structures, every per-model measurement, the selection threshold and how it was
+> derived, the declared restraints and the full ranked population are all in this directory, and
+> every number quoted can be recomputed from the files beside it. What is held back is how the
+> candidate sequences were *generated*, not how they were *judged*. We will release the engine with
+> the publication and are glad to discuss the method in confidence with the organisers meanwhile.
 
 **Files**
 

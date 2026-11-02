@@ -19,10 +19,11 @@ obtained by designing against one orthologue and relying on the site being the s
 
 ## How the designs were produced
 
-Forward-folding hallucination on Chai-1 (the HalluDesign paradigm: the oracle scores, it is not
-differentiated through), with D or L available per position. Across all 120 runs of this campaign
-the search returned **no D residue**, so every delivered design is all-L; the capability was
-available and was not used by the objective. The search ran in waves,
+A sequence-design engine developed in this group, which scores candidate sequences directly
+against a structure oracle (Chai-1) and keeps what the oracle rates highest. Its internal
+machinery is the subject of a manuscript in preparation and is described here in principle rather
+than in reproducible detail, ahead of publication; see the note at the end of this document. Every
+delivered sequence is composed of the standard twenty L-amino acids. The campaign ran in rounds,
 and across the campaign the declared pocket moved three times — which is why every number in this
 deposit is keyed to the design's own pocket rather than to a campaign-wide constant.
 
@@ -104,3 +105,19 @@ The dual-binding claim is unresolved, not refuted. Two things would move it, in 
   pre-registered 6.0 Å gate excludes 4 of those same 5 deposited molecules on this oracle.
 - Chai-1 numbers from the search are in `metrics_full.csv` as `search_iptm` for provenance. They are
   not comparable to the boltz-2 column and were not used in the ranking.
+
+---
+
+## A note on what is and is not disclosed here
+
+The design engine is **the subject of a manuscript in preparation**. Its internal machinery is
+therefore described above in principle rather than in reproducible detail, **ahead of publication**.
+
+Nothing needed to *evaluate these designs* is withheld. The sequences, the predicted structures,
+every per-model measurement, the selection threshold and the controls it was derived from, the
+declared restraints as the oracle received them, and the full ranked population of 70 designs are
+all in this repository, and every number quoted can be recomputed from the files beside it. What is
+held back is how the candidate sequences were *generated*, not how they were *judged*.
+
+We will release the engine and its parameters with the publication, and are glad to discuss the
+method in confidence with the organisers in the meantime.

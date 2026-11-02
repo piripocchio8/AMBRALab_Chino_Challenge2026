@@ -8,10 +8,8 @@ repository.)*
 **De novo binders to a 189-residue target window — AMBRA group, Chino lab, University of Naples
 Federico II**
 
-**Twenty designed peptides of 28–46 residues, de novo, produced by forward-folding hallucination on
-Chai-1.** Our framework assigns D or L per position, but across all 129 runs of this campaign the
-search returned no D residue, so **all twenty are all-L** and composed of the standard twenty amino
-acids. They have no sequence relationship to any deposited
+**Twenty designed peptides of 28–46 residues, designed de novo in our group**, composed of the
+standard twenty L-amino acids. They have no sequence relationship to any deposited
 binder of this target. They are deposited in two consecutive blocks under one ranking: ranks 1–15
 (`h_anchored`) and ranks 16–20 (`dual_lean`).
 
@@ -58,3 +56,12 @@ into the selection. The numbers are in `metrics_full.csv` as a spread, not as a 
 **The full ranked population is deposited, not only the winners.** `docs/ranking_all.json`
 carries all 70 designs with both orthologues' numbers, so the twenty can be seen against the
 distribution they were drawn from.
+
+**The design engine is the subject of a manuscript in preparation** and is described in principle
+ahead of publication. Nothing needed to evaluate these designs is withheld: every sequence, every
+predicted structure — five models per design per orthologue — every per-model measurement, the
+selection threshold and how it was derived from deposited complexes, the declared restraints, and
+the full ranked population of 70 are public at
+**github.com/piripocchio8/AMBRALab_Chino_Challenge2026**, under `Target_4/`. What is held back is
+how the candidate sequences were *generated*, not how they were *judged*. We are glad to discuss
+the method in confidence with the organisers.
