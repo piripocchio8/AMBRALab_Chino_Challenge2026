@@ -1,0 +1,33 @@
+{
+ "name": "AMBRA_T4_h_anchored_08",
+ "band": "h_anchored",
+ "submission_rank": 8,
+ "run_id": "t4_w3_m02",
+ "boltz_iptm_H_best": 0.8454,
+ "boltz_iptm_H_mean": 0.7489,
+ "boltz_plddt_H": 0.86,
+ "pose_disp_H_A": 20.94,
+ "n_models_H": 5,
+ "clears_threshold_H": true,
+ "pocket_models_H": 2,
+ "boltz_iptm_M_best": 0.5048,
+ "boltz_iptm_M_mean": 0.3398,
+ "boltz_plddt_M": 0.65,
+ "pose_disp_M_A": 14.47,
+ "n_models_M": 5,
+ "clears_threshold_M": false,
+ "pocket_models_M": 3,
+ "binder_length": 28,
+ "cys_count": 4,
+ "design_family": "wave-3 family (Tyr20)",
+ "pocket_H": [
+  20
+ ],
+ "pocket_M": [
+  20
+ ],
+ "design_stage": 1,
+ "search_iptm": 0.5755,
+ "threshold": 0.6428,
+ "oracle": "boltz-2, 189-residue window, declared pocket, msa empty, seed 2000, 5 diffusion samples"
+}

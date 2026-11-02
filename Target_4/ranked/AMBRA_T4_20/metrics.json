@@ -1,0 +1,40 @@
+{
+ "name": "AMBRA_T4_20",
+ "submission_rank": 20,
+ "run_id": "t4_p2_r02_v1",
+ "design_family": "phase-2 (Tyr20)",
+ "designed_against": "M_t4.fasta",
+ "binder_length": 48,
+ "cys_count": 6,
+ "pocket_H": [
+  20
+ ],
+ "pocket_M": [
+  20
+ ],
+ "search_iptm": 0.6459,
+ "threshold_T_full": 0.6278,
+ "beats_own_scramble_both": true,
+ "scramble_tested": true,
+ "boltz_iptm_H_mean": 0.4355,
+ "boltz_iptm_H_best": 0.5179,
+ "epitope_models_H": 5,
+ "min_dist_to_pocket_H_A": 2.8,
+ "sinkfrac_fulllength_H": 0.03,
+ "target_plddt_H": 93.9,
+ "n_models_H": 5,
+ "clears_T_full_H": false,
+ "boltz_iptm_M_mean": 0.3588,
+ "boltz_iptm_M_best": 0.5047,
+ "epitope_models_M": 5,
+ "min_dist_to_pocket_M_A": 4.61,
+ "sinkfrac_fulllength_M": 0.057,
+ "target_plddt_M": 90.7,
+ "n_models_M": 5,
+ "clears_T_full_M": false,
+ "scramble_iptm_H": 0.4084,
+ "gap_vs_scramble_H": 0.0271,
+ "scramble_iptm_M": 0.322,
+ "gap_vs_scramble_M": 0.0368,
+ "mean_iptm": 0.3972
+}

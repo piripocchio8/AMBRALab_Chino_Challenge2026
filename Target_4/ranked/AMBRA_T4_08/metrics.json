@@ -1,0 +1,40 @@
+{
+ "name": "AMBRA_T4_08",
+ "submission_rank": 8,
+ "run_id": "t4hp_sw1b_s1_9923_1122382_2",
+ "design_family": "two-hairpin (179; Ser/Asn)",
+ "designed_against": "H_deg.fasta",
+ "binder_length": 46,
+ "cys_count": 6,
+ "pocket_H": [
+  179
+ ],
+ "pocket_M": [
+  179
+ ],
+ "search_iptm": 0.5794,
+ "threshold_T_full": 0.6278,
+ "beats_own_scramble_both": true,
+ "scramble_tested": true,
+ "boltz_iptm_H_mean": 0.5557,
+ "boltz_iptm_H_best": 0.6349,
+ "epitope_models_H": 5,
+ "min_dist_to_pocket_H_A": 5.37,
+ "sinkfrac_fulllength_H": 0.0,
+ "target_plddt_H": 93.1,
+ "n_models_H": 5,
+ "clears_T_full_H": false,
+ "boltz_iptm_M_mean": 0.3199,
+ "boltz_iptm_M_best": 0.3844,
+ "epitope_models_M": 4,
+ "min_dist_to_pocket_M_A": 5.43,
+ "sinkfrac_fulllength_M": 0.0,
+ "target_plddt_M": 90.7,
+ "n_models_M": 5,
+ "clears_T_full_M": false,
+ "scramble_iptm_H": 0.434,
+ "gap_vs_scramble_H": 0.1217,
+ "scramble_iptm_M": 0.2817,
+ "gap_vs_scramble_M": 0.0382,
+ "mean_iptm": 0.4378
+}
