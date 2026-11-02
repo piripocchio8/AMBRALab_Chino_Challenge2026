@@ -4,48 +4,63 @@
 
 ---
 
-**De novo binders to a 189-residue epitope on two orthologues — AMBRA group, Chino lab, University
-of Naples Federico II**
+**De novo peptide binders against two orthologues of the target — AMBRA group, Chino lab,
+University of Naples Federico II**
 
-**Twenty designed peptides of 28–48 residues, designed de novo in our group**, composed of the
-standard twenty L-amino acids, with no sequence relationship to any deposited binder of this
-target. **Nothing here has been tested experimentally.** Every number is a property of a structure
-prediction.
+**Twenty peptides of 28–48 residues, designed from scratch by computer in our group**, built from
+the standard twenty L-amino acids. They are not variants of any known binder and share no sequence
+relationship with one. **None of them has been made or tested in a laboratory** — every number we
+report is a property of a structure prediction.
 
-**We chose the oracle by testing whether any oracle can do this at all.** Three binders with
-deposited co-crystal structures were folded through every available arm — Chai-1, Protenix and
-boltz-2; the 189-residue window and the full-length target; single-sequence and with MSAs; pocket
-declared and not — and each prediction was scored by CA RMSD against the deposited complex. One
-configuration reproduces a deposited structure: **boltz-2, full length, MSA on both chains, pocket
-declared**, which places B1 at **2.8 ± 0.3 Å in 5 of 5 models and recovers 89–92 % of the deposited
-contact set.** Both levers are needed — the MSA without the pocket gives 89.9 Å, the pocket without
-the MSA gives 66.0 Å. The other two deposited binders are reproduced by no arm we tried.
+**We tested whether any prediction method can solve this target before trusting one on our own
+designs.** Three published binders of this target, each with an experimentally solved structure in
+complex with it, were predicted using every combination available to us: three prediction programs,
+the full-length protein and a short fragment of it, with and without evolutionary alignments
+(MSAs), and with and without telling the program which surface patch to aim at. Each prediction was
+compared with the published experimental structure.
 
-**We report the ceiling rather than ranking around it.** B1's ipTM in that arm is 0.628, and **no
-design among 103 reaches it**; our best sit near 0.52. In the same arm B2 scores 0.714 — higher
-than B1 — on a pose 19 Å from its crystal structure, so confidence orders candidates and does not
-certify them.
+**Exactly one combination reproduces a published structure** — boltz-2, full-length target, MSAs
+supplied for both chains, target patch declared as a soft restraint. It places that binder
+**2.8 ± 0.3 Å from the experimental answer in all five predicted models**, recovering 89–92 % of
+the experimentally observed contacts. Both ingredients are necessary: the MSA without the patch
+gives 89.9 Å, the patch without the MSA gives 66.0 Å. **The other two published binders are
+reproduced by none of the setups we tried.** The method is therefore demonstrably capable on one
+real binder out of three, and we report our designs against that standard rather than against a
+more flattering one.
 
-**We did not select on "reaches the declared epitope", because that measure has no power here.**
-With the pocket declared, all three known binders reach the epitope in 5 of 5 models including the
-two that are 17–19 Å wrong; with the pocket removed, all three fail including the one that is
-right. All 103 of our designs reach it 5/5, which tells us nothing.
+**We did not select our twenty on prediction confidence, and we did not select them on whether the
+peptide reaches its intended patch.** Both were tested as criteria and both fail: when the patch is
+declared, all three published binders reach it in 5 of 5 models — including the two whose
+predictions are 17–19 Å wrong; when it is not declared, all three fail — including the one that is
+right. And confidence does not certify an answer: one published binder scores a *higher* confidence
+than the binder the method actually gets right, on a prediction 19 Å from the experimental
+structure.
 
-**We selected on each design against its own composition-matched scramble** — same residues, same
-length, shuffled order, everything else identical. Across all 103 designs, designed order beats composition on M
-(80/103, sign test p = 7.3 × 10⁻⁹) and far more weakly on H (63/103, p = 0.015), against an
-MSA-depth control of +0.010. **All twenty deposited designs beat their own scramble on both
-orthologues.**
+**We selected on a negative control instead.** Every design was predicted a second time with its
+own residues shuffled into random order — identical composition and length, only the arrangement
+destroyed. A design whose score does not beat its own shuffle has demonstrated nothing beyond its
+amino-acid content. Across all 103 candidate designs, the designed arrangement beats the shuffle on
+one orthologue in **80 of 103** (sign test p = 7.3 × 10⁻⁹) and on the other in 63 of 103
+(p = 0.015), against a +0.010 control for a possible confounding effect. **All twenty deposited
+designs beat their own shuffle on both orthologues.**
 
-**The ranking is at full length because the 189-residue construct is misleading.** That window
-exposes the hydrophobic scar of the excised domain, where designs can score well by sitting in an
-artefact; occupancy there reaches 0.78 and falls to 0.00–0.07 once the excised domain is restored.
+**We rank on the full-length protein because a short fragment is misleading.** Cutting the target
+down exposes a buried greasy surface at the cut, which predicted peptides are strongly drawn to:
+occupancy of that artefact reaches 78 % of a peptide's contacts on the fragment and falls to 0–7 %
+on the intact protein. A design can score well on a fragment while sitting in the scar of the cut.
 
-**One measurement bug is reported rather than buried.** Our deposited-target frame mapped residues
-by position in the list, which breaks across unmodelled residues: one deposit omits three, and
-B1's superposition was built from mispaired residues. Keying on the deposit's author numbering
-raised B1's contact agreement from 0.56 to 0.92. All figures above are post-fix.
+**What we do not claim.** No design reaches the confidence score of the one published binder the
+method predicts correctly — 0.628 against our best of about 0.52. That gap is real and we state it
+rather than rank around it. High confidence does not mean a correct pose. And nothing here has been
+tested experimentally.
 
-**The full ranked population is deposited, not only the winners** — all 103 designs with both
+**We also report a measurement error we found in our own code and fixed.** Comparing a prediction
+to an experimental structure requires aligning the two targets residue by residue; our code assumed
+the experimental structure contained every residue. One reference structure is missing three
+unresolved residues inside the compared region, which mismatched every residue after the gap and
+distorted the comparison. Keying on the residue numbering recorded in the experimental file fixed
+it — contact agreement rose from 0.56 to 0.92. All figures above are from after the fix.
+
+**The full candidate population is deposited, not only the winners.** All 103 designs with both
 orthologues' numbers are in `docs/ranking_all.json`, so the twenty can be read against the
-distribution they came from.
+distribution they were drawn from.
