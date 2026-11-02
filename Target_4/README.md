@@ -162,9 +162,3 @@ from that group**, and they have the most balanced two-orthologue profiles in th
 | `docs/metrics.md` | definition of every column in `metrics_full.csv` |
 | `docs/ranking_all.json` | all 103 designs with both orthologues' numbers, not only the winners |
 | `ranked/AMBRA_T4_01 … _20/` | per design: sequence, metrics, and the predicted complex with each orthologue |
-
-> **Note on two superseded directories.** `h_anchored/` and `dual_lean/` are left over from an
-> earlier version of this deposit that ranked designs on the 189-residue fragment. They are
-> **not** part of this submission — `ranked/` is. They are retained rather than deleted so the
-> change is auditable; they can be removed with
-> `git rm -r Target_4/h_anchored Target_4/dual_lean`.
