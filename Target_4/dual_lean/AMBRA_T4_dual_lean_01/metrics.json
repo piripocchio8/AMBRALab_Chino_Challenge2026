@@ -1,0 +1,31 @@
+{
+ "name": "AMBRA_T4_dual_lean_01",
+ "band": "dual_lean",
+ "submission_rank": 16,
+ "run_id": "t4hp_sw1b_s1_9923_1122382_2",
+ "boltz_iptm_H_best": 0.6793,
+ "boltz_iptm_H_mean": 0.4669,
+ "boltz_plddt_H": 0.85,
+ "pose_disp_H_A": 16.18,
+ "n_models_H": 5,
+ "clears_threshold_H": false,
+ "boltz_iptm_M_best": 0.708,
+ "boltz_iptm_M_mean": 0.5304,
+ "boltz_plddt_M": 0.72,
+ "pose_disp_M_A": 5.72,
+ "n_models_M": 5,
+ "clears_threshold_M": false,
+ "binder_length": 46,
+ "cys_count": 6,
+ "design_family": "two-hairpin (179; Ser/Asn)",
+ "pocket_H": [
+  179
+ ],
+ "pocket_M": [
+  179
+ ],
+ "design_stage": 1,
+ "search_iptm": 0.5794,
+ "threshold": 0.6428,
+ "oracle": "boltz-2, 189-residue window, declared pocket, msa empty, seed 2000, 5 diffusion samples"
+}
