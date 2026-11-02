@@ -1,67 +1,50 @@
 # Text for the submission form's description box
 
-*(Paste the block below as-is. The attachable file is `Target_4/DESIGN_STRATEGY.md` in the
-repository.)*
+*(Paste the block below as-is. The attachable file is `Target_4/DESIGN_STRATEGY.md`.)*
 
 ---
 
-**De novo binders to a 189-residue target window — AMBRA group, Chino lab, University of Naples
-Federico II**
+**De novo binders to a 189-residue epitope on two orthologues — AMBRA group, Chino lab, University
+of Naples Federico II**
 
-**Twenty designed peptides of 28–46 residues, designed de novo in our group**, composed of the
-standard twenty L-amino acids. They have no sequence relationship to any deposited
-binder of this target. They are deposited in two consecutive blocks under one ranking: ranks 1–15
-(`h_anchored`) and ranks 16–20 (`dual_lean`).
+**Twenty designed peptides of 28–48 residues, designed de novo in our group**, composed of the
+standard twenty L-amino acids, with no sequence relationship to any deposited binder of this
+target. **Nothing here has been tested experimentally.** Every number is a property of a structure
+prediction.
 
-**Nothing here has been tested.** No binding assay, no expression, no synthesis. Every number in
-this deposit is a property of a structure prediction.
+**We chose the oracle by testing whether any oracle can do this at all.** Three binders with
+deposited co-crystal structures were folded through every available arm — Chai-1, Protenix and
+boltz-2; the 189-residue window and the full-length target; single-sequence and with MSAs; pocket
+declared and not — and each prediction was scored by CA RMSD against the deposited complex. One
+configuration reproduces a deposited structure: **boltz-2, full length, MSA on both chains, pocket
+declared**, which places B1 at **2.8 ± 0.3 Å in 5 of 5 models and recovers 89–92 % of the deposited
+contact set.** Both levers are needed — the MSA without the pocket gives 89.9 Å, the pocket without
+the MSA gives 66.0 Å. The other two deposited binders are reproduced by no arm we tried.
 
-**We selected the oracle by asking whether any oracle can do this at all.** Five binders with
-deposited co-crystal structures against this target were folded through Chai-1, Protenix and
-boltz-2, against both the 189-residue window and the 640-residue full-length target, with and
-without the pocket declared, and each prediction was scored by CA RMSD against the deposited
-complex. **One configuration out of all of them reproduced a deposited structure**: boltz-2 on the
-189-residue window with the pocket declared, single-sequence, which placed B1 at 2.86 Å in 4 of 5
-models and ranked its own failing model last. Everything in this deposit is ranked on that one
-configuration. At full length no oracle reproduced anything — the best was 13.9 Å — and we measured
-why rather than guessing: the fraction of contacts landing on the designed window falls to 0.40
-there, and to a median of **0.06** for our own designs without a restraint. Those folds describe
-some other surface and we did not use them.
+**We report the ceiling rather than ranking around it.** B1's ipTM in that arm is 0.628, and **no
+design among 103 reaches it**; our best sit near 0.52. In the same arm B2 scores 0.714 — higher
+than B1 — on a pose 19 Å from its crystal structure, so confidence orders candidates and does not
+certify them.
 
-**Our ranking threshold is one real binder's confidence, and we are explicit that it is one.**
-T = 0.6428 is the ipTM that this oracle assigned to the single deposited complex it got right.
-Clearing T means the oracle is as confident about a design as it was about that complex — nothing
-more. The same oracle reaches 0.85 ipTM on a pose 18 Å from the crystallographic answer, so
-confidence above T is not evidence of binding.
+**We did not select on "reaches the declared epitope", because that measure has no power here.**
+With the pocket declared, all three known binders reach the epitope in 5 of 5 models including the
+two that are 17–19 Å wrong; with the pocket removed, all three fail including the one that is
+right. All 103 of our designs reach it 5/5, which tells us nothing.
 
-**The target is a dual-binder problem and we did not solve it.** The two orthologue windows are
-69.8 % identical and differ at *every* pocket position we declared (R/G, L/N, Y/D, S/N, K/Q).
-Twenty-three of our 70 designs clear T on the H orthologue. **None clears it on M.** The cause is in
-our own configuration files rather than in the chemistry: every design wave but one declares the H
-window as its target, so the designs were never optimised against M and they do not score against
-it. We report this instead of ranking around it.
+**We selected on each design against its own composition-matched scramble** — same residues, same
+length, shuffled order, everything else identical. Designed order beats composition on M (45/52,
+sign test p = 3.5 × 10⁻⁸) and does **not** on H (31/52, p = 0.11), against an MSA-depth control of
++0.010. **All twenty deposited designs beat their own scramble on both orthologues.**
 
-**We also cannot calibrate the M numbers at all.** The deposited binders are not known to bind the
-paralogue, so no molecule exists whose M complex the oracle could be checked against. An M ipTM in
-our table is a measured number with no positive control behind it. **No design in this deposit is
-claimed to bind M.** The five `dual_lean` entries are the strongest M engagement the campaign
-produced (ipTM 0.443–0.530, four of them from one design family); they do not clear T on H and are
-included because the brief asks for a dual binder, not because they are shown to be one.
+**The ranking is at full length because the 189-residue construct is misleading.** That window
+exposes the hydrophobic scar of the excised domain, where designs can score well by sitting in an
+artefact; occupancy there reaches 0.78 and falls to 0.00–0.07 once the excised domain is restored.
 
-**Pose dispersion is reported for every design and gates none of them.** Our pre-registered 6.0 Å
-dispersion gate was calibrated on Chai-1; on this oracle it excludes 4 of the same 5 molecules that
-have deposited co-crystal structures, so enforcing it would have imported a known miscalibration
-into the selection. The numbers are in `metrics_full.csv` as a spread, not as a verdict.
+**One measurement bug is reported rather than buried.** Our deposited-target frame mapped residues
+by position in the list, which breaks across unmodelled residues: one deposit omits three, and
+B1's superposition was built from mispaired residues. Keying on the deposit's author numbering
+raised B1's contact agreement from 0.56 to 0.92. All figures above are post-fix.
 
-**The full ranked population is deposited, not only the winners.** `docs/ranking_all.json`
-carries all 70 designs with both orthologues' numbers, so the twenty can be seen against the
-distribution they were drawn from.
-
-**The design engine is the subject of a manuscript in preparation** and is described in principle
-ahead of publication. Nothing needed to evaluate these designs is withheld: every sequence, every
-predicted structure — five models per design per orthologue — every per-model measurement, the
-selection threshold and how it was derived from deposited complexes, the declared restraints, and
-the full ranked population of 70 are public at
-**github.com/piripocchio8/AMBRALab_Chino_Challenge2026**, under `Target_4/`. What is held back is
-how the candidate sequences were *generated*, not how they were *judged*. We are glad to discuss
-the method in confidence with the organisers.
+**The full ranked population is deposited, not only the winners** — all 103 designs with both
+orthologues' numbers are in `docs/ranking_all.json`, so the twenty can be read against the
+distribution they came from.

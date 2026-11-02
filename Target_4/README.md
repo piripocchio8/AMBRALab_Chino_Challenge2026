@@ -1,125 +1,95 @@
-# Target 4 — de novo binders to a 189-residue target window (H and M orthologues)
+# Target 4 — de novo binders to a 189-residue epitope on two orthologues (H and M)
 
-Twenty designed peptides of 28–46 residues, composed of the standard twenty L-amino acids,
-designed de novo in this group and ranked on boltz-2. Entirely in silico; no experimental work.
+Twenty designed peptides, 28–48 residues, standard twenty L-amino acids, designed de novo in this
+group. Entirely in silico; nothing here has been tested experimentally.
 
 > **A note on what is and is not disclosed here.** The design engine is **the subject of a
 > manuscript in preparation**, so it is described in principle rather than in reproducible detail,
-> **ahead of publication**. Nothing needed to *evaluate* these designs is withheld: the sequences,
-> the predicted structures, every per-model measurement, the selection threshold and how it was
-> derived, the declared restraints and the full ranked population are all in this directory, and
-> every number quoted can be recomputed from the files beside it. What is held back is how the
-> candidate sequences were *generated*, not how they were *judged*. We will release the engine with
-> the publication and are glad to discuss the method in confidence with the organisers meanwhile.
+> **ahead of publication**. Nothing needed to *evaluate* these designs is withheld: sequences,
+> predicted structures, every per-model measurement, the selection rule and the controls behind it
+> are all in this directory. What is held back is how the candidates were *generated*, not how
+> they were *judged*.
 
-**Files**
+## The oracle, and why this one
+
+Every number is from **boltz-2, the full-length target (640/641 aa), MSA on BOTH chains, the
+design's own declared pocket as one soft 8 Å contact (`force: false`), seed 2000, 5 diffusion
+samples.** Target MSA depth 3095 (H) and 2590 (M), built with phmmer against UniRef90.
+
+That configuration was chosen by testing, not assumption. Three binders with deposited co-crystal
+structures against this target were folded through every available arm and scored by CA RMSD
+against the deposit:
+
+| arm (full length) | B1 | B2 | B3 |
+|---|---|---|---|
+| single-sequence, pocket | 66.0 Å | 18.3 Å | 36.1 Å |
+| MSA both chains, **no** pocket | 89.9 Å | 81.8 Å | 68.2 Å |
+| **MSA both chains, pocket** | **2.8 ± 0.3 Å** | 19.0 Å | 16.5 Å |
+
+B1 is reproduced in **5 of 5 models (2.44–3.36 Å), recovering 89–92 % of the deposited contact
+set**. Both levers are required: the MSA without the pocket is worse than single-sequence, and the
+pocket without the MSA leaves B1 66 Å away. B2 and B3 are not reproduced by any arm tried.
+
+## What the numbers can and cannot support
+
+**The threshold.** T_full = **0.6278** — B1's ipTM, the worst (and only) correctly predicted
+binder. **No design in 103 reaches it**; the best sit near 0.52 mean across the two orthologues.
+
+**Confidence does not certify a pose.** In this same arm B2 scores ipTM **0.714**, higher than B1,
+on a pose **19 Å** from its crystal structure. ipTM orders candidates; it does not say they are
+right.
+
+**Declared-epitope approach has no discriminating power, and was NOT used to select.** With the
+pocket declared, all three known binders reach the epitope in 5/5 models — including the two that
+are 17–19 Å wrong. With the pocket removed, all three fail 0/5 — including B1. The restraint
+steers a pose; it does not score one. All 103 designs approach 5/5, which therefore says nothing
+about them.
+
+**The selection criterion is the composition-matched scramble.** Each design was re-folded with its
+own residues shuffled — same length, same composition, same cysteine count, everything else
+identical. Across the 52 designs tested at the time of deposition:
+
+| | beat their own scramble | sign test |
+|---|---|---|
+| M | 45 / 52 | p = 3.5 × 10⁻⁸ |
+| H | 31 / 52 | p = 0.11 |
+
+Designed sequence **order** is distinguishable from composition on M, and is **not** on H. The
+median gap on M is +0.045, against an MSA-depth control of +0.010 (n = 3). **All twenty deposited
+designs beat their own scramble on both orthologues** — the conservative requirement, since only M
+carries signal.
+
+## The sink, and why the ranking is at full length
+
+The 189-residue window exposes the hydrophobic scar of the excised domain. Sink occupancy there
+reaches 0.78; at full length, where the domain it was cut from is present, the whole population
+sits at **0.00–0.07**. A design ranked on the window can be sitting in that scar rather than on its
+designed site. This deposit is ranked at full length for that reason, and per-design sink occupancy
+is in `metrics_full.csv`.
+
+## A measurement bug that was found and fixed
+
+The deposited-target frame was built by walking the residue list and adding one offset. 3kas leaves
+residues 316–318 unmodelled — inside the compared region — so every residue after the gap was keyed
+3 too low, and B1's target-to-target superposition was built from mispaired residues. Keying on the
+deposit's **author numbering** fixes it: B1's contact agreement rose from 0.56 to **0.92** and its
+RMSD settled at 2.8 ± 0.3 Å across all five models. The scorer now refuses any deposited chain
+below 95 % identity to the window after alignment, so a wrong chain cannot pass silently.
+
+## Population
+
+103 unique designs recovered from 162 runs across every wave and host, deduplicated by sequence,
+each folded against **both** orthologues with **its own** declared pocket (the campaign moved its
+declared epitope three times, so a single constant would have restrained most of the population to
+a site it was never designed for). 34 of the 103 were searched against M.
+
+## Files
 
 | path | contents |
 |---|---|
-| `submission.csv` | the twenty entries: `name,sequence,molecule_class` |
-| `metrics_full.csv` | every number behind the ranking, one row per design |
-| `DESIGN_STRATEGY.md` | how the designs were produced and how the twenty were chosen |
-| `SUBMISSION_TEXT.md` | the prose summary |
-| `docs/metrics.md` | what each column means and what it does not |
-| `docs/ranking_all.json` | the full ranked population, all 70 designs, both orthologues |
-| `h_anchored/`, `dual_lean/` | per-design `sequence.fasta`, `metrics.json`, `complex_H.pdb`, `complex_M.pdb` |
-
-## The one measurement this deposit rests on
-
-A binder's score here is its ipTM from **boltz-2 against the 189-residue target window, with the
-design's own declared pocket, single-sequence (`msa: empty`), seed 2000, five diffusion samples.**
-
-That configuration was not chosen for convenience. Five binders with deposited co-crystal
-structures against this target were put through every oracle and arm available — Chai-1 and
-Protenix as well as boltz-2, window and full-length target, pocket declared and not. **Exactly one
-combination reproduced a deposited complex**: boltz-2, 189-residue window, pocket declared, which
-placed B1 at **2.86 Å CA RMSD** from its crystal structure in 4 of 5 models and ranked its own
-failure last. Independently repeated: 2.96/3.61/2.81/3.49/55.90 Å against 2.99/3.68/2.86/3.53/53.81.
-
-Against the **full-length** target no oracle reproduced anything (best 13.9 Å; boltz B1 65.9 Å,
-Jaccard 0.000 on the contact set). The mechanism was measured rather than assumed: the fraction of
-contacted target residues lying inside the 189-residue window falls from 1.00 at window length to
-0.40 at full length, and for the design population in the unrestrained full-length arm to a median
-of **0.06**. One soft 8 Å `force: false` contact does not hold a binder on a 189-residue patch
-against 451 residues of competing surface. Full-length numbers from this campaign describe poses
-docked somewhere else and are not used here.
-
-## The threshold
-
-Ranking uses a threshold, not a composite and not the worse of the two orthologues.
-
-| real binder | ipTM (window, pocket) | CA RMSD vs deposit | |
-|---|---|---|---|
-| B1 | **0.6428** | 2.86 Å | correct |
-| B2 | 0.8500 | 17.6 Å | right epitope, wrong orientation |
-| B3 | 0.4380 | 13.9 Å | wrong |
-
-**T = 0.6428** — the worst ipTM among the real binders this oracle nevertheless predicts correctly
-(CA RMSD < 5 Å). Counting B2 as additionally correct-on-epitope gives the same number, which is the
-only robustness check available at n = 5 and is reported as such, not as a validation.
-
-What T is: the confidence this oracle assigned to a complex it got right. What T is not: a
-probability of binding. B2 sits far above T on a pose 18 Å from the crystallographic answer, so
-clearing T earns a design only the statement that the oracle is as confident about it as it was
-about the one complex it reproduced.
-
-## What the result actually is
-
-**No design clears T on both orthologues.** Twenty-three of 70 clear it on H; none clear it on M,
-where the whole population sits at a median ipTM of 0.27.
-
-This is the expected outcome rather than a surprise, and the reason is in the campaign's own
-configuration files: every wave but one declares `fasta_path: t4/H_t4.fasta`. Stage-1 and waves 2
-through 7 were searched against **H alone**. M entered only at stage 2 and in the phase-2 family.
-The designs were not optimised against M, and they do not score on M.
-
-**No design in this deposit is claimed to bind M.** There is also no way to calibrate the M numbers:
-the deposited binders are not known to bind the paralogue, so no molecule exists whose M complex the
-oracle could be checked against. T is an H-side threshold, and an M ipTM here is a measured number
-with nothing behind it.
-
-The twenty are therefore split to show that shape rather than hide it:
-
-- **`h_anchored` (15)** — highest ipTM on H among the designs clearing T on H. These are the
-  convincing ones, on the one axis where the instrument has a verified true positive.
-- **`dual_lean` (5)** — highest ipTM on M among the designs not already taken. None clears T on H.
-  They are here because the brief is a dual binder and these carry the strongest M engagement the
-  campaign produced. Four of the five come from the two-hairpin family.
-
-## One design is confident about the wrong interface
-
-`metrics_full.csv` carries `pocket_models_H` / `pocket_models_M`: in how many of the five models the
-binder comes within 8 Å of any of its own declared pocket residues. Nineteen of the twenty engage
-their declared pocket on H in at least one model, most in all five.
-
-**The exception is the top-ranked design.** `AMBRA_T4_h_anchored_01` has the highest ipTM in the
-deposit, 0.848 on H, and touches its declared pocket in **none** of its five models. ipTM measures
-the oracle's confidence in an interface; it does not say the interface is the designed one. The
-design keeps its ranked position because the ranking rule was fixed before this column existed, and
-the column is published alongside it rather than used to quietly re-cut the band.
-
-## Pose dispersion is reported and not gated
-
-`pose_disp_*_A` is the binder CA RMSD about the medoid pose over the five models, after superposing
-on the target. It is in `metrics_full.csv` for every design and no design was included or excluded
-on it. The campaign's pre-registered 6.0 Å gate was calibrated on Chai-1, and on this oracle it
-excludes 4 of the 5 molecules with deposited co-crystal structures; applying it would import a known
-miscalibration into the delivery. Read it as a spread, not as a verdict.
-
-## Population and provenance
-
-70 unique designs recovered from 129 runs across every wave and host, deduplicated by sequence
-(the higher search ipTM survives). Five design families, each folded against **its own** declared
-pocket, fragment-local in the 189-residue window:
-
-| family | n | pocket H | pocket M |
-|---|---|---|---|
-| stage-1 | 24 | 17, 180 | 18, 180 |
-| wave-3 family | 16 | 20 | 20 |
-| two-hairpin | 20 | 179 | 179 |
-| wave-2 | 9 | 180 | 180 |
-| phase-2 | 1 | 20 | 20 |
-
-A single pocket constant would have restrained three quarters of the population to a site it was
-never designed for. One run was refused outright because its family could not be resolved from its
-run id; it was neither folded nor ranked.
+| `submission.csv` | the twenty entries |
+| `metrics_full.csv` | every number behind the ranking |
+| `DESIGN_STRATEGY.md` | how the designs were made and how the twenty were chosen |
+| `SUBMISSION_TEXT.md` | prose summary for the submission form |
+| `docs/ranking_all.json` | all 103 designs, both orthologues |
+| `ranked/AMBRA_T4_nn/` | `sequence.fasta`, `metrics.json`, `complex_Hfull.pdb`, `complex_Mfull.pdb` |

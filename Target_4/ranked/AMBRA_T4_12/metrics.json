@@ -1,0 +1,42 @@
+{
+ "name": "AMBRA_T4_12",
+ "submission_rank": 12,
+ "run_id": "t4_s1_i06_18683_5",
+ "design_family": "stage-1 (17/18 + Lys180)",
+ "designed_against": "H_t4.fasta",
+ "binder_length": 38,
+ "cys_count": 2,
+ "pocket_H": [
+  17,
+  180
+ ],
+ "pocket_M": [
+  18,
+  180
+ ],
+ "search_iptm": 0.6928,
+ "threshold_T_full": 0.6278,
+ "beats_own_scramble_both": true,
+ "scramble_tested": true,
+ "boltz_iptm_H_mean": 0.4744,
+ "boltz_iptm_H_best": 0.5557,
+ "epitope_models_H": 5,
+ "min_dist_to_pocket_H_A": 2.78,
+ "sinkfrac_fulllength_H": 0.0,
+ "target_plddt_H": 92.6,
+ "n_models_H": 5,
+ "clears_T_full_H": false,
+ "boltz_iptm_M_mean": 0.3132,
+ "boltz_iptm_M_best": 0.4084,
+ "epitope_models_M": 5,
+ "min_dist_to_pocket_M_A": 4.64,
+ "sinkfrac_fulllength_M": 0.0,
+ "target_plddt_M": 90.0,
+ "n_models_M": 5,
+ "clears_T_full_M": false,
+ "scramble_iptm_H": 0.3462,
+ "gap_vs_scramble_H": 0.1282,
+ "scramble_iptm_M": 0.266,
+ "gap_vs_scramble_M": 0.0473,
+ "mean_iptm": 0.3938
+}
