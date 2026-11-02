@@ -32,7 +32,7 @@ deposit is keyed to the design's own pocket rather than to a campaign-wide const
 | wave-2 | 9 | 180 | a single lysine |
 | wave-3 family | 16 | 20 | a single tyrosine |
 | phase-2 | 1 | 20 | tyrosine, searched against M |
-| two-hairpin | 14 | 179 | neither lysine nor tyrosine — Ser in H, Asn in M |
+| two-hairpin | 20 | 179 | neither lysine nor tyrosine — Ser in H, Asn in M |
 
 The two-hairpin family is the latest construct: two hairpins on a 38–46 residue scaffold, declared
 against column 179, searched in two stages.
@@ -70,16 +70,16 @@ The rule is a threshold, not an average and not the worse of the two orthologues
 < 5 Å vs deposit). Only B1 qualifies at < 5 Å; including B2, which reaches the right epitope in the
 wrong orientation, returns the same number.
 
-All 64 designs were folded against both orthologues at the window, each with its own pocket, and
+All 70 designs were folded against both orthologues at the window, each with its own pocket, and
 tiered: clears T on both / on one / on neither.
 
-**Tier 1 is empty.** Twenty-two designs clear T on H. None clears it on M; the population median on
+**Tier 1 is empty.** Twenty-three designs clear T on H. None clears it on M; the population median on
 M is 0.27 against 0.74 on H among the H-passers. Given single-target search, this is what the
 configuration predicted, and it is reported rather than worked around.
 
 The twenty are therefore drawn in two bands:
 
-- **`h_anchored` (15)** — the top fifteen by H ipTM among the twenty-two clearing T on H.
+- **`h_anchored` (15)** — the top fifteen by H ipTM among the twenty-three clearing T on H.
 - **`dual_lean` (5)** — the five highest M ipTM among the remainder (0.443–0.530). None clears T on
   H. Four are two-hairpin designs, which is the one family that shows any M-side tendency.
 

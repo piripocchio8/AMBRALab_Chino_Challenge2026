@@ -88,6 +88,6 @@ arithmetic on two different scales.
 
 ## Population
 
-The twenty were drawn from 64 unique designs recovered from 119 runs across every wave and host,
-deduplicated by sequence. The full ranked population, with both orthologues' numbers for all 64, is
-in `docs/ranking_all_64.json`.
+The twenty were drawn from 70 unique designs recovered from 129 runs across every wave and host,
+deduplicated by sequence. The full ranked population, with both orthologues' numbers for all 70, is
+in `docs/ranking_all.json`.

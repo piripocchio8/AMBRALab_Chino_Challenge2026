@@ -1,6 +1,6 @@
 # Band `h_anchored` — ranks 1–15
 
-The fifteen highest-ipTM designs among the twenty-two that clear the threshold **T = 0.6428** on the
+The fifteen highest-ipTM designs among the twenty-three that clear the threshold **T = 0.6428** on the
 H orthologue, ordered by `boltz_iptm_H_mean`.
 
 T is the ipTM boltz-2 assigned to the one deposited complex it reproduced below 5 Å CA RMSD. These

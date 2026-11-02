@@ -2,7 +2,7 @@
 
 Twenty designed peptides, 28–46 residues, forward-folding design on Chai-1, ranked on boltz-2.
 **All twenty are all-L.** The design framework allows a D or L assignment per position, and across
-all 120 t4 runs the search returned no D residue, so every sequence here is composed of the standard
+all 129 t4 runs the search returned no D residue, so every sequence here is composed of the standard
 twenty L-amino acids. Entirely in silico; no experimental work.
 
 **Files**
@@ -14,7 +14,7 @@ twenty L-amino acids. Entirely in silico; no experimental work.
 | `DESIGN_STRATEGY.md` | how the designs were produced and how the twenty were chosen |
 | `SUBMISSION_TEXT.md` | the prose summary |
 | `docs/metrics.md` | what each column means and what it does not |
-| `docs/ranking_all_64.json` | the full ranked population, all 64 designs, both orthologues |
+| `docs/ranking_all.json` | the full ranked population, all 70 designs, both orthologues |
 | `h_anchored/`, `dual_lean/` | per-design `sequence.fasta`, `metrics.json`, `complex_H.pdb`, `complex_M.pdb` |
 
 ## The one measurement this deposit rests on
@@ -58,7 +58,7 @@ about the one complex it reproduced.
 
 ## What the result actually is
 
-**No design clears T on both orthologues.** Twenty-two of 64 clear it on H; none clear it on M,
+**No design clears T on both orthologues.** Twenty-three of 70 clear it on H; none clear it on M,
 where the whole population sits at a median ipTM of 0.27.
 
 This is the expected outcome rather than a surprise, and the reason is in the campaign's own
@@ -89,7 +89,7 @@ miscalibration into the delivery. Read it as a spread, not as a verdict.
 
 ## Population and provenance
 
-64 unique designs recovered from 119 runs across every wave and host, deduplicated by sequence
+70 unique designs recovered from 129 runs across every wave and host, deduplicated by sequence
 (the higher search ipTM survives). Five design families, each folded against **its own** declared
 pocket, fragment-local in the 189-residue window:
 
@@ -97,7 +97,7 @@ pocket, fragment-local in the 189-residue window:
 |---|---|---|---|
 | stage-1 | 24 | 17, 180 | 18, 180 |
 | wave-3 family | 16 | 20 | 20 |
-| two-hairpin | 14 | 179 | 179 |
+| two-hairpin | 20 | 179 | 179 |
 | wave-2 | 9 | 180 | 180 |
 | phase-2 | 1 | 20 | 20 |
 

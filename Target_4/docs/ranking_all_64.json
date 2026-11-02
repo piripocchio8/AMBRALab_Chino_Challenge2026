@@ -470,6 +470,40 @@
   "rank": 13
  },
  {
+  "cell": "t4hp_sw1_s1_9913_1122382_5",
+  "seq": "CRLECSDCGRDASQVQQHGGHLYCTNCGASADRIRSHC",
+  "L": 38,
+  "cys": 6,
+  "pocket_H": [
+   179
+  ],
+  "pocket_M": [
+   179
+  ],
+  "family": "two-hairpin (179; Ser/Asn)",
+  "search_iptm": 0.3994,
+  "pool": "t4_campaign/pull_ibisco2",
+  "stage": 1,
+  "construct": "sw1/s1-38",
+  "dup_count": 0,
+  "iptm_H": 0.7114702701568604,
+  "iptm_best_H": 0.8808850049972534,
+  "plddt_H": 0.9128915786743164,
+  "pose_H": 10.852894225948571,
+  "fracon_H": 1.0,
+  "n_H": 5,
+  "iptm_M": 0.2386788934469223,
+  "iptm_best_M": 0.27892982959747314,
+  "plddt_M": 0.6833364963531494,
+  "pose_M": 6.1473865594819195,
+  "fracon_M": 1.0,
+  "n_M": 5,
+  "pass_H": true,
+  "pass_M": false,
+  "tier": 2,
+  "rank": 14
+ },
+ {
   "cell": "t4_w3_m01",
   "seq": "YCSYCGLDANYWRWGYCTSCRASIDWIQ",
   "L": 28,
@@ -502,7 +536,7 @@
   "pass_H": true,
   "pass_M": false,
   "tier": 2,
-  "rank": 14
+  "rank": 15
  },
  {
   "cell": "t4_s1_h03_18673_2",
@@ -539,7 +573,7 @@
   "pass_H": true,
   "pass_M": false,
   "tier": 2,
-  "rank": 15
+  "rank": 16
  },
  {
   "cell": "t4_w2_w01_18736_0",
@@ -573,7 +607,7 @@
   "pass_H": true,
   "pass_M": false,
   "tier": 2,
-  "rank": 16
+  "rank": 17
  },
  {
   "cell": "t4_s1_i08_18691_7",
@@ -610,7 +644,7 @@
   "pass_H": true,
   "pass_M": false,
   "tier": 2,
-  "rank": 17
+  "rank": 18
  },
  {
   "cell": "t4_s1_i04_18683_3",
@@ -647,7 +681,7 @@
   "pass_H": true,
   "pass_M": false,
   "tier": 2,
-  "rank": 18
+  "rank": 19
  },
  {
   "cell": "t4_s1_h05_18673_4",
@@ -684,7 +718,7 @@
   "pass_H": true,
   "pass_M": false,
   "tier": 2,
-  "rank": 19
+  "rank": 20
  },
  {
   "cell": "t4_w3ls_ls03",
@@ -719,7 +753,7 @@
   "pass_H": true,
   "pass_M": false,
   "tier": 2,
-  "rank": 20
+  "rank": 21
  },
  {
   "cell": "t4_s1_i06_18683_5",
@@ -756,7 +790,7 @@
   "pass_H": true,
   "pass_M": false,
   "tier": 2,
-  "rank": 21
+  "rank": 22
  },
  {
   "cell": "t4_w3s_s04",
@@ -791,7 +825,7 @@
   "pass_H": true,
   "pass_M": false,
   "tier": 2,
-  "rank": 22
+  "rank": 23
  },
  {
   "cell": "t4_w3_m04",
@@ -826,7 +860,41 @@
   "pass_H": false,
   "pass_M": false,
   "tier": 3,
-  "rank": 23
+  "rank": 24
+ },
+ {
+  "cell": "t4hp_sw1_s1_9912_1122382_4",
+  "seq": "CTLVCSKCDADASQVEEHGGHLYCTNCGASADRIRSHC",
+  "L": 38,
+  "cys": 6,
+  "pocket_H": [
+   179
+  ],
+  "pocket_M": [
+   179
+  ],
+  "family": "two-hairpin (179; Ser/Asn)",
+  "search_iptm": 0.3762,
+  "pool": "t4_campaign/pull_ibisco2",
+  "stage": 1,
+  "construct": "sw1/s1-38",
+  "dup_count": 0,
+  "iptm_H": 0.6321979522705078,
+  "iptm_best_H": 0.794842004776001,
+  "plddt_H": 0.8913056492805481,
+  "pose_H": 24.654970099133028,
+  "fracon_H": 1.0,
+  "n_H": 5,
+  "iptm_M": 0.34384349435567857,
+  "iptm_best_M": 0.5921218395233154,
+  "plddt_M": 0.6653186440467834,
+  "pose_M": 14.089172876750585,
+  "fracon_M": 1.0,
+  "n_M": 5,
+  "pass_H": false,
+  "pass_M": false,
+  "tier": 3,
+  "rank": 25
  },
  {
   "cell": "t4_w3_m03",
@@ -861,7 +929,7 @@
   "pass_H": false,
   "pass_M": false,
   "tier": 3,
-  "rank": 24
+  "rank": 26
  },
  {
   "cell": "t4_w3s_s03",
@@ -896,7 +964,7 @@
   "pass_H": false,
   "pass_M": false,
   "tier": 3,
-  "rank": 25
+  "rank": 27
  },
  {
   "cell": "t4_w2_w08",
@@ -930,7 +998,7 @@
   "pass_H": false,
   "pass_M": false,
   "tier": 3,
-  "rank": 26
+  "rank": 28
  },
  {
   "cell": "t4_w3ls_ls02",
@@ -965,7 +1033,7 @@
   "pass_H": false,
   "pass_M": false,
   "tier": 3,
-  "rank": 27
+  "rank": 29
  },
  {
   "cell": "t4_w3ls_ls04",
@@ -1000,7 +1068,7 @@
   "pass_H": false,
   "pass_M": false,
   "tier": 3,
-  "rank": 28
+  "rank": 30
  },
  {
   "cell": "t4_w3ls_ls01",
@@ -1035,7 +1103,7 @@
   "pass_H": false,
   "pass_M": false,
   "tier": 3,
-  "rank": 29
+  "rank": 31
  },
  {
   "cell": "t4_w3l_l04",
@@ -1070,7 +1138,7 @@
   "pass_H": false,
   "pass_M": false,
   "tier": 3,
-  "rank": 30
+  "rank": 32
  },
  {
   "cell": "t4_s1_i02_18683_1",
@@ -1107,7 +1175,7 @@
   "pass_H": false,
   "pass_M": false,
   "tier": 3,
-  "rank": 31
+  "rank": 33
  },
  {
   "cell": "t4_w2_w05_18736_2",
@@ -1141,7 +1209,7 @@
   "pass_H": false,
   "pass_M": false,
   "tier": 3,
-  "rank": 32
+  "rank": 34
  },
  {
   "cell": "t4_s1_i03_18683_2",
@@ -1178,7 +1246,7 @@
   "pass_H": false,
   "pass_M": false,
   "tier": 3,
-  "rank": 33
+  "rank": 35
  },
  {
   "cell": "t4_w2_w09",
@@ -1212,7 +1280,7 @@
   "pass_H": false,
   "pass_M": false,
   "tier": 3,
-  "rank": 34
+  "rank": 36
  },
  {
   "cell": "t4_w3l_l02",
@@ -1247,7 +1315,7 @@
   "pass_H": false,
   "pass_M": false,
   "tier": 3,
-  "rank": 35
+  "rank": 37
  },
  {
   "cell": "t4_s1_i01_18683_0",
@@ -1284,7 +1352,7 @@
   "pass_H": false,
   "pass_M": false,
   "tier": 3,
-  "rank": 36
+  "rank": 38
  },
  {
   "cell": "t4hp_sw1b_s1_9921_1122382_0",
@@ -1302,7 +1370,8 @@
   "pool": "t4_campaign/pull_ibisco",
   "stage": 1,
   "construct": "sw1b",
-  "dup_count": 0,
+  "also_delivered_as": "t4hp_sw1b_s1_9921_1122382_0",
+  "dup_count": 1,
   "iptm_H": 0.5661115109920501,
   "iptm_best_H": 0.6944233179092407,
   "plddt_H": 0.8618258595466614,
@@ -1318,7 +1387,7 @@
   "pass_H": false,
   "pass_M": false,
   "tier": 3,
-  "rank": 37
+  "rank": 39
  },
  {
   "cell": "t4_w2_w03_18736_1",
@@ -1352,7 +1421,7 @@
   "pass_H": false,
   "pass_M": false,
   "tier": 3,
-  "rank": 38
+  "rank": 40
  },
  {
   "cell": "t4_s1_h01_18668_0",
@@ -1388,7 +1457,7 @@
   "pass_H": false,
   "pass_M": false,
   "tier": 3,
-  "rank": 39
+  "rank": 41
  },
  {
   "cell": "t4_s1_i07_18691_6",
@@ -1425,7 +1494,7 @@
   "pass_H": false,
   "pass_M": false,
   "tier": 3,
-  "rank": 40
+  "rank": 42
  },
  {
   "cell": "t4hp_sw1_s1_10011_19733_3",
@@ -1459,7 +1528,7 @@
   "pass_H": false,
   "pass_M": false,
   "tier": 3,
-  "rank": 41
+  "rank": 43
  },
  {
   "cell": "t4_w2_w02_18736_0",
@@ -1493,7 +1562,7 @@
   "pass_H": false,
   "pass_M": false,
   "tier": 3,
-  "rank": 42
+  "rank": 44
  },
  {
   "cell": "t4_w2_w06_18736_2",
@@ -1527,10 +1596,10 @@
   "pass_H": false,
   "pass_M": false,
   "tier": 3,
-  "rank": 43
+  "rank": 45
  },
  {
-  "cell": "t4hp_sw3c_s1_9731",
+  "cell": "t4hp_sw3c_s1_9731_v2",
   "seq": "WSCERKTKMGGVEHFYCTNCGASADRIRSTKHGGVEHLYCSDCGC",
   "L": 45,
   "cys": 6,
@@ -1546,6 +1615,7 @@
   "stage": 1,
   "construct": "sw3c",
   "dup_count": 0,
+  "cell_raw": "t4hp_sw3c_s1_9731",
   "iptm_H": 0.5271859705448151,
   "iptm_best_H": 0.766080379486084,
   "plddt_H": 0.837599766254425,
@@ -1561,7 +1631,7 @@
   "pass_H": false,
   "pass_M": false,
   "tier": 3,
-  "rank": 44
+  "rank": 46
  },
  {
   "cell": "t4_s1_g03",
@@ -1598,7 +1668,7 @@
   "pass_H": false,
   "pass_M": false,
   "tier": 3,
-  "rank": 45
+  "rank": 47
  },
  {
   "cell": "t4hp_sw1_s1_9711",
@@ -1632,7 +1702,41 @@
   "pass_H": false,
   "pass_M": false,
   "tier": 3,
-  "rank": 46
+  "rank": 48
+ },
+ {
+  "cell": "t4hp_sw1_s1_9911_1122382_3",
+  "seq": "CLLYCSYCDADANQVDYKNGHLYCTNCGASADRIRSHC",
+  "L": 38,
+  "cys": 6,
+  "pocket_H": [
+   179
+  ],
+  "pocket_M": [
+   179
+  ],
+  "family": "two-hairpin (179; Ser/Asn)",
+  "search_iptm": 0.3389,
+  "pool": "t4_campaign/pull_ibisco2",
+  "stage": 1,
+  "construct": "sw1/s1-38",
+  "dup_count": 0,
+  "iptm_H": 0.49197742342948914,
+  "iptm_best_H": 0.6670591831207275,
+  "plddt_H": 0.8565987467765808,
+  "pose_H": 9.74428472797748,
+  "fracon_H": 1.0,
+  "n_H": 5,
+  "iptm_M": 0.3512928605079651,
+  "iptm_best_M": 0.4959086775779724,
+  "plddt_M": 0.6811204195022583,
+  "pose_M": 17.35863940134955,
+  "fracon_M": 1.0,
+  "n_M": 5,
+  "pass_H": false,
+  "pass_M": false,
+  "tier": 3,
+  "rank": 49
  },
  {
   "cell": "t4_s1_i10_18691_9",
@@ -1669,7 +1773,7 @@
   "pass_H": false,
   "pass_M": false,
   "tier": 3,
-  "rank": 47
+  "rank": 50
  },
  {
   "cell": "t4_s1_g02",
@@ -1706,7 +1810,7 @@
   "pass_H": false,
   "pass_M": false,
   "tier": 3,
-  "rank": 48
+  "rank": 51
  },
  {
   "cell": "t4hp_sw1b_s1_9921_1122379_0",
@@ -1724,7 +1828,8 @@
   "pool": "t4_campaign/pull_ibisco",
   "stage": 1,
   "construct": "sw1b",
-  "dup_count": 0,
+  "also_delivered_as": "t4hp_sw1b_s1_9921_1122379_0",
+  "dup_count": 1,
   "iptm_H": 0.48254364132881167,
   "iptm_best_H": 0.616244375705719,
   "plddt_H": 0.9084879279136657,
@@ -1740,10 +1845,10 @@
   "pass_H": false,
   "pass_M": false,
   "tier": 3,
-  "rank": 49
+  "rank": 52
  },
  {
-  "cell": "t4hp_sw3c_s1_9731g",
+  "cell": "t4hp_sw3c_s1_9731_v1",
   "seq": "HSCRRQTKHPGETHIWCTWCGASADRIRSTKHGGVEHLYCSDCGC",
   "L": 45,
   "cys": 6,
@@ -1759,6 +1864,7 @@
   "stage": 1,
   "construct": "sw3c",
   "dup_count": 0,
+  "cell_raw": "t4hp_sw3c_s1_9731",
   "iptm_H": 0.4797081142663956,
   "iptm_best_H": 0.7654473185539246,
   "plddt_H": 0.838316285610199,
@@ -1774,7 +1880,7 @@
   "pass_H": false,
   "pass_M": false,
   "tier": 3,
-  "rank": 50
+  "rank": 53
  },
  {
   "cell": "t4hp_sw1b_s1_9923_1122382_2",
@@ -1792,7 +1898,8 @@
   "pool": "t4_campaign/pull_ibisco",
   "stage": 1,
   "construct": "sw1b",
-  "dup_count": 0,
+  "also_delivered_as": "t4hp_sw1b_s1_9923_1122382_2",
+  "dup_count": 1,
   "iptm_H": 0.4669462084770203,
   "iptm_best_H": 0.6793280243873596,
   "plddt_H": 0.8549952626228332,
@@ -1808,7 +1915,7 @@
   "pass_H": false,
   "pass_M": false,
   "tier": 3,
-  "rank": 51
+  "rank": 54
  },
  {
   "cell": "t4_s1_i09_18691_8",
@@ -1845,7 +1952,7 @@
   "pass_H": false,
   "pass_M": false,
   "tier": 3,
-  "rank": 52
+  "rank": 55
  },
  {
   "cell": "t4_p2_s04",
@@ -1879,7 +1986,7 @@
   "pass_H": false,
   "pass_M": false,
   "tier": 3,
-  "rank": 53
+  "rank": 56
  },
  {
   "cell": "t4_w2_w07",
@@ -1913,7 +2020,7 @@
   "pass_H": false,
   "pass_M": false,
   "tier": 3,
-  "rank": 54
+  "rank": 57
  },
  {
   "cell": "t4_s1_i05_18683_4",
@@ -1950,7 +2057,7 @@
   "pass_H": false,
   "pass_M": false,
   "tier": 3,
-  "rank": 55
+  "rank": 58
  },
  {
   "cell": "t4hp_sw3c_s1_9831",
@@ -1984,7 +2091,41 @@
   "pass_H": false,
   "pass_M": false,
   "tier": 3,
-  "rank": 56
+  "rank": 59
+ },
+ {
+  "cell": "t4hp_sw3c_s1_9931_1122382_6",
+  "seq": "RSCVRDTKHIGDHHLYCTNCGASADRIRSTKHGGVEHLYCSDCGC",
+  "L": 45,
+  "cys": 6,
+  "pocket_H": [
+   179
+  ],
+  "pocket_M": [
+   179
+  ],
+  "family": "two-hairpin (179; Ser/Asn)",
+  "search_iptm": 0.5193,
+  "pool": "t4_campaign/pull_ibisco2",
+  "stage": 1,
+  "construct": "sw3c",
+  "dup_count": 0,
+  "iptm_H": 0.451930433511734,
+  "iptm_best_H": 0.7716165781021118,
+  "plddt_H": 0.8681551456451416,
+  "pose_H": 12.205227189682596,
+  "fracon_H": 1.0,
+  "n_H": 5,
+  "iptm_M": 0.20550019443035125,
+  "iptm_best_M": 0.25305843353271484,
+  "plddt_M": 0.7193688035011292,
+  "pose_M": 6.277174160870857,
+  "fracon_M": 1.0,
+  "n_M": 5,
+  "pass_H": false,
+  "pass_M": false,
+  "tier": 3,
+  "rank": 60
  },
  {
   "cell": "t4hp_sw1_s2_9714",
@@ -2018,7 +2159,7 @@
   "pass_H": false,
   "pass_M": false,
   "tier": 3,
-  "rank": 57
+  "rank": 61
  },
  {
   "cell": "t4hp_sw1b_s2_9724",
@@ -2052,7 +2193,7 @@
   "pass_H": false,
   "pass_M": false,
   "tier": 3,
-  "rank": 58
+  "rank": 62
  },
  {
   "cell": "t4_s1_h10_18673_9",
@@ -2089,7 +2230,7 @@
   "pass_H": false,
   "pass_M": false,
   "tier": 3,
-  "rank": 59
+  "rank": 63
  },
  {
   "cell": "t4_w3s_s02",
@@ -2124,7 +2265,41 @@
   "pass_H": false,
   "pass_M": false,
   "tier": 3,
-  "rank": 60
+  "rank": 64
+ },
+ {
+  "cell": "t4hp_sw3c_s1_9932_1122382_7",
+  "seq": "QSCVRYYGVKGKEQLYCTNCGYSADRIRSTKHGGVEHLYCSDCGC",
+  "L": 45,
+  "cys": 6,
+  "pocket_H": [
+   179
+  ],
+  "pocket_M": [
+   179
+  ],
+  "family": "two-hairpin (179; Ser/Asn)",
+  "search_iptm": 0.7029,
+  "pool": "t4_campaign/pull_ibisco2",
+  "stage": 1,
+  "construct": "sw3c",
+  "dup_count": 0,
+  "iptm_H": 0.3829039096832275,
+  "iptm_best_H": 0.6979779005050659,
+  "plddt_H": 0.8301316976547242,
+  "pose_H": 23.21990999023365,
+  "fracon_H": 1.0,
+  "n_H": 5,
+  "iptm_M": 0.30228700041770934,
+  "iptm_best_M": 0.4531235992908478,
+  "plddt_M": 0.689146888256073,
+  "pose_M": 7.302867147646406,
+  "fracon_M": 1.0,
+  "n_M": 5,
+  "pass_H": false,
+  "pass_M": false,
+  "tier": 3,
+  "rank": 65
  },
  {
   "cell": "t4hp_sw3c_s2_9734",
@@ -2158,7 +2333,41 @@
   "pass_H": false,
   "pass_M": false,
   "tier": 3,
-  "rank": 61
+  "rank": 66
+ },
+ {
+  "cell": "t4hp_sw3c_s1_9933_1122382_8",
+  "seq": "DSCVRMTKHFNVEHLYCTTCGASADRIRSTKHGGVEHLYCSDCGC",
+  "L": 45,
+  "cys": 6,
+  "pocket_H": [
+   179
+  ],
+  "pocket_M": [
+   179
+  ],
+  "family": "two-hairpin (179; Ser/Asn)",
+  "search_iptm": 0.6525,
+  "pool": "t4_campaign/pull_ibisco2",
+  "stage": 1,
+  "construct": "sw3c",
+  "dup_count": 0,
+  "iptm_H": 0.35510838627815244,
+  "iptm_best_H": 0.5661992430686951,
+  "plddt_H": 0.8897748827934265,
+  "pose_H": 7.717799790740916,
+  "fracon_H": 1.0,
+  "n_H": 5,
+  "iptm_M": 0.28559720814228057,
+  "iptm_best_M": 0.4855024516582489,
+  "plddt_M": 0.6974644184112548,
+  "pose_M": 19.451567982910944,
+  "fracon_M": 1.0,
+  "n_M": 5,
+  "pass_H": false,
+  "pass_M": false,
+  "tier": 3,
+  "rank": 67
  },
  {
   "cell": "t4hp_sw1b_s1_9922_1122382_1",
@@ -2176,7 +2385,8 @@
   "pool": "t4_campaign/pull_ibisco",
   "stage": 1,
   "construct": "sw1b",
-  "dup_count": 0,
+  "also_delivered_as": "t4hp_sw1b_s1_9922_1122382_1",
+  "dup_count": 1,
   "iptm_H": 0.32611328065395356,
   "iptm_best_H": 0.3830011487007141,
   "plddt_H": 0.8608618140220642,
@@ -2192,7 +2402,7 @@
   "pass_H": false,
   "pass_M": false,
   "tier": 3,
-  "rank": 62
+  "rank": 68
  },
  {
   "cell": "t4hp_sw1b_s1_10023_19733_2",
@@ -2226,7 +2436,7 @@
   "pass_H": false,
   "pass_M": false,
   "tier": 3,
-  "rank": 63
+  "rank": 69
  },
  {
   "cell": "t4hp_sw1b_s1_9721",
@@ -2260,6 +2470,6 @@
   "pass_H": false,
   "pass_M": false,
   "tier": 3,
-  "rank": 64
+  "rank": 70
  }
 ]

@@ -9,7 +9,7 @@ repository.)*
 Federico II**
 
 **Twenty designed peptides of 28–46 residues, de novo, produced by forward-folding hallucination on
-Chai-1.** Our framework assigns D or L per position, but across all 120 runs of this campaign the
+Chai-1.** Our framework assigns D or L per position, but across all 129 runs of this campaign the
 search returned no D residue, so **all twenty are all-L** and composed of the standard twenty amino
 acids. They have no sequence relationship to any deposited
 binder of this target. They are deposited in two consecutive blocks under one ranking: ranks 1–15
@@ -38,7 +38,7 @@ confidence above T is not evidence of binding.
 
 **The target is a dual-binder problem and we did not solve it.** The two orthologue windows are
 69.8 % identical and differ at *every* pocket position we declared (R/G, L/N, Y/D, S/N, K/Q).
-Twenty-two of our 64 designs clear T on the H orthologue. **None clears it on M.** The cause is in
+Twenty-three of our 70 designs clear T on the H orthologue. **None clears it on M.** The cause is in
 our own configuration files rather than in the chemistry: every design wave but one declares the H
 window as its target, so the designs were never optimised against M and they do not score against
 it. We report this instead of ranking around it.
@@ -55,6 +55,6 @@ dispersion gate was calibrated on Chai-1; on this oracle it excludes 4 of the sa
 have deposited co-crystal structures, so enforcing it would have imported a known miscalibration
 into the selection. The numbers are in `metrics_full.csv` as a spread, not as a verdict.
 
-**The full ranked population is deposited, not only the winners.** `docs/ranking_all_64.json`
-carries all 64 designs with both orthologues' numbers, so the twenty can be seen against the
+**The full ranked population is deposited, not only the winners.** `docs/ranking_all.json`
+carries all 70 designs with both orthologues' numbers, so the twenty can be seen against the
 distribution they were drawn from.
