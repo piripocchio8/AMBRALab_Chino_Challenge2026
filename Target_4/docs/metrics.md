@@ -33,8 +33,23 @@ co-crystal structure (2.86 Å on B1). A blank cell means **not measured**, never
 | `boltz_iptm_H_best`, `boltz_iptm_M_best` | the single best of five, carried so the mean can be read against its own spread |
 | `boltz_plddt_H`, `boltz_plddt_M` | complex pLDDT, mean over five models, 0–1 |
 | `n_models_H`, `n_models_M` | always 5 |
+| `pocket_models_H`, `pocket_models_M` | in how many of the five models the binder comes within 8 Å of **any** of that design's declared pocket residues |
 | `threshold` | 0.6428, the same for every row |
 | `clears_threshold_H`, `clears_threshold_M` | whether `*_mean` ≥ threshold |
+
+### Declared-pocket engagement
+
+`pocket_models_*` asks a question ipTM does not: **does the pose touch the site the design was
+aimed at?** It is reported for every design and gates none of them — the pocket was a soft 8 Å
+prior with `force: false`, so a pose that misses it is a fact about that pose, not a violation.
+
+It separates designs that ipTM does not. Nineteen of the twenty engage their declared pocket on H
+in at least one of five models, and most do so in all five. **The exception is the top-ranked
+design**, `AMBRA_T4_h_anchored_01`: ipTM 0.848 on H, the highest in the deposit, and **zero of five
+models within 8 Å of its declared Tyr20**. That design is confidently predicted to form an
+interface somewhere other than the site it was designed for. It is deposited at its ranked position
+because the ranking rule is the threshold on ipTM and was fixed before this column was computed,
+but anyone reading the table should weight it accordingly.
 
 **`clears_threshold_M` is `false` on every row in this deposit.** That is the result, not an
 omission; see `README.md`.

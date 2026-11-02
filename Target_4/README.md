@@ -86,6 +86,18 @@ The twenty are therefore split to show that shape rather than hide it:
   They are here because the brief is a dual binder and these carry the strongest M engagement the
   campaign produced. Four of the five come from the two-hairpin family.
 
+## One design is confident about the wrong interface
+
+`metrics_full.csv` carries `pocket_models_H` / `pocket_models_M`: in how many of the five models the
+binder comes within 8 Å of any of its own declared pocket residues. Nineteen of the twenty engage
+their declared pocket on H in at least one model, most in all five.
+
+**The exception is the top-ranked design.** `AMBRA_T4_h_anchored_01` has the highest ipTM in the
+deposit, 0.848 on H, and touches its declared pocket in **none** of its five models. ipTM measures
+the oracle's confidence in an interface; it does not say the interface is the designed one. The
+design keeps its ranked position because the ranking rule was fixed before this column existed, and
+the column is published alongside it rather than used to quietly re-cut the band.
+
 ## Pose dispersion is reported and not gated
 
 `pose_disp_*_A` is the binder CA RMSD about the medoid pose over the five models, after superposing
