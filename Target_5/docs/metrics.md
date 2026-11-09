@@ -47,10 +47,54 @@ standard deviation from zero and +0.10 is more than three. The sign alone carrie
 |---|---|
 | `d6_deposited_model_A` | Asp6–Arg114 in the coordinate file in this directory; `d6_all_models_A` in `metrics.json` places it in its ensemble |
 | `d6_min_A` | the closest approach over the ensemble |
-| `peptide_register_rmsd_A` | decamer Cα RMSD to the 7OW6 peptide after superposing the groove helices. It separates a binder that holds Asp6 against Arg114 from one that slid the peptide until Asp6 happened to be there. All twenty sit between 0.57 and 2.38 Å, so none is doing the latter |
+| `peptide_register_rmsd_A` | decamer Cα RMSD to the 7OW6 peptide after superposing the groove helices. It separates a binder that holds Asp6 against Arg114 from one that slid the peptide until Asp6 happened to be there. The nineteen measured sit between 0.72 and 1.99 Å, so none is doing the latter; it is blank for `AMBRA_T5_05`, which was folded after the register audit ran |
 | `closest_contact_A` | tightest heavy-atom approach between binder and pMHC. Read it against the deposited crystal (2.69 Å) and against the oracle's own models of that same TCR (1.14–2.57 Å, median 2.19 over 75 models). Sub-2 Å is the oracle's signature across the board, so nothing is ranked on it |
 | `term_rmsd_A`, `core_rmsd_A`, `iface_rmsd_A` | bound-minus-unbound displacement split at the first and last four residues, the rest, and the residues contacting the decamer. A design over 2 Å on core but at or under 1 Å on iface keeps its binding face and loosens elsewhere, which is a different object from one that rearranges the face |
 | `free_terminal_residues` | residues at the two termini touching nothing at all in the bound pose |
+
+## ipSAE
+
+| column | meaning |
+|---|---|
+| `ipsae_binder_target` | ipSAE between the binder and all target chains taken together |
+| `ipsae_binder_peptide` | ipSAE between the binder and the decamer alone — the designed interaction |
+| `ipsae_binder_hla` | ipSAE between the binder and the HLA heavy chain |
+| `apo_ipsae_binder_target` | the same, in the peptide-free arm |
+| `n_models_ipsae` | models behind these values (5) |
+| `ipsae_method` (in `metrics.json`) | every parameter used, written out |
+
+ipSAE is computed from predicted aligned error, which the campaign's earlier waves did not store,
+so **a dedicated 5-model ensemble was folded for all twenty** under the unrestrained G12D
+condition with PAE saved. That ensemble is used for ipSAE **and for nothing else**: it is not
+pooled with the ensembles behind the IN counts and the ranking, which have their own *n*. The two
+should not be averaged together.
+
+Parameters, pinned because published implementations differ: PAE cutoff **10.0** (strict),
+L floor **27**, d0 minimum **1.0**, d0 = max(1.0, 1.24·(max(27, n_valid) − 15)^(1/3) − 1.8) per
+residue, term 1/(1 + (PAE/d0)²) applied to the **PAE value**, mean over PAE-valid partners only,
+max over residues, larger of the two chain directions.
+
+Across the twenty, `ipsae_binder_target` has a median of **0.583** and a range of 0.014–0.813;
+`ipsae_binder_peptide` is lower throughout (median 0.200), as expected for a ten-residue partner.
+**Three designs score at or below 0.02** — `AMBRA_T5_17`, `_18` and `_19`. For those three it is
+not a rounding artefact but a near-absence of confident inter-chain residue pairs, and the deposit
+does not hide it: two of them are also the two designs that stand at five models rather than
+twenty.
+
+## The peptide-free arm, and the two screens added for the selection process
+
+| column | meaning |
+|---|---|
+| `apo_hla_iptm` | median binder↔HLA chain-pair ipTM with **no peptide in the groove** — three chains (binder, HLA heavy chain, β2-microglobulin), no restraint table, 5 models. This is challenge goal (b), measured directly |
+| `g12d_hla_iptm` | the same quantity in the G12D complex, so the comparison is like for like. The campaign's ranking axis is binder↔**decamer** ipTM (`iptm_G12D`), which has no counterpart in a peptide-free fold |
+| `apo_minus_g12d_hla_iptm` | the difference. Negative means the design is less confident of the HLA when the peptide is gone |
+| `n_models_apo` | models behind the apo numbers (5) |
+| `mean_kd_hydropathy` | Kyte & Doolittle 1982 scale, unweighted mean over the whole submitted chain. Lower is more hydrophilic |
+
+A peptide-free class I heterodimer is not a physiological species and the oracle has seen very few,
+so an empty groove may attract a binder for reasons that have nothing to do with this target. The
+apo arm is reported as a screen against goal (b), not as a verdict on it, and nothing was re-ranked
+on it: it was folded after the twenty were fixed.
 
 ## A measurement that was withdrawn
 

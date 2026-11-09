@@ -31,6 +31,26 @@
  "peptide_register_rmsd_A": 1.16,
  "closest_contact_A": 2.44,
  "binder_plddt": 84.8,
+ "mean_kd_hydropathy": -0.528,
+ "apo_hla_iptm": 0.226,
+ "g12d_hla_iptm": 0.777,
+ "apo_minus_g12d_hla_iptm": -0.551,
+ "n_models_apo": 5,
+ "apo_binder_atoms_in_peptide_seat": 19,
+ "apo_models_in_peptide_seat": 5,
+ "apo_groove_helix_frac": 0.95,
+ "g12d_groove_helix_frac": 0.95,
+ "apo_hla_residues_contacted": 22,
+ "g12d_hla_residues_contacted": 16,
+ "apo_binder_plddt": 72.0,
+ "apo_minus_g12d_binder_plddt": -12.8,
+ "ipsae_binder_target": 0.772,
+ "ipsae_binder_peptide": 0.44,
+ "ipsae_binder_hla": 0.739,
+ "apo_ipsae_binder_target": 0.0,
+ "n_models_ipsae": 5,
+ "ile97_restrained_deposited": false,
+ "d6_restrained_deposited_model_A": null,
  "d6_all_models_A": [
   2.5,
   3.76,
@@ -41,5 +61,22 @@
  "deposited_model_index": 3,
  "control_empty_groove_IN": "0 of 50 models",
  "control_therapeutic_TCR_IN": "42 of 50 models",
- "control_wild_type_IN": "0 of 65 models"
+ "control_wild_type_IN": "0 of 65 models",
+ "apo_hla_iptm_all_models": [
+  0.226,
+  0.225,
+  0.218,
+  0.226,
+  0.227
+ ],
+ "apo_seat_atoms_all_models": [
+  21,
+  19,
+  44,
+  15,
+  16
+ ],
+ "d6_restrained_all_models_A": null,
+ "restrained_deposited_model_index": null,
+ "ipsae_method": "Dunbrack 2025 ipSAE, per-residue d0 variant; PAE cutoff 10.0 strict, L floor 27, d0 minimum 1.0, term 1/(1+(PAE/d0)^2), mean over PAE-valid partners, max over residues, larger of the two chain directions; computed on a dedicated 5-model PAE ensemble, not on the ensemble behind the IN counts"
 }
