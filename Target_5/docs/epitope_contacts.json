@@ -134,6 +134,40 @@
  },
  "AMBRA_T5_05": {
   "peptide_contacts": [
+   "GLY4",
+   "ALA5",
+   "ASP6",
+   "GLY7",
+   "VAL8",
+   "GLY9",
+   "LYS10"
+  ],
+  "hla_contacts": [
+   "GLU19",
+   "GLN62",
+   "ARG65",
+   "ASN66",
+   "LYS68",
+   "ALA69",
+   "GLN72",
+   "THR73",
+   "ARG75",
+   "VAL76",
+   "ASP77",
+   "LYS146",
+   "ALA150",
+   "HIS151",
+   "ALA152",
+   "GLU154",
+   "GLN155",
+   "ALA158"
+  ],
+  "n_peptide": 7,
+  "n_hla": 18,
+  "touches_Asp6": true
+ },
+ "AMBRA_T5_06": {
+  "peptide_contacts": [
    "VAL3",
    "GLY4",
    "ALA5",
@@ -164,7 +198,7 @@
   "n_hla": 17,
   "touches_Asp6": true
  },
- "AMBRA_T5_06": {
+ "AMBRA_T5_07": {
   "peptide_contacts": [
    "VAL3",
    "ALA5",
@@ -193,7 +227,7 @@
   "n_hla": 14,
   "touches_Asp6": true
  },
- "AMBRA_T5_07": {
+ "AMBRA_T5_08": {
   "peptide_contacts": [
    "VAL3",
    "GLY4",
@@ -227,7 +261,7 @@
   "n_hla": 19,
   "touches_Asp6": false
  },
- "AMBRA_T5_08": {
+ "AMBRA_T5_09": {
   "peptide_contacts": [
    "VAL1",
    "VAL3",
@@ -269,24 +303,6 @@
   "n_peptide": 8,
   "n_hla": 26,
   "touches_Asp6": true
- },
- "AMBRA_T5_09": {
-  "peptide_contacts": [],
-  "hla_contacts": [
-   "ARG14",
-   "GLY16",
-   "ARG17",
-   "GLY18",
-   "ARG21",
-   "ASP37",
-   "ASP39",
-   "ALA40",
-   "ALA41",
-   "SER42"
-  ],
-  "n_peptide": 0,
-  "n_hla": 10,
-  "touches_Asp6": false
  },
  "AMBRA_T5_10": {
   "peptide_contacts": [

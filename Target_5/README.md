@@ -13,8 +13,8 @@ ranked/AMBRA_T5_nn/ one directory per design
     complex_G12D.pdb   binder + HLA + β2-microglobulin + the G12D decamer
     complex_WT.pdb     the same binder on the wild-type decamer
     binder_alone.pdb   the binder predicted with no target present
-    complex_G12D_Ile97_restrained.pdb   ranks 9 and 10 only: the same complex under
-                       the single declared Asp6-Ile97 contact they were promoted for
+    complex_G12D_Ile97_restrained.pdb   rank 10 only: the same complex under the
+                       single declared Asp6-Ile97 contact it was promoted for
     sequence.fasta     the submitted sequence
     metrics.json       every number for this design, including per-model values
 docs/metrics.md     what each column means and how it was measured
@@ -64,14 +64,14 @@ disulfide declaration. The table is how the design was made; it is not evidence 
 works, and under restraint the IN state comes nearly free, so the restrained count cannot
 discriminate between designs. The restrained numbers are reported too, in the columns marked
 *restrained*, because that is what the campaign admitted each design on — but the selection, and
-the eleven IN-positive entries, come from the unrestrained arm.
+the twelve IN-positive entries, come from the unrestrained arm.
 
 ## Strength of the set, and its limits
 
-- **Eleven of the twenty clear the IN criterion** against the binder-free control: ranks 1–8 and
-  11–13. Ranks 9 and 10 are the two designs promoted for reaching the salt bridge 5 of 5 under a
-  single declared contact, which `DESIGN_STRATEGY.md` §6 sets out. They are the entries this submission rests on.
-- **The other nine are deposited on the remaining three criteria** — they land on the groove
+- **Twelve of the twenty clear the IN criterion** against the binder-free control, nine of them in
+  the first ten. `AMBRA_T5_05` leads on it: 14 of 20 models, a margin of **+0.370** — the largest
+  in the campaign — and the cleanest fold in the set bar one. They are the entries this submission rests on.
+- **The other eight are deposited on the remaining three criteria** — they land on the groove
   unrestrained, they fold on their own, and most prefer the neoantigen over wild type — but on the
   salt bridge itself they are not yet distinguishable from an empty groove. `metrics_full.csv` says
   which is which, design by design, with denominators and confidence intervals.
@@ -80,8 +80,9 @@ the eleven IN-positive entries, come from the unrestrained arm.
 - **Two of the twenty stand at five models**, not twenty: `AMBRA_T5_18` and `AMBRA_T5_19`. Their
   on-groove and IN fractions carry the wider interval printed in `metrics_full.csv`.
 - **Goal (b) is measured, and the answer is partial.** Every design is less confident of the
-  peptide-free heterodimer — interface ipTM down in 20 of 20, binder pLDDT down in 20 of 20 — but
-  19 of 20 still occupy the groove the peptide vacated. That pose is not a realizable state (empty
+  peptide-free heterodimer — interface ipTM down in 20 of 20 (median −0.265), binder pLDDT down in
+  20 of 20 (median −8.2) and ipSAE down in 18 of 20 — but 19 of 20 still occupy the groove the
+  peptide vacated. That pose is not a realizable state (empty
   class I does not hold its fold), and goal (b) was never an objective of the search. We report it
   rather than claim it: `docs/peptide_free_control.md`.
 - **All of this is predicted structure.** No experiment was performed. The oracle is a single

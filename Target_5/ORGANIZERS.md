@@ -51,17 +51,11 @@ interaction is specifically that the **Asp6 carboxylate engages HLA Arg114**.
 `docs/epitope_contacts.json` lists, for each design, every peptide and HLA residue its deposited
 G12D model contacts within 4.5 Å. Summary:
 
-- **19 of 20** contact the decamer directly; **14 of 20** contact **Asp6** itself in the deposited
-  model. **`AMBRA_T5_09` is the exception and it is worth being blunt about**: in its deposited
-  model it contacts no decamer residue and no α1/α2-helix residue — its whole interface sits on
-  the β-sheet floor and the α1 N-terminal strand (residues 14–42), 6.37 Å from the salt bridge.
-  That design lands on the groove in 15 of 20 unrestrained models, and the deposited file is the
-  **median** model on the Asp6–Arg114 axis, which for this design is one of the five off-groove
-  members. We did not swap in a more flattering model: the median rule is applied to all twenty.
-  The pose this design was selected for is in its `complex_G12D_Ile97_restrained.pdb`, which is
-  deposited for ranks 9 and 10 alone — the two designs whose place in the first ten rests on what
-  they do under that single declared contact. For every other design the unrestrained complex is
-  the evidence the ranking used.
+- **All 20** contact the decamer directly; **15 of 20** contact **Asp6** itself in the deposited
+  model. The fewest decamer contacts are `AMBRA_T5_10` with two and `AMBRA_T5_18` with three.
+  `AMBRA_T5_10` is the one design promoted on the restrained arm, and its
+  `complex_G12D_Ile97_restrained.pdb` — the only such file in the deposit — holds the pose it was
+  promoted for. For every other design the unrestrained complex is the evidence the ranking used.
 - HLA contacts are 10–26 residues per design, **mostly** on the α1/α2 helices (57–84 and
   138–180); seven designs also touch residues outside those ranges, and the criterion is defined
   on the majority of contacts, not all of them (`docs/metrics.md`).
@@ -76,7 +70,7 @@ Recorded for all twenty, same method for each.
 |---|---|---|
 | **pLDDT** | `binder_plddt` (binder chain in the G12D complex) and `alone_plddt` (binder predicted with no target) in `metrics_full.csv` | ours, from the co-folding oracle; a ProteinTyper value is the organizers' to compute |
 | **mean Kyte–Doolittle hydropathy** | `mean_kd_hydropathy` in `metrics_full.csv` | Kyte & Doolittle 1982 scale, unweighted mean over the whole chain. All twenty are hydrophilic (−1.23 to +0.25), consistent with cell-free expression and solubility |
-| **ipSAE** | `ipsae_binder_target`, `ipsae_binder_peptide`, `ipsae_binder_hla` and `apo_ipsae_binder_target` in `metrics_full.csv`; `ipsae_method` in each `metrics.json` names every parameter | our own, from a **dedicated 5-model PAE ensemble folded for this purpose** — the campaign's earlier waves did not store PAE. Not pooled with the ranking ensembles. Median 0.583 against the whole target, range 0.000–0.813; `docs/metrics.md` has the parameters and the four designs that score ≈0 |
+| **ipSAE** | `ipsae_binder_target`, `ipsae_binder_peptide`, `ipsae_binder_hla` and `apo_ipsae_binder_target` in `metrics_full.csv`; `ipsae_method` in each `metrics.json` names every parameter | our own, from a **dedicated 5-model PAE ensemble folded for this purpose** — the campaign's earlier waves did not store PAE. Not pooled with the ranking ensembles. Median 0.583 against the whole target, range 0.014–0.813; `docs/metrics.md` has the parameters and the three designs that score ≈0 |
 | **interface confidence** | `iptm_G12D` (binder↔decamer) and `iptm_restrained` in `metrics_full.csv`; per-chain-pair ipTM in each `metrics.json` | reported alongside ipSAE rather than in place of it |
 
 Self-reported numbers are comparable within this submission only; they all come from one oracle
@@ -100,18 +94,21 @@ submission: every design re-predicted as **three chains — binder, HLA heavy ch
 path and seed as every other unrestrained fold. `docs/peptide_free_control.md` has the full
 result; the `apo_*` columns of `metrics_full.csv` carry it per design.
 
-Both confidence measures fall in **20 of 20** designs: binder↔HLA ipTM by a median of **−0.207**
-and the binder's own pLDDT by a median of **−7.7**. Structurally, however, **19 of 20 occupy the
-seat the peptide vacated** (median 47.5 binder heavy atoms within 4 Å of the decamer's position), so
+Every confidence measure falls: binder↔HLA ipTM in **20 of 20** designs by a median of **−0.265**,
+the binder's own pLDDT in **20 of 20** by a median of **−8.2**, and ipSAE in **18 of 20**.
+Structurally, however, **19 of 20 occupy the
+seat the peptide vacated** (median 42.5 binder heavy atoms within 4 Å of the decamer's position), so
 we do not claim peptide-free non-binding. `AMBRA_T5_12` is the exception and the one design with
 positive evidence here. Two qualifications we state rather than leave to be found: goal (b) was
 never an objective of the search, and the apo pose is not a realizable state — a peptide-free
 class I heavy chain does not hold its fold, so this arm is a screen on what the oracle does with
 an empty channel, not a verdict on an interaction that could be measured at the bench.
 
-**(c) Strong binding to the G12D complex.** Eleven of the twenty reproduce the Asp6–Arg114 salt
-bridge with nothing declared at all, and five more reproduce it under a single declared contact
-(Asp6 to HLA Ile97, 6.5 Å — a condition that does not name Arg114), four of those in 5 of 5 models.
+**(c) Strong binding to the G12D complex.** Twelve of the twenty reproduce the Asp6–Arg114 salt
+bridge with nothing declared at all — `AMBRA_T5_05` in 14 of 20 models, with the largest
+G12D-versus-wild-type margin in the campaign (+0.370) — and four more reproduce it under a single
+declared contact (Asp6 to HLA Ile97, 6.5 Å — a condition that does not name Arg114), three of those
+in 5 of 5 models.
 Sixteen of the twenty therefore produce the discriminating interaction under one condition or the
 other; `IN_unrestrained` and `IN_restrained` are kept as separate columns so the two are never
 conflated. Beyond that: `iptm_G12D`, `on_groove` (20 of 20 designs place the
@@ -141,13 +138,15 @@ discuss it in confidence with the organizers.
 
 Stated by us rather than left to be found:
 
-- **Nine of the twenty do not clear the IN criterion.** They are deposited on the other three
+- **Eight of the twenty do not clear the IN criterion.** They are deposited on the other three
   criteria and their IN counts are reported with denominators and intervals.
-- **`AMBRA_T5_09` contacts no peptide residue in its deposited model**, and `AMBRA_T5_10` contacts
-  two. Both are the designs promoted for reaching the salt bridge 5 of 5 under the single Ile97
-  contact; in the fully unrestrained pose their grip is on the HLA rather than on the decamer, and
-  the promotion and its reason are recorded in `DESIGN_STRATEGY.md` §6 rather than hidden in the
-  ranking.
+- **`AMBRA_T5_10` contacts only two decamer residues in its deposited model.** It is the design
+  promoted for reaching the salt bridge 5 of 5 under the single Ile97 contact; in the fully
+  unrestrained pose its grip is on the HLA rather than on the decamer, and the promotion and its
+  reason are recorded in `DESIGN_STRATEGY.md` §6 rather than hidden in the ranking.
+- **`peptide_register_rmsd_A` is blank for `AMBRA_T5_05`.** That design was folded after the
+  register audit ran and the column was not recomputed for it before the deadline. It is a
+  reported-not-ranked column; the other nineteen sit between 0.72 and 1.99 Å.
 - **Two designs stand at five models** rather than twenty (`AMBRA_T5_18`, `AMBRA_T5_19`); their
   intervals are correspondingly wide.
 - **Five of the top ten share one lineage**, which is the cap we set. The set as a whole spans

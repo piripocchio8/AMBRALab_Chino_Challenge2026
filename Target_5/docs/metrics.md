@@ -47,7 +47,7 @@ standard deviation from zero and +0.10 is more than three. The sign alone carrie
 |---|---|
 | `d6_deposited_model_A` | Asp6–Arg114 in the coordinate file in this directory; `d6_all_models_A` in `metrics.json` places it in its ensemble |
 | `d6_min_A` | the closest approach over the ensemble |
-| `peptide_register_rmsd_A` | decamer Cα RMSD to the 7OW6 peptide after superposing the groove helices. It separates a binder that holds Asp6 against Arg114 from one that slid the peptide until Asp6 happened to be there. All twenty sit between 0.72 and 1.99 Å, so none is doing the latter |
+| `peptide_register_rmsd_A` | decamer Cα RMSD to the 7OW6 peptide after superposing the groove helices. It separates a binder that holds Asp6 against Arg114 from one that slid the peptide until Asp6 happened to be there. The nineteen measured sit between 0.72 and 1.99 Å, so none is doing the latter; it is blank for `AMBRA_T5_05`, which was folded after the register audit ran |
 | `closest_contact_A` | tightest heavy-atom approach between binder and pMHC. Read it against the deposited crystal (2.69 Å) and against the oracle's own models of that same TCR (1.14–2.57 Å, median 2.19 over 75 models). Sub-2 Å is the oracle's signature across the board, so nothing is ranked on it |
 | `term_rmsd_A`, `core_rmsd_A`, `iface_rmsd_A` | bound-minus-unbound displacement split at the first and last four residues, the rest, and the residues contacting the decamer. A design over 2 Å on core but at or under 1 Å on iface keeps its binding face and loosens elsewhere, which is a different object from one that rearranges the face |
 | `free_terminal_residues` | residues at the two termini touching nothing at all in the bound pose |
@@ -74,14 +74,12 @@ L floor **27**, d0 minimum **1.0**, d0 = max(1.0, 1.24·(max(27, n_valid) − 15
 residue, term 1/(1 + (PAE/d0)²) applied to the **PAE value**, mean over PAE-valid partners only,
 max over residues, larger of the two chain directions.
 
-Across the twenty, `ipsae_binder_target` has a median of **0.583** and a range of 0.000–0.813;
+Across the twenty, `ipsae_binder_target` has a median of **0.583** and a range of 0.014–0.813;
 `ipsae_binder_peptide` is lower throughout (median 0.200), as expected for a ten-residue partner.
-**Four designs score at or below 0.02** — `AMBRA_T5_09`, `_17`, `_18`, `_19`. For `AMBRA_T5_09`
-this is not a rounding artefact: in that ensemble **no** binder–target residue pair has a PAE below
-the cutoff at all (minimum inter-chain PAE 15.0). That design is in the first ten for what it does
-under the single declared Asp6–Ile97 contact, and its unrestrained interface is weak by every
-measure we have — on-groove in 15 of 20, the lowest binder–HLA ipTM in the set (0.209), and now
-ipSAE 0.000. The deposit does not hide this.
+**Three designs score at or below 0.02** — `AMBRA_T5_17`, `_18` and `_19`. For those three it is
+not a rounding artefact but a near-absence of confident inter-chain residue pairs, and the deposit
+does not hide it: two of them are also the two designs that stand at five models rather than
+twenty.
 
 ## The peptide-free arm, and the two screens added for the selection process
 

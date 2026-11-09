@@ -20,21 +20,21 @@ were written down before the folds existed.
 ## Result
 
 **Confidence falls for every design.** All twenty have a lower binder↔HLA ipTM without the peptide:
-median **−0.207**, range −0.015 to −0.551. Not one design is more confident of the empty
+median **−0.265**. Not one design is more confident of the empty
 heterodimer than of the G12D complex.
 
 **But the binders do not leave the groove.** They stay on the α1/α2 helices (groove-helix fraction
-0.59–1.00 in apo, against 0.80–1.00 with the peptide present), they contact *more* HLA residues
+0.59–1.00 in apo, against 0.83–1.00 with the peptide present), they contact *more* HLA residues
 than before (median **+6**), and **19 of 20 occupy the seat the peptide vacated** — a median of
-**47.5** binder heavy atoms within 4 Å of the decamer's position, in 5 of 5 models for 17 of them.
+**42.5** binder heavy atoms within 4 Å of the decamer's position, in 5 of 5 models for 17 of them.
 
 **The binder itself is modelled worse there.** Binder pLDDT falls in **20 of 20** designs without
-the peptide, median **−7.7** (range −1.9 to −16.6), and the apo median sits at **71.3** against **81.3**
+the peptide, median **−8.2** (range −1.9 to −17.6), and the apo median sits below the bound median
 with the peptide present, both read by the one script so the pair is comparable. So the oracle is not quietly confident about an alternative pose: the
 interface score falls, and the chain's own confidence falls with it.
 
 **A third measure agrees.** ipSAE, computed on both arms, falls from a median of **0.583** in the
-G12D complex to **0.013** without the peptide, and is lower in the apo arm for **17 of 20**
+G12D complex to **0.013** without the peptide, and is lower in the apo arm for **18 of 20**
 designs. For most of the set the apo interface has essentially no residue pair the predictor is
 confident about — which is what an interface that exists in contacts but not in confidence looks
 like. Four designs keep a substantial apo ipSAE (`AMBRA_T5_06` 0.639, `AMBRA_T5_10` 0.603,
@@ -74,7 +74,5 @@ Two further cautions, stated rather than discovered:
 Nothing was re-ranked on this measurement. It was folded after the twenty and their order were
 fixed, and it is reported because the organizers ask for goal (b) and this is what we can honestly
 say about it. The designs with the strongest evidence here, in order, are `AMBRA_T5_12` (ranked
-12th on the campaign's own criteria), then `AMBRA_T5_04`, `AMBRA_T5_03` and `AMBRA_T5_05`, which
-are the next largest confidence drops with the fewest atoms left in the seat; the weakest are
-`AMBRA_T5_06`, `AMBRA_T5_10`, `AMBRA_T5_20` and `AMBRA_T5_07`, which keep an apo ipTM of
-0.599–0.704.
+12th on the campaign's own criteria); the weakest are `AMBRA_T5_07`, `AMBRA_T5_10`, `AMBRA_T5_20`
+and `AMBRA_T5_08`, which keep an apo ipTM of 0.599–0.704 and the highest apo ipSAE in the set.

@@ -58,9 +58,9 @@ twenty where the design was replicated.
 ## The three goals, each with a measurement
 
 **(c) Binding the G12D complex.** Twenty of twenty place the binder on the α1/α2 groove in at
-least 60% of unrestrained models. Eleven reproduce the Asp6–Arg114 salt bridge with nothing
-declared; five more reproduce it under the single Asp6–Ile97 contact, four of those in 5 of 5
-models. Sixteen of twenty therefore produce the discriminating interaction under one condition or
+least 60% of unrestrained models. Twelve reproduce the Asp6–Arg114 salt bridge with nothing
+declared — `AMBRA_T5_05` in 14 of 20 models, with a margin of +0.370, the largest in the campaign;
+four more reproduce it under the single Asp6–Ile97 contact, three of those in 5 of 5 models. Sixteen of twenty therefore produce the discriminating interaction under one condition or
 the other, and the two counts are kept in separate columns so they are never conflated.
 
 **(a) Not binding the wild-type peptide.** Every design was predicted on the wild-type complex
@@ -72,7 +72,7 @@ glycine where the neoantigen has aspartate.
 **(b) Not binding the peptide-free heterodimer.** Measured for this submission, because the
 challenge asks for it and the campaign had not: all twenty re-predicted as three chains with the
 peptide deleted and no restraints. **Every design loses confidence** — binder↔HLA ipTM falls in 20
-of 20 (median −0.207) and the binder's own pLDDT falls in 20 of 20 (median −7.7). But the chain
+of 20 (median −0.265), the binder's own pLDDT in 20 of 20 (median −8.2) and ipSAE in 18 of 20. But the chain
 does not leave: 19 of 20 occupy the seat the peptide vacated. We therefore do **not** claim
 peptide-free non-binding. Two things are worth saying about that pose. It was never selected
 against — goal (b) was not an objective of the search. And it is not a realizable state: a
@@ -87,8 +87,8 @@ fall away with the peptide. Full numbers in `docs/peptide_free_control.md`.
 
 Designs were ranked on four criteria, applied in this order: that the binder lands on the α1/α2
 groove with no restraints; that it induces the IN state, against the control above; that it folds
-on its own; and that it separates the two peptides. **Eleven of the twenty clear the IN bar** and
-are the strongest entries in the set. The remaining nine are deposited on the other three
+on its own; and that it separates the two peptides. **Twelve of the twenty clear the IN bar** and
+are the strongest entries in the set. The remaining eight are deposited on the other three
 criteria: they dock on the groove unrestrained, they fold independently, and most prefer the
 neoantigen over wild type — but on the salt bridge itself they are not yet distinguishable from an
 empty groove, and `metrics_full.csv` says which is which design by design. The full ensemble is
@@ -111,8 +111,8 @@ behaviours of the predictor that bear on reading the numbers.
 - **Classes and size.** Nineteen miniproteins and one 25-residue peptide; 25 to 62 residues, one
   chain each, the standard twenty L-amino acids, all disulfide-capped, nine independent lineages.
 - **Epitope, stated rather than left to be predicted.** The decamer and the groove around it,
-  centred on peptide position 6. Nineteen of twenty contact the decamer in their deposited model
-  and fourteen contact Asp6 itself; `docs/epitope_contacts.json` lists every contacted residue of
+  centred on peptide position 6. All twenty contact the decamer in their deposited model and
+  fifteen contact Asp6 itself; `docs/epitope_contacts.json` lists every contacted residue of
   every design.
 - **Method family.** Forward-folding sequence design against a structure-prediction oracle — the
   hallucination family, in which the oracle is queried rather than differentiated through — with
@@ -124,7 +124,7 @@ behaviours of the predictor that bear on reading the numbers.
   error that the campaign's earlier waves did not store, so a dedicated 5-model ensemble was
   folded for all twenty and is used for ipSAE alone, never pooled with the ranking ensembles;
   every parameter is written out in each `metrics.json`. Median 0.583 against the whole target,
-  and four designs score ≈0 — named in `docs/metrics.md` rather than averaged away.
+  and three designs score ≈0 — named in `docs/metrics.md` rather than averaged away.
 - **What is withheld.** Only the internals of the sequence-search engine, which is the subject of a
   manuscript in preparation. Everything needed to evaluate these designs is here: sequences,
   structures, per-model measurements, the selection rule, the controls, and what the restraint
