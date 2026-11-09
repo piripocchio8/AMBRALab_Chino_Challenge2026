@@ -44,6 +44,13 @@
  "g12d_hla_residues_contacted": 19,
  "apo_binder_plddt": 80.6,
  "apo_minus_g12d_binder_plddt": -1.9,
+ "ipsae_binder_target": 0.686,
+ "ipsae_binder_peptide": 0.287,
+ "ipsae_binder_hla": 0.631,
+ "apo_ipsae_binder_target": 0.603,
+ "n_models_ipsae": 5,
+ "ile97_restrained_deposited": true,
+ "d6_restrained_deposited_model_A": 2.98,
  "d6_all_models_A": [
   9.3,
   9.45,
@@ -68,5 +75,14 @@
   12,
   7,
   12
- ]
+ ],
+ "d6_restrained_all_models_A": [
+  2.83,
+  2.98,
+  3.13,
+  2.9,
+  3.02
+ ],
+ "restrained_deposited_model_index": 2,
+ "ipsae_method": "Dunbrack 2025 ipSAE, per-residue d0 variant; PAE cutoff 10.0 strict, L floor 27, d0 minimum 1.0, term 1/(1+(PAE/d0)^2), mean over PAE-valid partners, max over residues, larger of the two chain directions; computed on a dedicated 5-model PAE ensemble, not on the ensemble behind the IN counts"
 }

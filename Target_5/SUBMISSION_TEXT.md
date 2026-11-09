@@ -95,7 +95,41 @@ empty groove, and `metrics_full.csv` says which is which design by design. The f
 deposited for every entry rather than a single flattering model, together with the three systematic
 behaviours of the predictor that bear on reading the numbers.
 
-The sequences are 25 to 62 residues, all disulfide-capped, spanning nine independent design
-lineages. The sequence-design engine itself is the subject of a manuscript in preparation and is
-described in principle rather than in reproducible detail; everything needed to evaluate these
-designs is in this directory. All results are predicted structures — no experiment was performed.
+## What this submission declares
+
+- **Ranking.** The row order of `submission.csv` is the ranking, rank 1 first. It is the
+  four-criteria rule above plus two adjustments stated in `DESIGN_STRATEGY.md` §6: a cap of five
+  designs from any one lineage in the first ten, and two designs promoted for reaching the salt
+  bridge 5 of 5 under the single declared Asp6–Ile97 contact.
+- **De novo and zero-shot.** No design is derived from, seeded with, templated on or initialised
+  from any existing binder, and no known binder was used for training or calibration. The
+  therapeutic TCR of 7OW6 and a published de novo minibinder of a different pMHC appear only as
+  **controls that were predicted and measured** — neither contributed a residue to any design.
+- **No tags, linkers, padding or extra domains.** The submitted sequence is the binder chain
+  alone, exactly the chain folded, scored and deposited. Nothing in the design targets a construct
+  tag.
+- **Classes and size.** Nineteen miniproteins and one 25-residue peptide; 25 to 62 residues, one
+  chain each, the standard twenty L-amino acids, all disulfide-capped, nine independent lineages.
+- **Epitope, stated rather than left to be predicted.** The decamer and the groove around it,
+  centred on peptide position 6. Nineteen of twenty contact the decamer in their deposited model
+  and fourteen contact Asp6 itself; `docs/epitope_contacts.json` lists every contacted residue of
+  every design.
+- **Method family.** Forward-folding sequence design against a structure-prediction oracle — the
+  hallucination family, in which the oracle is queried rather than differentiated through — with
+  ProteinMPNN redesign and terminal elongation. The co-folding oracle is Chai-1. No backbone
+  diffusion was used. **Declared AI tools:** Claude (Claude Code) for orchestration and analysis,
+  Chai-1 as the oracle, ProteinMPNN for redesign.
+- **Screens.** pLDDT, mean Kyte–Doolittle hydropathy and **ipSAE** are in `metrics_full.csv` for
+  all twenty, each with the ensemble it came from and its *n*. ipSAE needed predicted aligned
+  error that the campaign's earlier waves did not store, so a dedicated 5-model ensemble was
+  folded for all twenty and is used for ipSAE alone, never pooled with the ranking ensembles;
+  every parameter is written out in each `metrics.json`. Median 0.583 against the whole target,
+  and four designs score ≈0 — named in `docs/metrics.md` rather than averaged away.
+- **What is withheld.** Only the internals of the sequence-search engine, which is the subject of a
+  manuscript in preparation. Everything needed to evaluate these designs is here: sequences,
+  structures, per-model measurements, the selection rule, the controls, and what the restraint
+  tables did and did not declare. We will release the engine with the publication and are glad to
+  discuss it in confidence with the organizers in the meantime.
+
+`ORGANIZERS.md` answers each of these at length. All results are predicted structures — no
+experiment was performed.

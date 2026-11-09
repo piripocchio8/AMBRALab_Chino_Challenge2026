@@ -52,9 +52,19 @@ interaction is specifically that the **Asp6 carboxylate engages HLA Arg114**.
 G12D model contacts within 4.5 Å. Summary:
 
 - **19 of 20** contact the decamer directly; **14 of 20** contact **Asp6** itself in the deposited
-  model. `AMBRA_T5_09` contacts the HLA only in that model, which is stated here rather than left
-  to be discovered.
-- HLA contacts are 10–26 residues per design, on the α1/α2 helices (57–84 and 138–180).
+  model. **`AMBRA_T5_09` is the exception and it is worth being blunt about**: in its deposited
+  model it contacts no decamer residue and no α1/α2-helix residue — its whole interface sits on
+  the β-sheet floor and the α1 N-terminal strand (residues 14–42), 6.37 Å from the salt bridge.
+  That design lands on the groove in 15 of 20 unrestrained models, and the deposited file is the
+  **median** model on the Asp6–Arg114 axis, which for this design is one of the five off-groove
+  members. We did not swap in a more flattering model: the median rule is applied to all twenty.
+  The pose this design was selected for is in its `complex_G12D_Ile97_restrained.pdb`, which is
+  deposited for ranks 9 and 10 alone — the two designs whose place in the first ten rests on what
+  they do under that single declared contact. For every other design the unrestrained complex is
+  the evidence the ranking used.
+- HLA contacts are 10–26 residues per design, **mostly** on the α1/α2 helices (57–84 and
+  138–180); seven designs also touch residues outside those ranges, and the criterion is defined
+  on the majority of contacts, not all of them (`docs/metrics.md`).
 - Contacts are read from the deposited model, which is the **median** model of each ensemble on the
   Asp6–Arg114 axis, not the best one.
 
@@ -66,7 +76,8 @@ Recorded for all twenty, same method for each.
 |---|---|---|
 | **pLDDT** | `binder_plddt` (binder chain in the G12D complex) and `alone_plddt` (binder predicted with no target) in `metrics_full.csv` | ours, from the co-folding oracle; a ProteinTyper value is the organizers' to compute |
 | **mean Kyte–Doolittle hydropathy** | `mean_kd_hydropathy` in `metrics_full.csv` | Kyte & Doolittle 1982 scale, unweighted mean over the whole chain. All twenty are hydrophilic (−1.23 to +0.25), consistent with cell-free expression and solubility |
-| **interface confidence** | `iptm_G12D` (binder↔decamer) and `iptm_restrained` in `metrics_full.csv`; per-chain-pair ipTM in each `metrics.json` | **ipSAE is not supplied**: the stored predictions for 13 of the 20 do not carry the PAE matrix it needs, and a column computed for only part of the set would not be comparable across it. The organizers' uniform ipSAE is the right instrument here |
+| **ipSAE** | `ipsae_binder_target`, `ipsae_binder_peptide`, `ipsae_binder_hla` and `apo_ipsae_binder_target` in `metrics_full.csv`; `ipsae_method` in each `metrics.json` names every parameter | our own, from a **dedicated 5-model PAE ensemble folded for this purpose** — the campaign's earlier waves did not store PAE. Not pooled with the ranking ensembles. Median 0.583 against the whole target, range 0.000–0.813; `docs/metrics.md` has the parameters and the four designs that score ≈0 |
+| **interface confidence** | `iptm_G12D` (binder↔decamer) and `iptm_restrained` in `metrics_full.csv`; per-chain-pair ipTM in each `metrics.json` | reported alongside ipSAE rather than in place of it |
 
 Self-reported numbers are comparable within this submission only; they all come from one oracle
 with one set of settings, and the per-model values behind every summary are in each `metrics.json`.

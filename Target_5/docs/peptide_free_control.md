@@ -33,6 +33,14 @@ the peptide, median **−7.7** (range −1.9 to −16.6), and the apo median sit
 with the peptide present, both read by the one script so the pair is comparable. So the oracle is not quietly confident about an alternative pose: the
 interface score falls, and the chain's own confidence falls with it.
 
+**A third measure agrees.** ipSAE, computed on both arms, falls from a median of **0.583** in the
+G12D complex to **0.013** without the peptide, and is lower in the apo arm for **17 of 20**
+designs. For most of the set the apo interface has essentially no residue pair the predictor is
+confident about — which is what an interface that exists in contacts but not in confidence looks
+like. Four designs keep a substantial apo ipSAE (`AMBRA_T5_06` 0.639, `AMBRA_T5_10` 0.603,
+`AMBRA_T5_20` 0.495, `AMBRA_T5_07` 0.372) — the same four that keep the highest apo ipTM, two
+independent measures picking out the same four as the weakest on goal (b).
+
 **One design is the exception.** `AMBRA_T5_12` puts **0** atoms in that seat in its median model
 (1 of 5 models reaches 10), its groove-helix fraction falls to 0.59, and its ipTM drops 0.477. It
 is the only design in this set with positive structural evidence for goal (b).
@@ -66,6 +74,7 @@ Two further cautions, stated rather than discovered:
 Nothing was re-ranked on this measurement. It was folded after the twenty and their order were
 fixed, and it is reported because the organizers ask for goal (b) and this is what we can honestly
 say about it. The designs with the strongest evidence here, in order, are `AMBRA_T5_12` (ranked
-12th on the campaign's own criteria), then `AMBRA_T5_04`, `AMBRA_T5_03` and `AMBRA_T5_01`; the
-weakest are `AMBRA_T5_06`, `AMBRA_T5_10`, `AMBRA_T5_20` and `AMBRA_T5_07`, which keep an apo ipTM
-of 0.60–0.70.
+12th on the campaign's own criteria), then `AMBRA_T5_04`, `AMBRA_T5_03` and `AMBRA_T5_05`, which
+are the next largest confidence drops with the fewest atoms left in the seat; the weakest are
+`AMBRA_T5_06`, `AMBRA_T5_10`, `AMBRA_T5_20` and `AMBRA_T5_07`, which keep an apo ipTM of
+0.599–0.704.

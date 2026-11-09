@@ -13,6 +13,8 @@ ranked/AMBRA_T5_nn/ one directory per design
     complex_G12D.pdb   binder + HLA + β2-microglobulin + the G12D decamer
     complex_WT.pdb     the same binder on the wild-type decamer
     binder_alone.pdb   the binder predicted with no target present
+    complex_G12D_Ile97_restrained.pdb   ranks 9 and 10 only: the same complex under
+                       the single declared Asp6-Ile97 contact they were promoted for
     sequence.fasta     the submitted sequence
     metrics.json       every number for this design, including per-model values
 docs/metrics.md     what each column means and how it was measured
@@ -66,8 +68,9 @@ the eleven IN-positive entries, come from the unrestrained arm.
 
 ## Strength of the set, and its limits
 
-- **Eleven of the twenty clear the IN criterion** against the binder-free control, and head the
-  ranking. They are the entries this submission rests on.
+- **Eleven of the twenty clear the IN criterion** against the binder-free control: ranks 1–8 and
+  11–13. Ranks 9 and 10 are the two designs promoted for reaching the salt bridge 5 of 5 under a
+  single declared contact, which `DESIGN_STRATEGY.md` §6 sets out. They are the entries this submission rests on.
 - **The other nine are deposited on the remaining three criteria** — they land on the groove
   unrestrained, they fold on their own, and most prefer the neoantigen over wild type — but on the
   salt bridge itself they are not yet distinguishable from an empty groove. `metrics_full.csv` says

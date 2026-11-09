@@ -104,12 +104,20 @@ sort.** They matter because a submission's leading designs are what a screen act
   six lineages in it instead of three.
 - **Two designs promoted on the restrained arm.** `AMBRA_T5_09` and `AMBRA_T5_10` reach the IN
   state in **5 of 5** models under a single declared contact — Asp6 to HLA Ile97, which does not
-  name Arg114 — while scoring 0 of 20 with nothing declared. They also carry the largest restrained
-  margins in the set (+0.349 and +0.051) and two of its cleanest folds (bound-vs-unbound 0.71 Å
-  and 1.25 Å, alone pLDDT 80.7 and 88.5). One declared contact is a modest and physically
-  realizable condition, and a design that holds the salt bridge under it is a real candidate even
-  where the fully unrestrained prediction does not show it. They are promoted for that, explicitly,
-  and not for their unrestrained counts.
+  name Arg114 — while scoring 0 of 20 with nothing declared. One declared contact is a modest and
+  physically realizable condition, and a design that holds the salt bridge under it is a real
+  candidate even where the fully unrestrained prediction does not show it. They are promoted for
+  that, and not for their unrestrained counts.
+
+  Five designs qualify on that criterion; these two were taken because they come from **two
+  different lineages** (`g7_L48_s10` and `g7_L48_s04`), so the promotion buys two independent
+  designs rather than two relatives. `AMBRA_T5_09` carries the largest restrained margin in the
+  set (+0.349) and a clean fold (bound-vs-unbound 0.71 Å). `AMBRA_T5_10` does **not**: its
+  restrained margin of +0.051 is ninth of the twenty. It was taken for its lineage and its fold —
+  alone pLDDT 88.5, the second highest in the set. `AMBRA_T5_17` has the same qualifying profile
+  with a larger restrained margin (+0.209) and the cleanest fold on the board (0.46 Å), and was
+  not promoted only because it shares `AMBRA_T5_09`'s lineage. It sits at rank 17 and is the
+  obvious first reserve.
 
 Eleven of the twenty clear the IN criterion against the binder-free control, and eight of those
 eleven are in the first ten. A further five reach IN under the single Asp6–Ile97 contact, four of
@@ -123,9 +131,8 @@ confidence intervals rather than rounded away.
 Three decisions in the final set were taken by the principal investigator on inspection of the
 coordinates, and are recorded as such rather than folded into the ranking:
 
-1. Two designs with **IN 0 of 20** unrestrained but **5 of 5 restrained**, the cleanest folds and
-   the largest restrained margins, were kept and then promoted into the first ten
-   (`AMBRA_T5_09`, `AMBRA_T5_10`).
+1. Two designs with **IN 0 of 20** unrestrained but **5 of 5 restrained** were kept and then
+   promoted into the first ten (`AMBRA_T5_09`, `AMBRA_T5_10`), on the grounds set out above.
 2. Six ranked designs were removed — three for a terminal segment judged unsound on inspection,
    three for failing to fold on their own. The second judgement reproduces as a measurement (gate
    F); the first does not reproduce by any measurement we have — two of the three rejected sit
