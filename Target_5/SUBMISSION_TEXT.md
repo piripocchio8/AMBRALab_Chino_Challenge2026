@@ -55,12 +55,40 @@ mutation. A design is credited on this criterion only where its count is separat
 binder-free control by a one-sided Fisher exact test at p < 0.05 — two of five models, or three of
 twenty where the design was replicated.
 
+## The three goals, each with a measurement
+
+**(c) Binding the G12D complex.** Twenty of twenty place the binder on the α1/α2 groove in at
+least 60% of unrestrained models. Eleven reproduce the Asp6–Arg114 salt bridge with nothing
+declared; five more reproduce it under the single Asp6–Ile97 contact, four of those in 5 of 5
+models. Sixteen of twenty therefore produce the discriminating interaction under one condition or
+the other, and the two counts are kept in separate columns so they are never conflated.
+
+**(a) Not binding the wild-type peptide.** Every design was predicted on the wild-type complex
+under identical conditions; fifteen of twenty clear the margin threshold, which is set at the
+unrestrained margin the therapeutic TCR itself shows. The structural discriminator is the stronger
+one: the salt bridge eleven designs reproduce **cannot exist** on the wild-type peptide, which has
+glycine where the neoantigen has aspartate.
+
+**(b) Not binding the peptide-free heterodimer.** Measured for this submission, because the
+challenge asks for it and the campaign had not: all twenty re-predicted as three chains with the
+peptide deleted and no restraints. **Every design loses confidence** — binder↔HLA ipTM falls in 20
+of 20 (median −0.207) and the binder's own pLDDT falls in 20 of 20 (median −7.7). But the chain
+does not leave: 19 of 20 occupy the seat the peptide vacated. We therefore do **not** claim
+peptide-free non-binding. Two things are worth saying about that pose. It was never selected
+against — goal (b) was not an objective of the search. And it is not a realizable state: a
+peptide-free class I heavy chain does not hold its fold, which is why empty HLA is loaded in the ER
+rather than found waiting on the surface, so a binder sitting in that groove describes what a
+predictor does with an empty channel rather than an interaction that could be measured at the
+bench. The two confidence drops are consistent with exactly that. `AMBRA_T5_12` is the one design
+with positive structural evidence here: zero atoms in the vacated seat, and its groove contacts
+fall away with the peptide. Full numbers in `docs/peptide_free_control.md`.
+
 ## Ranking, and what the twenty are
 
 Designs were ranked on four criteria, applied in this order: that the binder lands on the α1/α2
 groove with no restraints; that it induces the IN state, against the control above; that it folds
-on its own; and that it separates the two peptides. **Eight of the twenty clear the IN bar** and
-are the strongest entries in the set. The remaining twelve are deposited on the other three
+on its own; and that it separates the two peptides. **Eleven of the twenty clear the IN bar** and
+are the strongest entries in the set. The remaining nine are deposited on the other three
 criteria: they dock on the groove unrestrained, they fold independently, and most prefer the
 neoantigen over wild type — but on the salt bridge itself they are not yet distinguishable from an
 empty groove, and `metrics_full.csv` says which is which design by design. The full ensemble is

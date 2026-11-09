@@ -16,6 +16,9 @@ ranked/AMBRA_T5_nn/ one directory per design
     sequence.fasta     the submitted sequence
     metrics.json       every number for this design, including per-model values
 docs/metrics.md     what each column means and how it was measured
+docs/epitope_contacts.json  per design, every peptide and HLA residue it touches
+docs/peptide_free_control.md  the binder on HLA + b2m with no peptide: challenge goal (b)
+ORGANIZERS.md       everything the selection process asks of a submission, point by point
 DESIGN_STRATEGY.md  how the designs were produced and selected
 SUBMISSION_TEXT.md  the narrative submitted alongside the file
 _selftest/          the checks run over this directory, and their output
@@ -59,20 +62,25 @@ disulfide declaration. The table is how the design was made; it is not evidence 
 works, and under restraint the IN state comes nearly free, so the restrained count cannot
 discriminate between designs. The restrained numbers are reported too, in the columns marked
 *restrained*, because that is what the campaign admitted each design on — but the selection, and
-the eight IN-positive entries, come from the unrestrained arm.
+the eleven IN-positive entries, come from the unrestrained arm.
 
 ## Strength of the set, and its limits
 
-- **Eight of the twenty clear the IN criterion** against the binder-free control, and head the
+- **Eleven of the twenty clear the IN criterion** against the binder-free control, and head the
   ranking. They are the entries this submission rests on.
-- **The other twelve are deposited on the remaining three criteria** — they land on the groove
+- **The other nine are deposited on the remaining three criteria** — they land on the groove
   unrestrained, they fold on their own, and most prefer the neoantigen over wild type — but on the
   salt bridge itself they are not yet distinguishable from an empty groove. `metrics_full.csv` says
   which is which, design by design, with denominators and confidence intervals.
 - **The set spans nine independent design lineages**, 25 to 62 residues, all disulfide-capped, so
   it is not twenty variations on one scaffold; the largest lineage contributes eight.
-- **Two of the twenty stand at five models**, not twenty: `AMBRA_T5_16` and `AMBRA_T5_17`. Their
+- **Two of the twenty stand at five models**, not twenty: `AMBRA_T5_18` and `AMBRA_T5_19`. Their
   on-groove and IN fractions carry the wider interval printed in `metrics_full.csv`.
+- **Goal (b) is measured, and the answer is partial.** Every design is less confident of the
+  peptide-free heterodimer — interface ipTM down in 20 of 20, binder pLDDT down in 20 of 20 — but
+  19 of 20 still occupy the groove the peptide vacated. That pose is not a realizable state (empty
+  class I does not hold its fold), and goal (b) was never an objective of the search. We report it
+  rather than claim it: `docs/peptide_free_control.md`.
 - **All of this is predicted structure.** No experiment was performed. The oracle is a single
   structure predictor, and three of its systematic behaviours are quantified in `docs/metrics.md`
   rather than hidden: sub-2 Å contacts are its signature on the deposited crystal too, its ψ3

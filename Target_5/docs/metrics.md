@@ -52,6 +52,21 @@ standard deviation from zero and +0.10 is more than three. The sign alone carrie
 | `term_rmsd_A`, `core_rmsd_A`, `iface_rmsd_A` | bound-minus-unbound displacement split at the first and last four residues, the rest, and the residues contacting the decamer. A design over 2 Å on core but at or under 1 Å on iface keeps its binding face and loosens elsewhere, which is a different object from one that rearranges the face |
 | `free_terminal_residues` | residues at the two termini touching nothing at all in the bound pose |
 
+## The peptide-free arm, and the two screens added for the selection process
+
+| column | meaning |
+|---|---|
+| `apo_hla_iptm` | median binder↔HLA chain-pair ipTM with **no peptide in the groove** — three chains (binder, HLA heavy chain, β2-microglobulin), no restraint table, 5 models. This is challenge goal (b), measured directly |
+| `g12d_hla_iptm` | the same quantity in the G12D complex, so the comparison is like for like. The campaign's ranking axis is binder↔**decamer** ipTM (`iptm_G12D`), which has no counterpart in a peptide-free fold |
+| `apo_minus_g12d_hla_iptm` | the difference. Negative means the design is less confident of the HLA when the peptide is gone |
+| `n_models_apo` | models behind the apo numbers (5) |
+| `mean_kd_hydropathy` | Kyte & Doolittle 1982 scale, unweighted mean over the whole submitted chain. Lower is more hydrophilic |
+
+A peptide-free class I heterodimer is not a physiological species and the oracle has seen very few,
+so an empty groove may attract a binder for reasons that have nothing to do with this target. The
+apo arm is reported as a screen against goal (b), not as a verdict on it, and nothing was re-ranked
+on it: it was folded after the twenty were fixed.
+
 ## A measurement that was withdrawn
 
 An earlier version of this analysis reported a peptide Val3 backbone state (ψ3) on which the oracle

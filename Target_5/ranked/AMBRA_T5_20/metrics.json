@@ -31,6 +31,19 @@
  "peptide_register_rmsd_A": 1.99,
  "closest_contact_A": 2.28,
  "binder_plddt": 86.7,
+ "mean_kd_hydropathy": 0.252,
+ "apo_hla_iptm": 0.615,
+ "g12d_hla_iptm": 0.754,
+ "apo_minus_g12d_hla_iptm": -0.139,
+ "n_models_apo": 5,
+ "apo_binder_atoms_in_peptide_seat": 12,
+ "apo_models_in_peptide_seat": 5,
+ "apo_groove_helix_frac": 0.82,
+ "g12d_groove_helix_frac": 0.83,
+ "apo_hla_residues_contacted": 18,
+ "g12d_hla_residues_contacted": 18,
+ "apo_binder_plddt": 78.7,
+ "apo_minus_g12d_binder_plddt": -8.0,
  "d6_all_models_A": [
   12.67,
   10.0,
@@ -41,5 +54,19 @@
  "deposited_model_index": 5,
  "control_empty_groove_IN": "0 of 50 models",
  "control_therapeutic_TCR_IN": "42 of 50 models",
- "control_wild_type_IN": "0 of 65 models"
+ "control_wild_type_IN": "0 of 65 models",
+ "apo_hla_iptm_all_models": [
+  0.616,
+  0.616,
+  0.615,
+  0.614,
+  0.614
+ ],
+ "apo_seat_atoms_all_models": [
+  15,
+  12,
+  11,
+  19,
+  10
+ ]
 }
