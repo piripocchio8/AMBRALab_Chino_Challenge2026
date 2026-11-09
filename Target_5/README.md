@@ -28,7 +28,15 @@ of peptide Asp6 is held within 4 Å of the guanidinium of HLA Arg114**. In the d
 structure of a therapeutic T-cell receptor bound to this same peptide–HLA complex (PDB **7OW6**)
 that distance is **2.95 Å**. We call a model that reaches it **IN**.
 
-It is not a free outcome of the prediction. Measured with the same code, on the same oracle:
+This was the selection axis for the whole campaign, in both arms — the designs were chosen for
+inducing the discriminating salt bridge, not for groove affinity with specificity checked
+afterwards. And the salt bridge was always **observed, never declared**: no restraint table used to
+produce any delivered design names Arg114. What the design arms declare about the aspartate is the
+hydrophobic pocket beneath it (peptide Asp6 to HLA **Ile97**, 6.5 Å), with the binder's own docking
+site moved one residue along the epitope so it does not compete for the side chain it is meant to
+free. `DESIGN_STRATEGY.md` §3 gives the tables.
+
+It is also not a free outcome of the prediction. Measured with the same code, on the same oracle:
 
 | system | models IN | median Asp6–Arg114 |
 |---|---|---|
@@ -44,22 +52,27 @@ design was replicated to twenty.
 
 ## What "unrestrained" means here, and why it is the axis
 
-Designs were produced with a declared restraint table — a jig that tells the predictor where the
+Designs were produced with a declared restraint table — geometry that tells the predictor where the
 binder should sit. Every number in `metrics_full.csv` prefixed *unrestrained* comes from a fold
 given the four chains and **no table at all**: no distance restraints, no declared contacts, no
-disulfide declaration. The jig is how the design was made; it is not evidence that the design
-works, and under restraint the IN state is nearly free. The restrained numbers are reported too,
-in the columns marked *restrained*, because that is what the campaign admitted each design on, but
-the selection is on the unrestrained arm.
+disulfide declaration. The table is how the design was made; it is not evidence that the design
+works, and under restraint the IN state comes nearly free, so the restrained count cannot
+discriminate between designs. The restrained numbers are reported too, in the columns marked
+*restrained*, because that is what the campaign admitted each design on — but the selection, and
+the eight IN-positive entries, come from the unrestrained arm.
 
-## Honest limits
+## Strength of the set, and its limits
 
+- **Eight of the twenty clear the IN criterion** against the binder-free control, and head the
+  ranking. They are the entries this submission rests on.
+- **The other twelve are deposited on the remaining three criteria** — they land on the groove
+  unrestrained, they fold on their own, and most prefer the neoantigen over wild type — but on the
+  salt bridge itself they are not yet distinguishable from an empty groove. `metrics_full.csv` says
+  which is which, design by design, with denominators and confidence intervals.
+- **The set spans nine independent design lineages**, 25 to 62 residues, all disulfide-capped, so
+  it is not twenty variations on one scaffold; the largest lineage contributes eight.
 - **Two of the twenty stand at five models**, not twenty: `AMBRA_T5_16` and `AMBRA_T5_17`. Their
   on-groove and IN fractions carry the wider interval printed in `metrics_full.csv`.
-- **Eight of the twenty meet the IN criterion**; the other twelve are, on that axis, not
-  distinguishable from an empty groove. They are here on the other three criteria — they land on
-  the groove unrestrained, they fold on their own, and most separate the two peptides — and the
-  per-design numbers say which is which.
 - **All of this is predicted structure.** No experiment was performed. The oracle is a single
   structure predictor, and three of its systematic behaviours are quantified in `docs/metrics.md`
   rather than hidden: sub-2 Å contacts are its signature on the deposited crystal too, its ψ3
